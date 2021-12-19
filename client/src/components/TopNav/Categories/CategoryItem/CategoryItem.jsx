@@ -2,14 +2,13 @@ import React from "react";
 
 import { Card } from "react-bootstrap";
 
-export const CategoryItem = ({ item }) => {
+export const CategoryItem = ({ category }) => {
   return (
     <Card>
-      <Card.Img variant="top" src={item.img} />
+      <Card.Img variant="top" src={category.img} />
 
       <Card.Body>
-        <Card.Title>{item.title}</Card.Title>
-        <Card.Text>{item.desc}</Card.Text>
+        <Card.Title>{category.title}</Card.Title>
       </Card.Body>
     </Card>
   );
