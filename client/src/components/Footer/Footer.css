@@ -1,4 +1,43 @@
 .footerWrapper {
+  padding: 30px 0;
   background-color: rgb(76, 84, 100);
   color: white;
+}
+
+.footerLeft p {
+  margin: 20px 0px;
+}
+
+.socialContainer {
+  display: flex;
+  justify-content: center;
+}
+.socialContainer .socialLink {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  background-color: rgb(124, 124, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.footerCenter ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.footerCenter a {
+  color: lightblue;
+}
+
+.footerRight h6 {
+  padding: 7px;
+}
+
+@media screen and (max-width: 767px) {
+  .footerCenter {
+    display: none;
+  }
 }
