@@ -2,7 +2,7 @@ import React from "react";
 
 import { Row, Col } from "react-bootstrap";
 import CategoryItem from "./CategoryItem/CategoryItem";
-import { categories } from "../../../data";
+import { categories } from "../../data";
 
 const Categories = () => {
   return (
