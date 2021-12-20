@@ -1,16 +1,19 @@
 import React from "react";
 
+import "./Footer.css";
 import { Container, Row, Col } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <Container>
-      <Row className="mt-5">
-        <Col>Left</Col>
-        <Col>Center</Col>
-        <Col>Right</Col>
-      </Row>
-    </Container>
+    <div className="footerWrapper mt-5">
+      <Container>
+        <Row>
+          <Col className="text-center">Left</Col>
+          <Col className="text-center">Center</Col>
+          <Col className="text-center">Right</Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 export default Footer;
