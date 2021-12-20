@@ -7,10 +7,12 @@ import Login from "./pages/Login/Login";
 import Cart from "./pages/Cart/Cart";
 import TopNav from "./components/TopNav/TopNav";
 import Footer from "./components/Footer/Footer";
+import Announcement from "./components/Announcement/Announcement";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Announcement />
       <TopNav />
       <Switch>
         <Route exact path="/">
