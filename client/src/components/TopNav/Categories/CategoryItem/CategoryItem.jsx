@@ -1,16 +1,17 @@
 import React from "react";
 
+import "./CategoryItem.css";
 import { Card } from "react-bootstrap";
 
 const CategoryItem = ({ category }) => {
   return (
-    <Card>
-      <Card.Img variant="top" src={category.img} />
-
-      <Card.Body>
-        <Card.Title>{category.title}</Card.Title>
-      </Card.Body>
-    </Card>
+    <div className="catItemWrapper">
+      <img src={category.img} />
+      <div className="catItemInfo">
+        <h5>{category.title}</h5>
+        <button>Explore</button>
+      </div>
+    </div>
   );
 };
 export default CategoryItem;
