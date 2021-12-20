@@ -1,0 +1,37 @@
+.navbar {
+  background-color: #151431;
+  font-family: "Open Sans", sans-serif;
+}
+.navbar a {
+  color: #ffffff !important;
+}
+
+.topImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.myResponsive {
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar {
+  position: relative;
+}
+.avatar:hover {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 991px) {
+  .myResponsive {
+    display: block;
+  }
+  .navSearch {
+    margin: 10px 0 5px;
+  }
+}
