@@ -2,11 +2,13 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 import Products from "../../components/Products/Products";
+import Slider from "../../components/Slider/Slider";
 import Categories from "../../components/TopNav/Categories/Categories";
 
 const Home = () => {
   return (
     <div>
+      <Slider />
       <Container>
         <Row className="mt-5">
           <Col>
