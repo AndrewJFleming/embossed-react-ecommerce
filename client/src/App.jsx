@@ -6,6 +6,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Cart from "./pages/Cart/Cart";
 import TopNav from "./components/TopNav/TopNav";
+import { Footer } from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Cart />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };
