@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
-import { CategoryItem } from "./CategoryItem/CategoryItem";
+import { Row, Col } from "react-bootstrap";
+import CategoryItem from "./CategoryItem/CategoryItem";
 import { categories } from "../../../data";
 
-export const Categories = () => {
+const Categories = () => {
   return (
     <Row>
       {categories.map((item) => (
@@ -15,3 +15,4 @@ export const Categories = () => {
     </Row>
   );
 };
+export default Categories;

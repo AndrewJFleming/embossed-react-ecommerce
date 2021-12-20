@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card } from "react-bootstrap";
 
-export const CategoryItem = ({ category }) => {
+const CategoryItem = ({ category }) => {
   return (
     <Card>
       <Card.Img variant="top" src={category.img} />
@@ -13,3 +13,4 @@ export const CategoryItem = ({ category }) => {
     </Card>
   );
 };
+export default CategoryItem;

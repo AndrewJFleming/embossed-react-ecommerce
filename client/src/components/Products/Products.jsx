@@ -1,10 +1,10 @@
 import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
-import { Product } from "./Product/Product";
+import Product from "./Product/Product";
 import { popularProducts } from "../../data";
 
-export const Products = () => {
+const Products = () => {
   return (
     <Row>
       {popularProducts.map((item) => (
@@ -15,3 +15,4 @@ export const Products = () => {
     </Row>
   );
 };
+export default Products;

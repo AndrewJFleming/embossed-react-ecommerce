@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
-import { Products } from "../../components/Products/Products";
-import { Categories } from "../../components/TopNav/Categories/Categories";
+import Products from "../../components/Products/Products";
+import Categories from "../../components/TopNav/Categories/Categories";
 
 const Home = () => {
   return (

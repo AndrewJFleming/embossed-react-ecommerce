@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <Container>
       <Row className="mt-5">
@@ -13,3 +13,4 @@ export const Footer = () => {
     </Container>
   );
 };
+export default Footer;
