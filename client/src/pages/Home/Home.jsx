@@ -9,7 +9,7 @@ import Categories from "../../components/Categories/Categories";
 const Home = () => {
   return (
     <div>
-      {/* <Slider /> */}
+      <Slider />
       <Container>
         <Row className="mt-5">
           <Col>

@@ -1,5 +1,9 @@
 .carouselImage {
   height: 500px;
   object-fit: cover;
-  object-position: top;
+  /* object-position: top; */
+}
+
+.carousel-indicators {
+  padding-bottom: 30px;
 }

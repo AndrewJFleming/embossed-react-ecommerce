@@ -12,25 +12,23 @@ function ControlledCarousel() {
   };
 
   return (
-    <Container>
-      <Carousel fade activeIndex={index} onSelect={handleSelect}>
-        {sliderItems.map((item) => (
-          <Carousel.Item>
-            <img
-              className="d-block 
+    <Carousel fade activeIndex={index} onSelect={handleSelect}>
+      {sliderItems.map((item) => (
+        <Carousel.Item>
+          <img
+            className="d-block 
             w-100 
             carouselImage"
-              src={item.img}
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </Container>
+            src={item.img}
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 }
 const Slider = () => {
