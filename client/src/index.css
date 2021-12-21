@@ -14,13 +14,6 @@ a {
   cursor: pointer;
 }
 
-input {
-  flex: 1;
-  min-width: 40%;
-  margin: 10px 0;
-  padding: 10px;
-}
-
 /* button {
   width: 40%;
   border: none;
