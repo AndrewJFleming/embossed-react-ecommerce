@@ -95,6 +95,9 @@ const TopNav = () => {
               <Nav.Link as={Link} to="/product-list" handler={handleCollapse}>
                 Products
               </Nav.Link>
+              <Nav.Link as={Link} to="/product" handler={handleCollapse}>
+                Single
+              </Nav.Link>
               <Nav.Link as={Link} to="/login" handler={handleCollapse}>
                 Login
               </Nav.Link>

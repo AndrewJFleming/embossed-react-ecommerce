@@ -9,6 +9,7 @@ import TopNav from "./components/TopNav/TopNav";
 import Footer from "./components/Footer/Footer";
 import Announcement from "./components/Announcement/Announcement";
 import ProductList from "./pages/ProductList/ProductList";
+import SingleProduct from "./pages/SingleProduct/SingleProduct";
 
 const App = () => {
   return (
@@ -21,6 +22,9 @@ const App = () => {
         </Route>
         <Route path="/product-list">
           <ProductList />
+        </Route>
+        <Route path="/product">
+          <SingleProduct />
         </Route>
         <Route path="/register">
           <Register />
