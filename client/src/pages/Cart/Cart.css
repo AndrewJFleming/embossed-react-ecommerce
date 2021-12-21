@@ -97,7 +97,7 @@
   font-weight: 600;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 767px) {
   .topText {
     display: none;
   }
