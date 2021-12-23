@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import "./ProductList.css";
 import Newsletter from "../../components/Newsletter/Newsletter";
@@ -6,6 +7,21 @@ import Products from "../../components/Products/Products";
 import { Container } from "react-bootstrap";
 
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
+
+  console.log(filters);
+
   return (
     <div className="mt-5">
       <Container>
@@ -13,7 +29,7 @@ const ProductList = () => {
         <div className="filterContainer">
           <div className="filter">
             <h4>Filter Products:</h4>
-            <select id="colors">
+            <select id="color" name="color" onChange={handleFilters}>
               <option value="white">White</option>
               <option value="black">Black</option>
               <option value="red">Red</option>
@@ -21,7 +37,7 @@ const ProductList = () => {
               <option value="yellow">Yellow</option>
               <option value="green">Green</option>
             </select>
-            <select id="sizes">
+            <select id="size" name="size" onChange={handleFilters}>
               <option value="xs">XS</option>
               <option value="s">S</option>
               <option value="m">M</option>
@@ -31,7 +47,7 @@ const ProductList = () => {
           </div>
           <div className="filter">
             <h4>Sort Products:</h4>
-            <select id="order">
+            <select id="order" onChange={(e) => setSort(e.target.value)}>
               <option value="newest">Newest</option>
               <option value="asc">Price (asc)</option>
               <option value="desc">Price (desc)</option>
@@ -40,7 +56,7 @@ const ProductList = () => {
         </div>
       </Container>
       <Container className="mt-3">
-        <Products />
+        <Products cat={cat} filters={filters} sort={sort} />
       </Container>
       <Newsletter />
     </div>

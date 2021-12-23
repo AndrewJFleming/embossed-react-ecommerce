@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 import Product from "./Product/Product";
 import { popularProducts } from "../../data";
 
-const Products = () => {
+const Products = ({ cat, filters, sort }) => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {}, [cat]);
+
   return (
     <Row>
       {popularProducts.map((item) => (
