@@ -39,22 +39,17 @@ const SingleProduct = () => {
                 <div className="filter">
                   <h4>Colors</h4>
                   <select id="colors">
-                    <option value="white">White</option>
-                    <option value="black">Black</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="green">Green</option>
+                    {product.color?.map((c) => (
+                      <option value={c}>{c}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="filter">
                   <h4>Sizes</h4>
                   <select id="sizes">
-                    <option value="xs">XS</option>
-                    <option value="s">S</option>
-                    <option value="m">M</option>
-                    <option value="l">L</option>
-                    <option value="xl">XL</option>
+                    {product.size?.map((s) => (
+                      <option value={s}>{s}</option>
+                    ))}
                   </select>
                 </div>
               </div>
