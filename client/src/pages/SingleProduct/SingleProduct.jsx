@@ -33,14 +33,8 @@ const SingleProduct = () => {
           <Col xs={12} sm={6} md={6} lg={6}>
             <div className="infoContainer">
               <h4>{product.title}</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                venenatis, dolor in finibus malesuada, lectus ipsum porta nunc,
-                at iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex,
-                eget tristique tortor pretium ut. Curabitur elit justo,
-                consequat id condimentum ac, volutpat ornare.
-              </p>
-              <p className="price">$ 20</p>
+              <p>{product.desc}</p>
+              <p className="price">$&nbsp;{product.price}</p>
               <div className="filterContainer">
                 <div className="filter">
                   <h4>Colors</h4>
