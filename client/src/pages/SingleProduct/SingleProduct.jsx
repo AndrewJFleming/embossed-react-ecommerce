@@ -10,6 +10,7 @@ const SingleProduct = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -20,6 +21,14 @@ const SingleProduct = () => {
     };
     getProduct();
   }, [id]);
+
+  const handleQuanity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
 
   return (
     <div className="mt-5">
@@ -55,9 +64,15 @@ const SingleProduct = () => {
               </div>
               <div className="addContainer">
                 <div className="amountContainer">
-                  <i class="fas fa-plus"></i>
-                  <p className="productAmount">1</p>
-                  <i class="fas fa-minus"></i>
+                  <i
+                    class="fas fa-minus"
+                    onClick={() => handleQuanity("dec")}
+                  ></i>
+                  <p className="productAmount">{quantity}</p>
+                  <i
+                    class="fas fa-plus"
+                    onClick={() => handleQuanity("inc")}
+                  ></i>
                 </div>
                 <Button>ADD TO CART</Button>
               </div>
