@@ -11,12 +11,16 @@ const SingleProduct = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
   useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
+        setColor(res.data.color[0]);
+        setSize(res.data.size[0]);
       } catch {}
     };
     getProduct();
@@ -47,7 +51,10 @@ const SingleProduct = () => {
               <div className="filterContainer">
                 <div className="filter">
                   <h4>Colors</h4>
-                  <select id="colors">
+                  <select
+                    id="colors"
+                    onChange={(e) => setColor(e.target.value)}
+                  >
                     {product.color?.map((c) => (
                       <option value={c}>{c}</option>
                     ))}
@@ -55,7 +62,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="filter">
                   <h4>Sizes</h4>
-                  <select id="sizes">
+                  <select id="sizes" onChange={(e) => setSize(e.target.value)}>
                     {product.size?.map((s) => (
                       <option value={s}>{s}</option>
                     ))}
