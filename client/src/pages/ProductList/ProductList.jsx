@@ -25,7 +25,7 @@ const ProductList = () => {
   return (
     <div className="mt-5">
       <Container>
-        <h2 className="pageTitle">Dresses</h2>
+        <h2 className="pageTitle">{cat}</h2>
         <div className="filterContainer">
           <div className="filter">
             <h4>Filter Products:</h4>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./Product.css";
 
@@ -20,7 +21,9 @@ const Product = ({ product }) => {
           <i class="fas fa-shopping-basket"></i>
         </div>
         <div className="productIcon">
-          <i class="fas fa-search"></i>
+          <Link to={`/product/${product._id}`}>
+            <i class="fas fa-search"></i>
+          </Link>
         </div>
         <div className="productIcon">
           <i class="fas fa-heart"></i>
