@@ -19,8 +19,12 @@ const SingleProduct = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-        setColor(res.data.color[0]);
-        setSize(res.data.size[0]);
+        if (res.data.color[0]) {
+          setColor(res.data.color[0]);
+        }
+        if (res.data.size[0]) {
+          setSize(res.data.size[0]);
+        }
       } catch {}
     };
     getProduct();
