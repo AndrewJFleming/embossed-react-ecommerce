@@ -11,11 +11,13 @@ import {
 } from "react-bootstrap";
 import NavLogo from "../../images/logo.png";
 import "./TopNav.css";
+import { useSelector } from "react-redux";
 
 const TopNav = () => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
   const [user, setUser] = useState(true);
+  const quantity = useSelector((state) => state.cart.quantity);
   // const { user, dispatch } = useContext(Context);
 
   const handleLogout = () => {
@@ -109,7 +111,7 @@ const TopNav = () => {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/cart" handler={handleCollapse}>
-              <i class="fas fa-shopping-basket"></i>
+              <i class="fas fa-shopping-basket">&nbsp;{quantity}</i>
             </Nav.Link>
             <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl

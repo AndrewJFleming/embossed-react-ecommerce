@@ -38,6 +38,10 @@ const SingleProduct = () => {
     }
   };
 
+  const handleAdd = () => {
+    //update cart
+  };
+
   return (
     <div className="mt-5">
       <Container>
@@ -85,7 +89,7 @@ const SingleProduct = () => {
                     onClick={() => handleQuanity("inc")}
                   ></i>
                 </div>
-                <Button>ADD TO CART</Button>
+                <Button onCLick={handleAdd}>ADD TO CART</Button>
               </div>
             </div>
           </Col>
