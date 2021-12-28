@@ -1,6 +1,12 @@
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+
+import "./Cart.css";
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [shipping, setShipping] = useState(5.9);
   return (
     <Container className="mb-5">
       <div>
@@ -15,80 +21,58 @@ const Cart = () => {
         </div>
         <div className="bottom">
           <div className="info">
-            <div className="product">
-              <div className="productDetail">
-                <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <div className="details">
-                  <h4>
-                    <b>Product:</b> DUMMY PRODUCT SHOES
-                  </h4>
-                  <p>
-                    <b>ID:</b> 93813718293
-                  </p>
-                  <p>
-                    <b>Color:</b> black
-                  </p>
-                  <p>
-                    <b>Size:</b> 37.5
-                  </p>
+            {cart.products.map((product) => (
+              <React.Fragment>
+                <div className="product">
+                  <div className="productDetail">
+                    <img className="productImage" src={product.img} alt="" />
+                    <div className="details">
+                      <h4>
+                        <b>Product:</b> {product.title}
+                      </h4>
+                      <p>
+                        <b>ID:</b> {product._id}
+                      </p>
+                      <p>
+                        <b>Color:</b> {product.color}
+                      </p>
+                      <p>
+                        <b>Size:</b> {product.size}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="priceDetail">
+                    <div className="productAmountContainer">
+                      <i class="fas fa-plus"></i>
+                      <p className="productAmount">{product.quantity}</p>
+                      <i class="fas fa-minus"></i>
+                    </div>
+                    <p className="productPrice">
+                      $ {product.price * product.quantity}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="priceDetail">
-                <div className="productAmountContainer">
-                  <i class="fas fa-plus"></i>
-                  <p className="productAmount">2</p>
-                  <i class="fas fa-minus"></i>
-                </div>
-                <p className="productPrice">$ 30</p>
-              </div>
-            </div>
-            <hr />
-            <div className="product">
-              <div className="productDetail">
-                <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <div className="details">
-                  <h4>
-                    <b>Product:</b> DUMMY PRODUCT SHOES
-                  </h4>
-                  <p>
-                    <b>ID:</b> 93813718293
-                  </p>
-                  <p>
-                    <b>Color:</b> black
-                  </p>
-                  <p>
-                    <b>Size:</b> 37.5
-                  </p>
-                </div>
-              </div>
-              <div className="priceDetail">
-                <div className="productAmountContainer">
-                  <i class="fas fa-plus"></i>
-                  <p className="productAmount">2</p>
-                  <i class="fas fa-minus"></i>
-                </div>
-                <p className="productPrice">$ 30</p>
-              </div>
-            </div>
-            <hr />
+                <hr />
+              </React.Fragment>
+            ))}
           </div>
           <div className="summary">
             <h2 className="summaryTitle">ORDER SUMMARY</h2>
             <div className="summaryItem">
               <h5>Subtotal</h5>
-              <p>$ 80</p>
+              <p>$ {cart.total}</p>
             </div>
             <div className="summaryItem">
-              <h5>Subtotal</h5>
-              <p>$ 80</p>
+              <h5>Estimated Shipping</h5>
+              <p>$ {shipping}</p>
             </div>
             <div className="summaryItem">
-              <h5>Subtotal</h5>
-              <p>$ 80</p>
+              <h5>Shipping Discount</h5>
+              <p>$ 0</p>
             </div>
             <div className="summaryItem">
               <h5>TOTAL</h5>
-              <p>$ 240</p>
+              <p>$ {cart.total ? cart.total + shipping : 0}</p>
             </div>
             <button>CHECKOUT NOW</button>
           </div>
