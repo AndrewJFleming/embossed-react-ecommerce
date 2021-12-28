@@ -5,6 +5,8 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import "./SingleProduct.css";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import { publicRequest } from "../../requestMethods";
+import { addProduct } from "../../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const SingleProduct = () => {
   const location = useLocation();
@@ -13,6 +15,7 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -39,7 +42,7 @@ const SingleProduct = () => {
   };
 
   const handleAdd = () => {
-    //update cart
+    dispatch(addProduct({ ...product, quantity, color, size }));
   };
 
   return (
@@ -89,7 +92,7 @@ const SingleProduct = () => {
                     onClick={() => handleQuanity("inc")}
                   ></i>
                 </div>
-                <Button onCLick={handleAdd}>ADD TO CART</Button>
+                <Button onClick={handleAdd}>ADD TO CART</Button>
               </div>
             </div>
           </Col>
