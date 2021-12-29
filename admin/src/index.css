@@ -22,7 +22,7 @@ code {
 
 a {
   margin: 5px 0px;
-  font-size: 12px;
-  text-decoration: underline;
+  /* font-size: 12px; */
+  text-decoration: none;
   cursor: pointer;
 }

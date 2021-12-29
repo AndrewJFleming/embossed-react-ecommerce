@@ -6,14 +6,16 @@ import "./Product.css";
 const Product = ({ product }) => {
   return (
     <div className="productContainer">
-      <div className="circle"></div>
-      <img src={product.img} alt="product thumb" />
-      <div className="iconsWrapper">
-        <div className="productIcon">
-          <Link to={`/product/${product._id}`}>
-            <p>{product.name}</p>
-          </Link>
-        </div>
+      <Link to={`/product/${product._id}`}>
+        <img src={product.img} alt="product thumb" />
+      </Link>
+      <div className="infoWrapper">
+        <h4>
+          <Link to={`/product/${product._id}`}>{product.name}</Link>
+        </h4>
+        <p>Stock: {product.stock}</p>
+        <p>Status: {product.status}</p>
+        <p>Price: {product.price}</p>
       </div>
     </div>
   );
