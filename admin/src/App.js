@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
-import Login from "./pages/Auth/Login";
+import Login from "./pages/Login/Login";
 import TopNav from "./components/TopNav/TopNav";
 import ProductList from "./pages/ProductList/ProductList";
 import Product from "./components/Products/Product/Product";
-import NewProduct from "./pages/newProduct/NewProduct";
-import UserList from "./pages/userList/UserList";
-import User from "./pages/user/User";
-import NewUser from "./pages/newUser/NewUser";
+import NewProduct from "./pages/NewProduct/NewProduct";
+import UserList from "./pages/UserList/UserList";
+import User from "./pages/User/User";
+import NewUser from "./pages/NewUser/NewUser";
 import { useSelector } from "react-redux";
 
 const App = () => {
@@ -17,9 +17,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login">
+        {/* <Route path="/login">
           <Login />
-        </Route>
+        </Route> */}
         {/* {admin && ( */}
         <React.Fragment>
           <TopNav />
