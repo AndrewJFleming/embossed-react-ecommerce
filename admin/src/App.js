@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import TopNav from "./components/TopNav/TopNav";
 import ProductList from "./pages/ProductList/ProductList";
 import Product from "./components/Product/Product";
+import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import NewProduct from "./pages/NewProduct/NewProduct";
 import UserList from "./pages/UserList/UserList";
 import User from "./pages/User/User";
@@ -40,7 +41,7 @@ const App = () => {
               <ProductList />
             </Route>
             <Route path="/product/:productId">
-              <Product />
+              <SingleProduct />
             </Route>
             <Route path="/newproduct">
               <NewProduct />
