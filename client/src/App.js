@@ -12,9 +12,10 @@ import Product from "./components/Products/Product/Product";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Pay from "./pages/Stripe/Pay";
 import Success from "./pages/Stripe/Success";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const user = false;
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
       <Announcement />

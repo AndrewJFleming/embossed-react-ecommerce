@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import "./Auth.css";
 import { Container, Button } from "react-bootstrap";
 import { bgImage } from "../../images/bgImage.jpg";
+import { login } from "../../redux/apiCalls";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +16,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    login(dispatch, { username, password });
   };
 
   return (
@@ -30,7 +32,6 @@ const Login = () => {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* {isFetching && } */}
           <Button onClick={handleLogin} disabled={isFetching}>
             LOGIN
           </Button>
