@@ -18,15 +18,15 @@ const Product = ({ product }) => {
       <img src={product.img} alt="product thumb" />
       <div className="iconsWrapper" style={style}>
         <div className="productIcon">
-          <i class="fas fa-shopping-basket"></i>
+          <i className="fas fa-shopping-basket"></i>
         </div>
         <div className="productIcon">
           <Link to={`/product/${product._id}`}>
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
           </Link>
         </div>
         <div className="productIcon">
-          <i class="fas fa-heart"></i>
+          <i className="fas fa-heart"></i>
         </div>
       </div>
     </div>

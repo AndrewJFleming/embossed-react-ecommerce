@@ -14,7 +14,7 @@ import Pay from "./pages/Stripe/Pay";
 import Success from "./pages/Stripe/Success";
 
 const App = () => {
-  const user = true;
+  const user = false;
   return (
     <BrowserRouter>
       <Announcement />

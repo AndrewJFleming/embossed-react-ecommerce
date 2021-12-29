@@ -83,12 +83,12 @@ const SingleProduct = () => {
               <div className="addContainer">
                 <div className="amountContainer">
                   <i
-                    class="fas fa-minus"
+                    className="fas fa-minus"
                     onClick={() => handleQuanity("dec")}
                   ></i>
                   <p className="productAmount">{quantity}</p>
                   <i
-                    class="fas fa-plus"
+                    className="fas fa-plus"
                     onClick={() => handleQuanity("inc")}
                   ></i>
                 </div>

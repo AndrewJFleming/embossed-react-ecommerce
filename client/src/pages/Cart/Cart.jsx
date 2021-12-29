@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
 
 import "./Cart.css";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -43,9 +46,9 @@ const Cart = () => {
                   </div>
                   <div className="priceDetail">
                     <div className="productAmountContainer">
-                      <i class="fas fa-plus"></i>
+                      <i className="fas fa-plus"></i>
                       <p className="productAmount">{product.quantity}</p>
-                      <i class="fas fa-minus"></i>
+                      <i className="fas fa-minus"></i>
                     </div>
                     <p className="productPrice">
                       $ {product.price * product.quantity}
@@ -74,6 +77,9 @@ const Cart = () => {
               <h5>TOTAL</h5>
               <p>$ {cart.total ? cart.total + shipping : 0}</p>
             </div>
+            {/* <StripeCheckout>
+            <button>CHECKOUT NOW</button>
+            </StripeCheckout> */}
             <button>CHECKOUT NOW</button>
           </div>
         </div>

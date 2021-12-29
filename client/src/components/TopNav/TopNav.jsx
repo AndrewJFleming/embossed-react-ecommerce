@@ -37,27 +37,6 @@ const TopNav = () => {
   };
 
   return (
-    // <Navbar bg="light" expand="lg">
-    //   <Container>
-    //     <Navbar.Brand as={Link} to="/">
-    //       Embossed
-    //     </Navbar.Brand>
-    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //     <Navbar.Collapse id="basic-navbar-nav">
-    //       <Nav className="me-auto">
-    //         <Nav.Link as={Link} to="/cart">
-    //           Cart
-    //         </Nav.Link>
-    //         <Nav.Link as={Link} to="/login">
-    //           Login
-    //         </Nav.Link>
-    //         <Nav.Link as={Link} to="/register">
-    //           Register
-    //         </Nav.Link>
-    //       </Nav>
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
     <Navbar
       // className="fixed-top"
       expanded={expanded}
@@ -82,7 +61,7 @@ const TopNav = () => {
         <Navbar.Collapse id="responsive-navbar-nav" className="myResponsive">
           <Nav className="me-auto">
             {user && (
-              <Nav.Link as={Link} to="/write" handler={handleLogout}>
+              <Nav.Link as={Link} to="/write" onClick={handleLogout}>
                 Logout
               </Nav.Link>
             )}
@@ -94,24 +73,24 @@ const TopNav = () => {
               </Link>
             ) : ( */}
             <React.Fragment>
-              <Nav.Link as={Link} to="/product-list" handler={handleCollapse}>
+              <Nav.Link as={Link} to="/product-list" onClick={handleCollapse}>
                 Products
               </Nav.Link>
-              <Nav.Link as={Link} to="/product" handler={handleCollapse}>
+              <Nav.Link as={Link} to="/product" onClick={handleCollapse}>
                 Single
               </Nav.Link>
-              <Nav.Link as={Link} to="/login" handler={handleCollapse}>
+              <Nav.Link as={Link} to="/login" onClick={handleCollapse}>
                 Login
               </Nav.Link>
-              <Nav.Link as={Link} to="/register" handler={handleCollapse}>
+              <Nav.Link as={Link} to="/register" onClick={handleCollapse}>
                 Register
               </Nav.Link>
             </React.Fragment>
             {/* )} */}
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/cart" handler={handleCollapse}>
-              <i class="fas fa-shopping-basket">&nbsp;{quantity}</i>
+            <Nav.Link as={Link} to="/cart" onClick={handleCollapse}>
+              <i className="fas fa-shopping-basket">&nbsp;{quantity}</i>
             </Nav.Link>
             <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl
