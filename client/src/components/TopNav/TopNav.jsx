@@ -16,9 +16,9 @@ import { useSelector } from "react-redux";
 const TopNav = () => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
-  const [user, setUser] = useState(true);
+  // const [user, setUser] = useState(true);
   const quantity = useSelector((state) => state.cart.quantity);
-  // const { user, dispatch } = useContext(Context);
+  const user = useSelector((state) => state.user.currentUser);
 
   const handleLogout = () => {
     // dispatch({ type: "LOGOUT" });
@@ -60,33 +60,28 @@ const TopNav = () => {
         />
         <Navbar.Collapse id="responsive-navbar-nav" className="myResponsive">
           <Nav className="me-auto">
-            {user && (
-              <Nav.Link as={Link} to="/write" onClick={handleLogout}>
-                Logout
-              </Nav.Link>
-            )}
+            <Nav.Link as={Link} to="/product-list" onClick={handleCollapse}>
+              Products
+            </Nav.Link>
           </Nav>
           <Nav>
-            {/* {user ? (
-              <Link to="/settings" className="avatar" alt={user.username}>
+            {user ? (
+              <React.Fragment>
                 <span>{user.username}</span>
-              </Link>
-            ) : ( */}
-            <React.Fragment>
-              <Nav.Link as={Link} to="/product-list" onClick={handleCollapse}>
-                Products
-              </Nav.Link>
-              <Nav.Link as={Link} to="/product" onClick={handleCollapse}>
-                Single
-              </Nav.Link>
-              <Nav.Link as={Link} to="/login" onClick={handleCollapse}>
-                Login
-              </Nav.Link>
-              <Nav.Link as={Link} to="/register" onClick={handleCollapse}>
-                Register
-              </Nav.Link>
-            </React.Fragment>
-            {/* )} */}
+                <Nav.Link as={Link} to="/write" onClick={handleLogout}>
+                  Logout
+                </Nav.Link>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Nav.Link as={Link} to="/login" onClick={handleCollapse}>
+                  Login
+                </Nav.Link>
+                <Nav.Link as={Link} to="/register" onClick={handleCollapse}>
+                  Register
+                </Nav.Link>
+              </React.Fragment>
+            )}
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/cart" onClick={handleCollapse}>
