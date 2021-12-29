@@ -16,13 +16,12 @@ import { useSelector } from "react-redux";
 const TopNav = () => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
-  // const [user, setUser] = useState(true);
   const quantity = useSelector((state) => state.cart.quantity);
   const user = useSelector((state) => state.user.currentUser);
 
   const handleLogout = () => {
     // dispatch({ type: "LOGOUT" });
-    // setExpanded(false);
+    setExpanded(false);
   };
 
   const handleSearch = (e) => {
@@ -66,12 +65,9 @@ const TopNav = () => {
           </Nav>
           <Nav>
             {user ? (
-              <React.Fragment>
-                <span>{user.username}</span>
-                <Nav.Link as={Link} to="/write" onClick={handleLogout}>
-                  Logout
-                </Nav.Link>
-              </React.Fragment>
+              <Nav.Link as={Link} to="/" onClick={handleLogout}>
+                Logout
+              </Nav.Link>
             ) : (
               <React.Fragment>
                 <Nav.Link as={Link} to="/login" onClick={handleCollapse}>
@@ -84,6 +80,7 @@ const TopNav = () => {
             )}
           </Nav>
           <Nav>
+            {user && <span className="avatar">{user.username}</span>}
             <Nav.Link as={Link} to="/cart" onClick={handleCollapse}>
               <i className="fas fa-shopping-basket">&nbsp;{quantity}</i>
             </Nav.Link>

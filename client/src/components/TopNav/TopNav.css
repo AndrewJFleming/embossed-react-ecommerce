@@ -22,6 +22,11 @@
 
 .avatar {
   position: relative;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 5px 0;
+  padding: 4px 0;
 }
 .avatar:hover {
   text-decoration: none;
