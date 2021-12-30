@@ -11,10 +11,10 @@ const Product = ({ product }) => {
       </Link>
       <div className="infoWrapper">
         <h4>
-          <Link to={`/product/${product._id}`}>{product.name}</Link>
+          <Link to={`/product/${product._id}`}>{product.title}</Link>
         </h4>
         <p>Stock: {product.stock}</p>
-        <p>Status: {product.status}</p>
+        <p>Status: {product.inStock ? "In Stock" : "Out of Stock"}</p>
         <p>Price: {product.price}</p>
       </div>
     </div>

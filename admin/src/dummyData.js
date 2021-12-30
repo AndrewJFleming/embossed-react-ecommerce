@@ -1,51 +1,51 @@
 export const userData = [
   {
     name: "Jan",
-    "Active User": 4000,
+    "true User": 4000,
   },
   {
     name: "Feb",
-    "Active User": 3000,
+    "true User": 3000,
   },
   {
     name: "Mar",
-    "Active User": 5000,
+    "true User": 5000,
   },
   {
     name: "Apr",
-    "Active User": 4000,
+    "true User": 4000,
   },
   {
     name: "May",
-    "Active User": 3000,
+    "true User": 3000,
   },
   {
     name: "Jun",
-    "Active User": 2000,
+    "true User": 2000,
   },
   {
     name: "Jul",
-    "Active User": 4000,
+    "true User": 4000,
   },
   {
     name: "Agu",
-    "Active User": 3000,
+    "true User": 3000,
   },
   {
     name: "Sep",
-    "Active User": 4000,
+    "true User": 4000,
   },
   {
     name: "Oct",
-    "Active User": 1000,
+    "true User": 1000,
   },
   {
     name: "Nov",
-    "Active User": 4000,
+    "true User": 4000,
   },
   {
     name: "Dec",
-    "Active User": 3000,
+    "true User": 3000,
   },
 ];
 
@@ -71,7 +71,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -80,7 +80,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -89,7 +89,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -98,7 +98,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -107,7 +107,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -116,7 +116,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -125,7 +125,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -134,7 +134,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -143,7 +143,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
   {
@@ -152,7 +152,7 @@ export const userRows = [
     avatar:
       "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "jon@gmail.com",
-    status: "active",
+    status: "true",
     transaction: "$120.00",
   },
 ];
@@ -160,82 +160,92 @@ export const userRows = [
 export const productRows = [
   {
     _id: 1,
-    name: "Apple Airpods1",
+    title: "Apple Airpods1",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 12223,
-    status: "active",
+    inStock: true,
     price: "$120.99",
   },
   {
     _id: 2,
-    name: "Apple Airpods2",
+    title: "Apple Airpods2",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 1233,
-    status: "false",
+    inStock: false,
     price: "$126.00",
   },
   {
     _id: 3,
-    name: "Apple Airpods3",
+    title: "Apple Airpods3",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 1213,
-    status: "active",
+    inStock: true,
     price: "$126.00",
   },
   {
     _id: 4,
-    name: "Apple Airpods4",
+    title: "Apple Airpods4",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 1243,
-    status: "active",
+    inStock: true,
     price: "$120.00",
   },
   {
     _id: 5,
-    name: "Apple Airpods5",
+    title: "Apple Airpods5",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 125553,
-    status: "false",
+    inStock: false,
     price: "$121.00",
   },
   {
     _id: 6,
-    name: "Apple Airpods6",
+    title: "Apple Airpods6",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 1231,
-    status: "active",
+    inStock: true,
     price: "$120.00",
   },
   {
     _id: 7,
-    name: "Apple Airpods7",
+    title: "Apple Airpods7",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 6123,
-    status: "false",
+    inStock: false,
     price: "$121.00",
   },
   {
     _id: 8,
-    name: "Apple Airpods8",
+    title: "Apple Airpods8",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 7123,
-    status: "false",
+    inStock: false,
     price: "$124.00",
   },
   {
     _id: 9,
-    name: "Apple Airpods9",
+    title: "Apple Airpods9",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 1723,
-    status: "active",
+    inStock: true,
     price: "$128.00",
   },
   {
     _id: 10,
-    name: "Apple Airpods10",
+    title: "Apple Airpods10",
+    desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
     img: "https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     stock: 7123,
-    status: "false",
+    inStock: false,
     price: "$122.00",
   },
 ];
