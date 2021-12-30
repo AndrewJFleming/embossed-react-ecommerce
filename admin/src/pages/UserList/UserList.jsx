@@ -33,11 +33,10 @@ const UserList = () => {
               <td>{user.email}</td>
               <td>{user.status}</td>
               <td>{user.transaction}</td>
-              <td className="d-flex justify-content-around">
+              <td>
                 <Link to={"/user/" + user._id}>
                   <Button variant="dark">Edit</Button>
                 </Link>
-
                 <Button
                   className="ml-2"
                   variant="danger"
