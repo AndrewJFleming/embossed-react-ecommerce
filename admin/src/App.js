@@ -5,11 +5,10 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import TopNav from "./components/TopNav/TopNav";
 import ProductList from "./pages/ProductList/ProductList";
-import Product from "./components/Product/Product";
 import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import NewProduct from "./pages/NewProduct/NewProduct";
 import UserList from "./pages/UserList/UserList";
-import User from "./pages/User/User";
+import SingleUser from "./pages/SingleUser/SingleUser";
 import NewUser from "./pages/NewUser/NewUser";
 import { useSelector } from "react-redux";
 
@@ -32,7 +31,7 @@ const App = () => {
               <UserList />
             </Route>
             <Route path="/user/:userId">
-              <User />
+              <SingleUser />
             </Route>
             <Route path="/newUser">
               <NewUser />

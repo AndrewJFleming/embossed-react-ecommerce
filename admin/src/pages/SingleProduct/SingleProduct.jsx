@@ -5,7 +5,7 @@ import { productRows } from "../../dummyData";
 import { Button } from "react-bootstrap";
 import "./SingleProduct.css";
 
-const Product = () => {
+const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
@@ -73,7 +73,7 @@ const Product = () => {
               <Button>Upload</Button>
               <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            <Button className="productButton">Update</Button>
           </div>
         </form>
       </div>
@@ -81,4 +81,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProduct;
