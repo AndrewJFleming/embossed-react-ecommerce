@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/user/:userId">
               <SingleUser />
             </Route>
-            <Route path="/newUser">
+            <Route path="/new-user">
               <NewUser />
             </Route>
             <Route path="/products">
@@ -42,7 +42,7 @@ const App = () => {
             <Route path="/product/:productId">
               <SingleProduct />
             </Route>
-            <Route path="/newproduct">
+            <Route path="/new-product">
               <NewProduct />
             </Route>
           </div>
