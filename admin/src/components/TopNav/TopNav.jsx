@@ -40,13 +40,13 @@ const TopNav = () => {
               Products
             </Nav.Link>
             <Nav.Link as={Link} to="/new-product" onClick={handleCollapse}>
-              New Product
+              <em>New Product</em>
             </Nav.Link>
             <Nav.Link as={Link} to="/users" onClick={handleCollapse}>
               Users
             </Nav.Link>
             <Nav.Link as={Link} to="/new-user" onClick={handleCollapse}>
-              New User
+              <em>New User</em>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
