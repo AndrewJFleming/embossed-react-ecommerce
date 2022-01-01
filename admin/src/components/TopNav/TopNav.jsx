@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import {
   Container,
@@ -9,12 +10,19 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import { logout } from "../../redux/apiCalls";
 import "./TopNav.css";
 
 const TopNav = () => {
   const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
 
   const handleCollapse = () => {
+    setExpanded(false);
+  };
+
+  const handleLogout = () => {
+    logout(dispatch);
     setExpanded(false);
   };
 
@@ -47,6 +55,12 @@ const TopNav = () => {
             </Nav.Link>
             <Nav.Link as={Link} to="/new-user" onClick={handleCollapse}>
               <em>New User</em>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/login" onClick={handleCollapse}>
+              Login
+            </Nav.Link>
+            <Nav.Link as={Link} to="/" onClick={handleLogout}>
+              Logout
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

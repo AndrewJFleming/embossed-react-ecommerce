@@ -13,41 +13,44 @@ import NewUser from "./pages/NewUser/NewUser";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  // const admin = useSelector((state) => state.user.currentUser.isAdmin);
+  const admin = useSelector((state) => state.user.currentUser.isAdmin);
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route path="/login">
+        <Route path="/login">
           <Login />
-        </Route> */}
-        {/* {admin && ( */}
-        <React.Fragment>
-          <TopNav />
-          <div>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/users">
-              <UserList />
-            </Route>
-            <Route path="/user/:userId">
-              <SingleUser />
-            </Route>
-            <Route path="/new-user">
-              <NewUser />
-            </Route>
-            <Route path="/products">
-              <ProductList />
-            </Route>
-            <Route path="/product/:productId">
-              <SingleProduct />
-            </Route>
-            <Route path="/new-product">
-              <NewProduct />
-            </Route>
-          </div>
-        </React.Fragment>
-        {/* )} */}
+        </Route>
+        {admin && (
+          <React.Fragment>
+            <TopNav />
+            <div>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/users">
+                <UserList />
+              </Route>
+              <Route path="/user/:userId">
+                <SingleUser />
+              </Route>
+              <Route path="/new-user">
+                <NewUser />
+              </Route>
+              <Route path="/products">
+                <ProductList />
+              </Route>
+              <Route path="/product/:productId">
+                <SingleProduct />
+              </Route>
+              <Route path="/new-product">
+                <NewProduct />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+            </div>
+          </React.Fragment>
+        )}
       </Switch>
     </BrowserRouter>
   );

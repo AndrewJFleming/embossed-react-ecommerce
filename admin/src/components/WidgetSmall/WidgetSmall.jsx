@@ -26,7 +26,7 @@ const WidgetSmall = () => {
             </div>
             <Link to={"/user/" + user._id}>
               <button className="widgetSmButton">
-                <i class="fas fa-eye widgetSmIcon"></i>
+                <i className="fas fa-eye widgetSmIcon"></i>
                 Display
               </button>
             </Link>

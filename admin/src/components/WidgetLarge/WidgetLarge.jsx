@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 import { orderData } from "../../dummyData";
 import "./WidgetLarge.css";
 
-const Button = ({ type }) => {
-  return <p className={`widgetLgButton ${type}`}>{type}</p>;
+const Button = ({ type, userId }) => {
+  return (
+    <Link to={"/user/" + userId}>
+      <button className={`widgetLgButton ${type}`}>{type}</button>
+    </Link>
+  );
 };
 
 const WidgetLarge = () => {
@@ -13,7 +18,7 @@ const WidgetLarge = () => {
 
   return (
     <div className="widgetLg">
-      <h3 className="widgetLgTitle">Latest transactions</h3>
+      <h3 className="widgetLgTitle">Latest Transactions</h3>
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
           <th className="widgetLgTh">Customer Id</th>
@@ -29,7 +34,7 @@ const WidgetLarge = () => {
             <td className="widgetLgDate">{format(order.createdAt)}</td>
             <td className="widgetLgAmount">${order.amount}</td>
             <td className="widgetLgStatus">
-              <Button type={order.status} />
+              <Button type={order.status} userId={order.userId} />
             </td>
           </tr>
         ))}
