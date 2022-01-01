@@ -10,11 +10,13 @@ import WidgetLarge from "../../components/WidgetLarge/WidgetLarge";
 import "./Home.css";
 
 const Home = () => {
+  const [userStats, setUserStats] = useState([]);
+
   return (
-    <div>
+    <div className="home">
       <FeaturedInfo />
       <Chart
-        // data={userStats}
+        data={userStats}
         title="User Analytics"
         grid
         dataKey="Active User"

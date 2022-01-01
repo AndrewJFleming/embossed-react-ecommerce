@@ -249,3 +249,56 @@ export const productRows = [
     price: "$122.00",
   },
 ];
+export const orderData = [
+  {
+    _id: 1,
+    userId: 1,
+    products: [
+      {
+        productId: 1,
+        quantity: 5,
+      },
+      {
+        productId: 2,
+        quantity: 4,
+      },
+    ],
+    amount: "$100.99",
+    address: "1234 2nd Ave S, New York, 123456",
+    status: "declined",
+  },
+  {
+    _id: 2,
+    userId: 2,
+    products: [
+      {
+        productId: 1,
+        quantity: 7,
+      },
+      {
+        productId: 3,
+        quantity: 1,
+      },
+    ],
+    amount: "$120.99",
+    address: "1234 2nd Ave S, New York, 123456",
+    status: "approved",
+  },
+  {
+    _id: 3,
+    userId: 3,
+    products: [
+      {
+        productId: 5,
+        quantity: 2,
+      },
+      {
+        productId: 3,
+        quantity: 4,
+      },
+    ],
+    amount: "$110.99",
+    address: "1234 2nd Ave S, New York, 123456",
+    status: "pending",
+  },
+];
