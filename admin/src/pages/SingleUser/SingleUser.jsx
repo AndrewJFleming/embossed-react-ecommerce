@@ -26,7 +26,7 @@ const SingleUser = () => {
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
-            <img src={user.avatar} alt="" className="userShowImg" />
+            <img src={user.img} alt="" className="userShowImg" />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{user.username}</span>
             </div>
