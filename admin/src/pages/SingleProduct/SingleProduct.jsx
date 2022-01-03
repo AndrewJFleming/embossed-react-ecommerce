@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { productRows } from "../../dummyData";
-import { Button } from "react-bootstrap";
+import { Button, Card, ListGroup } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
 import "./SingleProduct.css";
 
 const SingleProduct = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-  const [product, setProduct] = useState({});
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [categories, setCategories] = useState([]);
@@ -17,23 +15,26 @@ const SingleProduct = () => {
   const [inStock, setInStock] = useState(false);
   const [img, setImg] = useState("");
 
-  // const handleUpdate = async () => {
-  //   setError(false);
-  //   try {
-  //     await axios.put(`/posts/${post._id}`, {
-  //       username: user.username,
-  //       title,
-  //       description,
-  //       categories,
-  //       featured,
-  //       photo: newPhoto.image,
-  //     });
-  //     setUpdateMode(false);
-  //   } catch (err) {
-  //     console.log(err);
-  //     setError(true);
-  //   }
-  // };
+  const handleUpdate = async () => {
+    try {
+      await userRequest.put(`/products/${productId}`, {
+        title,
+        desc,
+        categories,
+        price,
+        inStock,
+        img,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleCat = (e) => {
+    setCategories(e.target.value.split(","));
+  };
+
+  const handleInStock = () => setInStock(!inStock);
 
   useEffect(() => {
     const getPost = async () => {
@@ -49,68 +50,108 @@ const SingleProduct = () => {
     getPost();
   }, [productId]);
 
-  // useEffect(() => {
-  //   const dummyProduct = productRows.find(
-  //     (product) => product._id == productId
-  //   );
-  //   setProduct(dummyProduct);
-  // }, [productId]);
-
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
-        <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
+        <h1 className="productTitle">
+          Product / <em>Update Product</em>
+        </h1>
+        <Link to="/new-product">
+          <button className="productAddButton">Create New</button>
         </Link>
       </div>
-      <div className="productTop">
-        <div className="productTopLeft">
-          {/* <Chart data={pStats} dataKey="Sales" title="Sales Performance" /> */}
-        </div>
-        <div className="productTopRight">
-          <div className="productInfoTop">
-            <img src={img} alt="" className="productInfoImg" />
-            <span className="productName">{title}</span>
-          </div>
-          <div className="productInfoBottom">
-            <div className="productInfoItem">
-              <span className="productInfoKey">id:</span>
-              <span className="productInfoValue">{productId}</span>
-            </div>
-            {/* <div className="productInfoItem">
-              <span className="productInfoKey">sales:</span>
-              <span className="productInfoValue">5123</span>
-            </div> */}
-            <div className="productInfoItem">
-              <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue">{inStock ? "Yes" : "No"}</span>
-            </div>
-          </div>
-        </div>
+      <div className="productTop d-flex">
+        <img src={img} alt="" />
+        <Card className="productCard">
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+            <Card.Text>{desc}</Card.Text>
+          </Card.Body>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <span className="listGroupLabel">Product ID:&nbsp;</span>
+              {productId}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Price:&nbsp;</span>${price}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">In Stock:&nbsp;</span>
+              {inStock ? "Yes" : "No"}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Categories:&nbsp;</span>
+              {categories.map((cat) => (
+                <span>
+                  &nbsp;&#8226;<em>{cat}</em>
+                </span>
+              ))}
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
       </div>
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" placeholder={title} />
+            <input
+              type="text"
+              placeholder={title}
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
             <label>Product Description</label>
-            <textarea type="text" placeholder={desc} />
+            <textarea
+              type="text"
+              placeholder={desc}
+              value={desc}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+            />
             <label>Price</label>
-            <input type="text" placeholder={price} />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-          <div className="productFormRight">
-            <div className="productUpload">
-              <img src={img} alt="" className="productUploadImg" />
-              <Button>Upload</Button>
-              <input type="file" id="file" style={{ display: "none" }} />
+            <input
+              type="text"
+              placeholder={price}
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+            <div className="addProductItem">
+              <label>Categories</label>
+              <input
+                type="text"
+                placeholder={categories}
+                value={categories}
+                onChange={handleCat}
+              />
             </div>
-            <Button className="productButton">Update</Button>
+            <div className="addProductItem">
+              <label>In Stock</label>
+              <input
+                onClick={handleInStock}
+                checked={inStock}
+                type="checkbox"
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Photo</label>
+              <input
+                name="photo"
+                type="text"
+                placeholder={img}
+                value={img}
+                onChange={(e) => {
+                  setImg(e.target.value);
+                }}
+              />
+            </div>
+            <Button onClick={handleUpdate} className="productButton">
+              Update
+            </Button>
           </div>
         </form>
       </div>

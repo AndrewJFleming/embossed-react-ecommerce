@@ -128,3 +128,16 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.listGroupLabel {
+  font-weight: bold;
+}
+
+.productTop img {
+  max-width: 200px;
+  margin-right: 20px;
+}
+
+.productCard {
+  width: 100%;
+}
