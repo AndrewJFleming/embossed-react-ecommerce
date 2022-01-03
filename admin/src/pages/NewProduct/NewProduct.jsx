@@ -1,23 +1,48 @@
 import React, { useState } from "react";
 
+import { userRequest } from "../../requestMethods";
 import { Button } from "react-bootstrap";
 import "./NewProduct.css";
 
 const NewProduct = () => {
-  const [inputs, setInputs] = useState({});
-  const [cat, setCat] = useState([]);
+  // const [inputs, setInputs] = useState({});
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [price, setPrice] = useState(null);
+  const [inStock, setInStock] = useState(false);
+  const [img, setImg] = useState("");
+  const [error, setError] = useState(false);
 
-  const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
+  // const handleChange = (e) => {
+  //   setInputs((prev) => {
+  //     return { ...prev, [e.target.name]: e.target.value };
+  //   });
+  // };
 
   const handleCat = (e) => {
-    setCat(e.target.value.split(","));
+    setCategories(e.target.value.split(","));
   };
 
-  const handleSubmit = () => {};
+  const handleInStock = () => setInStock(!inStock);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newProduct = {
+      title,
+      desc,
+      categories,
+      price,
+      inStock,
+      img,
+    };
+    try {
+      const res = await userRequest.post("/products", newProduct);
+      window.location.replace("/product/" + res.data._id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="newProduct">
@@ -33,7 +58,9 @@ const NewProduct = () => {
             name="title"
             type="text"
             placeholder="title..."
-            onChange={handleChange}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
         </div>
         <div className="addProductItem">
@@ -42,7 +69,9 @@ const NewProduct = () => {
             name="desc"
             type="text"
             placeholder="description..."
-            onChange={handleChange}
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
           />
         </div>
         <div className="addProductItem">
@@ -51,7 +80,9 @@ const NewProduct = () => {
             name="price"
             type="number"
             placeholder="price..."
-            onChange={handleChange}
+            onChange={(e) => {
+              setPrice(e.target.valueAsNumber);
+            }}
           />
         </div>
         <div className="addProductItem">
@@ -63,11 +94,19 @@ const NewProduct = () => {
           />
         </div>
         <div className="addProductItem">
-          <label>Stock</label>
-          <select name="inStock" onChange={handleChange}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+          <label>In Stock</label>
+          <input onClick={handleInStock} checked={inStock} type="checkbox" />
+        </div>
+        <div className="addProductItem">
+          <label>Photo</label>
+          <input
+            name="photo"
+            type="text"
+            placeholder="image url..."
+            onChange={(e) => {
+              setImg(e.target.value);
+            }}
+          />
         </div>
         <Button onClick={handleSubmit} className="addProductButton">
           Create

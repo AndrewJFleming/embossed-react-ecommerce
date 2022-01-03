@@ -10,9 +10,7 @@ import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import "./ProductList.css";
 
 const ProductList = () => {
-  // const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  // const products = useSelector((state) => state.product.products);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -31,14 +29,6 @@ const ProductList = () => {
       console.log(err);
     }
   };
-
-  // useEffect(() => {
-  //   getProducts(dispatch);
-  // }, [dispatch]);
-
-  // const handleDelete = (id) => {
-  //   deleteProduct(id, dispatch);
-  // };
 
   return (
     <div className="productList">
