@@ -12,7 +12,6 @@ const NewProduct = () => {
   const [price, setPrice] = useState(null);
   const [inStock, setInStock] = useState(false);
   const [img, setImg] = useState("");
-  const [error, setError] = useState(false);
 
   // const handleChange = (e) => {
   //   setInputs((prev) => {
