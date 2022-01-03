@@ -5,3 +5,16 @@
 .productThumb {
   width: 100px;
 }
+
+.editIcon {
+  color: darkblue;
+  padding: 3px;
+}
+.deleteIcon {
+  color: red;
+  padding: 3px;
+}
+.deleteIcon:hover,
+.editIcon:hover {
+  cursor: pointer;
+}

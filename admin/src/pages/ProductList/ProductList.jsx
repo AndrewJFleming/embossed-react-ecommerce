@@ -1,19 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import Product from "../../components/Product/Product";
 import { Table, Button } from "react-bootstrap";
-import { productRows } from "../../dummyData";
+// import { productRows } from "../../dummyData";
+import { userRequest } from "../../requestMethods";
+import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import "./ProductList.css";
 
 const ProductList = () => {
+  // const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
   // const products = useSelector((state) => state.product.products);
-  const [products, setProducts] = useState(productRows);
 
-  const handleDelete = (id) => {
-    setProducts(products.filter((item) => item._id !== id));
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await userRequest.get("products");
+        setProducts(res.data);
+      } catch {}
+    };
+    getProducts();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await userRequest.delete(`/products/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // useEffect(() => {
+  //   getProducts(dispatch);
+  // }, [dispatch]);
+
+  // const handleDelete = (id) => {
+  //   deleteProduct(id, dispatch);
+  // };
 
   return (
     <div className="productList">
@@ -45,17 +70,24 @@ const ProductList = () => {
               <td>{product.stock}</td>
               <td>{product.inStock ? "Yes" : "No"}</td>
               <td>{product.price}</td>
-              <td>
-                <Link to={"/product/" + product._id}>
-                  <Button variant="dark">Edit</Button>
-                </Link>
-                <Button
+              <td className="text-center">
+                <div>
+                  <Link to={"/product/" + product._id}>
+                    {/* <Button variant="dark">Edit</Button> */}
+                    <i className="fas fa-edit editIcon"></i>
+                  </Link>
+                  {/* <Button
                   className="ml-2"
                   variant="danger"
                   onClick={() => handleDelete(product._id)}
                 >
                   Delete
-                </Button>
+                </Button> */}
+                  <i
+                    className="fas fa-trash-alt deleteIcon"
+                    onClick={() => handleDelete(product._id)}
+                  ></i>
+                </div>
               </td>
             </tr>
           ))}
