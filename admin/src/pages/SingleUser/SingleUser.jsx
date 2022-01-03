@@ -1,23 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { Button } from "react-bootstrap";
-import { userRows } from "../../dummyData";
+import { Button, Container, Form, Card, ListGroup } from "react-bootstrap";
+import { userRequest } from "../../requestMethods";
 import "./SingleUser.css";
 
 const SingleUser = () => {
   const [user, setUser] = useState({});
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [img, setImg] = useState("");
 
   useEffect(() => {
-    const dummyUser = userRows.find((user) => user._id == userId);
-    setUser(dummyUser);
+    const getPost = async () => {
+      const res = await userRequest.get("/users/find/" + userId);
+      setUser(res.data);
+      setUsername(res.data.username);
+      setEmail(res.data.email);
+      setIsAdmin(res.data.isAdmin);
+      setImg(res.data.img);
+    };
+    getPost();
   }, [userId]);
+
+  const handleUpdate = async () => {
+    try {
+      await userRequest.put(`/users/${userId}`, {
+        username,
+        email,
+        password,
+        img,
+      });
+      window.location.replace("/user/" + userId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleIsAdmin = () => setIsAdmin(!isAdmin);
 
   return (
     <div className="user">
-      <div className="userTitleContainer">
+      {/* <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
         <Link to="/newUser">
           <button className="userAddButton">Create</button>
@@ -32,20 +60,11 @@ const SingleUser = () => {
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
-              {/* <PermIdentity className="userShowIcon" /> */}
-              <span className="userShowInfoTitle">
-                {user.status ? "account active" : "account deactivated"}
-              </span>
-            </div>
-            <div className="userShowInfo">
-              {/* <PermIdentity className="userShowIcon" /> */}
               <span className="userShowInfoTitle">{user.transaction}</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
-              {/* <MailOutline className="userShowIcon" /> */}
               <span className="userShowInfoTitle">{user.email}</span>
             </div>
           </div>
@@ -78,13 +97,6 @@ const SingleUser = () => {
                   className="userUpdateInput"
                 />
               </div>
-              <div className="userUpdateItem">
-                <label>Account Status</label>
-                <select name="Account Status" id="accountStatus">
-                  <option value="true">active</option>
-                  <option value="false">inactive</option>
-                </select>
-              </div>
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
@@ -102,7 +114,104 @@ const SingleUser = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
+
+      <Container className="productTitleContainer">
+        <h1 className="productTitle">User</h1>
+        <Link to="/new-user">
+          <Button className="productAddButton">Create New</Button>
+        </Link>
+      </Container>
+      <Container className="productTop d-flex mb-5">
+        <img src={user.img} alt="" />
+        <Card className="productCard">
+          <Card.Body>
+            <Card.Title>{user.username}</Card.Title>
+          </Card.Body>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <span className="listGroupLabel">User ID:&nbsp;</span>
+              {userId}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Email:&nbsp;</span>
+              {user.email}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Is Admin:&nbsp;</span>
+              {user.isAdmin ? "Yes" : "No"}
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
+      </Container>
+      <Container>
+        <h2 className="productTitle">Update User</h2>
+        <Form>
+          <div>
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder={email}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>New Password</Form.Label>
+              <Form.Control
+                name="photo"
+                type="password"
+                placeholder="password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Admin Status</Form.Label>
+              <Form.Check
+                onClick={handleIsAdmin}
+                checked={isAdmin}
+                type="checkbox"
+                label="In Stock"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Photo</Form.Label>
+              <Form.Control
+                name="photo"
+                type="text"
+                placeholder={img}
+                value={img}
+                onChange={(e) => {
+                  setImg(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Button onClick={handleUpdate} className="productButton">
+              Update
+            </Button>
+          </div>
+        </Form>
+      </Container>
     </div>
   );
 };

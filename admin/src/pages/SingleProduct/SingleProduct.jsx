@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, ListGroup, Container, Form } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
 import "./SingleProduct.css";
 
 const SingleProduct = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [productCats, setProductCats] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [categories, setCategories] = useState([]);
@@ -25,6 +27,7 @@ const SingleProduct = () => {
         inStock,
         img,
       });
+      window.location.replace("/product/" + productId);
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +42,8 @@ const SingleProduct = () => {
   useEffect(() => {
     const getPost = async () => {
       const res = await userRequest.get("/products/find/" + productId);
-      // setPost(res.data);
+      setProduct(res.data);
+      setProductCats(res.data.categories);
       setTitle(res.data.title);
       setDesc(res.data.desc);
       setCategories(res.data.categories);
@@ -52,20 +56,18 @@ const SingleProduct = () => {
 
   return (
     <div className="product">
-      <div className="productTitleContainer">
-        <h1 className="productTitle">
-          Product / <em>Update Product</em>
-        </h1>
+      <Container className="productTitleContainer">
+        <h1 className="productTitle">Product</h1>
         <Link to="/new-product">
-          <button className="productAddButton">Create New</button>
+          <Button className="productAddButton">Create New</Button>
         </Link>
-      </div>
-      <div className="productTop d-flex">
-        <img src={img} alt="" />
+      </Container>
+      <Container className="productTop d-flex mb-5">
+        <img src={product.img} alt="" />
         <Card className="productCard">
           <Card.Body>
-            <Card.Title>{title}</Card.Title>
-            <Card.Text>{desc}</Card.Text>
+            <Card.Title>{product.title}</Card.Title>
+            <Card.Text>{product.desc}</Card.Text>
           </Card.Body>
           <ListGroup variant="flush">
             <ListGroup.Item>
@@ -73,15 +75,16 @@ const SingleProduct = () => {
               {productId}
             </ListGroup.Item>
             <ListGroup.Item>
-              <span className="listGroupLabel">Price:&nbsp;</span>${price}
+              <span className="listGroupLabel">Price:&nbsp;</span>$
+              {product.price}
             </ListGroup.Item>
             <ListGroup.Item>
               <span className="listGroupLabel">In Stock:&nbsp;</span>
-              {inStock ? "Yes" : "No"}
+              {product.inStock ? "Yes" : "No"}
             </ListGroup.Item>
             <ListGroup.Item>
               <span className="listGroupLabel">Categories:&nbsp;</span>
-              {categories.map((cat) => (
+              {productCats.map((cat) => (
                 <span>
                   &nbsp;&#8226;<em>{cat}</em>
                 </span>
@@ -89,57 +92,66 @@ const SingleProduct = () => {
             </ListGroup.Item>
           </ListGroup>
         </Card>
-      </div>
-      <div className="productBottom">
-        <form className="productForm">
-          <div className="productFormLeft">
-            <label>Product Name</label>
-            <input
-              type="text"
-              placeholder={title}
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-            <label>Product Description</label>
-            <textarea
-              type="text"
-              placeholder={desc}
-              value={desc}
-              onChange={(e) => {
-                setDesc(e.target.value);
-              }}
-            />
-            <label>Price</label>
-            <input
-              type="text"
-              placeholder={price}
-              value={price}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-            />
-            <div className="addProductItem">
-              <label>Categories</label>
-              <input
+      </Container>
+      <Container>
+        <h2 className="productTitle">Update Product</h2>
+        <Form>
+          <div>
+            <Form.Group className="mb-3">
+              <Form.Label>Product Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Product Description</Form.Label>
+              <Form.Control
+                type="textarea"
+                placeholder={desc}
+                value={desc}
+                onChange={(e) => {
+                  setDesc(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={price}
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Categories</Form.Label>
+              <Form.Control
                 type="text"
                 placeholder={categories}
                 value={categories}
                 onChange={handleCat}
               />
-            </div>
-            <div className="addProductItem">
-              <label>In Stock</label>
-              <input
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Availability</Form.Label>
+              <Form.Check
                 onClick={handleInStock}
                 checked={inStock}
                 type="checkbox"
+                label="In Stock"
               />
-            </div>
-            <div className="addProductItem">
-              <label>Photo</label>
-              <input
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Photo</Form.Label>
+              <Form.Control
                 name="photo"
                 type="text"
                 placeholder={img}
@@ -148,13 +160,14 @@ const SingleProduct = () => {
                   setImg(e.target.value);
                 }}
               />
-            </div>
+            </Form.Group>
+
             <Button onClick={handleUpdate} className="productButton">
               Update
             </Button>
           </div>
-        </form>
-      </div>
+        </Form>
+      </Container>
     </div>
   );
 };
