@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { Container } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
 import "./WidgetSmall.css";
 
@@ -18,8 +19,8 @@ const WidgetSmall = () => {
   }, []);
 
   return (
-    <div className="widgetSm">
-      <span className="widgetSmTitle">New Members</span>
+    <Container className="pb-3">
+      <h3 className="widgetTitle">New Members</h3>
       <ul className="widgetSmList">
         {users.map((user) => (
           <li className="widgetSmListItem" key={user._id}>
@@ -28,22 +29,19 @@ const WidgetSmall = () => {
                 user.img ||
                 "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"
               }
-              alt=""
+              alt={`${user.username}-thumb`}
               className="widgetSmImg"
             />
-            <div className="widgetSmUser">
-              <span className="widgetSmUsername">
-                {user.username}
-                {user.isAdmin && <em className="adminBadge">Admin</em>}
-              </span>
-            </div>
             <Link to={"/user/" + user._id}>
-              <i className="fas fa-external-link-alt fa-md"></i>
+              <h5 className="widgetSmUsername">
+                {user.username}
+                {user.isAdmin && <i className="fas fa-user-shield"></i>}
+              </h5>
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };
 

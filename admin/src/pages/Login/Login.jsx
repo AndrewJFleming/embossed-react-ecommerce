@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Form, Button } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import { login } from "../../redux/apiCalls";
-import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -16,8 +15,8 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <Container className="mt-5">
+      <h1>Login</h1>
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Username</Form.Label>
@@ -35,19 +34,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        {/* <input
-          type="text"
-          placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        /> */}
       </Form>
       <Button onClick={handleLogin}>Login</Button>
-    </div>
+    </Container>
   );
 };
 

@@ -1,3 +1,22 @@
-.userList {
-  padding: 20px;
+.userIdWrapper {
+  width: auto;
+  overflow-wrap: normal;
+}
+
+.userThumb {
+  width: 100px;
+}
+
+.standardUserIcon {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 767px) {
+  .userIdWrapper {
+    width: 70px;
+    overflow-wrap: anywhere;
+  }
+  .userThumb {
+    width: 50px;
+  }
 }

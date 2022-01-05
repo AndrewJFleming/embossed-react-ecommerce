@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 
-import { Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
 import "./WidgetLarge.css";
 
-const Button = ({ type, userId }) => {
+const Button = ({ type, orderId }) => {
   return (
-    <Link to={"/user/" + userId}>
+    // <Link to={"/order/" + orderId}>
+    <Link to="#">
       <button className={`widgetLgButton ${type}`}>
         {type}&nbsp;
-        <i className="fas fa-external-link-alt fa-xs"></i>
+        {/* <i className="fas fa-external-link-alt fa-xs"></i> */}
       </button>
     </Link>
   );
 };
 
 const WidgetLarge = () => {
-  // const [orders, setOrders] = useState(orderData);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const WidgetLarge = () => {
   }, []);
 
   return (
-    <div className="widgetLg">
-      <h3 className="widgetLgTitle">Latest Transactions</h3>
-      <Table className="widgetLgTable">
+    <Container>
+      <h3 className="widgetTitle">Latest Transactions</h3>
+      <Table responsive size="sm" className="widgetLgTable">
         <thead>
           <tr className="widgetLgTr">
             <th className="widgetLgTh">Customer Id</th>
@@ -48,7 +48,7 @@ const WidgetLarge = () => {
             <tr className="widgetLgTr" key={order._id}>
               <td className="widgetLgUser">
                 <Link to={"/user/" + order.userId}>
-                  <span className="widgetLgName">{order.userId}</span>
+                  <div className="orderUserIdWrapper">{order.userId}</div>
                 </Link>
               </td>
               <td className="widgetLgDate">
@@ -57,13 +57,13 @@ const WidgetLarge = () => {
               </td>
               <td className="widgetLgAmount">${order.amount}</td>
               <td className="widgetLgStatus">
-                <Button type={order.status} userId={order.userId} />
+                <Button type={order.status} orderId={order._id} />
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-    </div>
+    </Container>
   );
 };
 

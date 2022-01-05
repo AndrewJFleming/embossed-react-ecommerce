@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-import Product from "../../components/Product/Product";
-import { Table, Button } from "react-bootstrap";
-// import { productRows } from "../../dummyData";
+import {
+  Button,
+  Container,
+  Table,
+  Tooltip,
+  OverlayTrigger,
+} from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import "./ProductList.css";
 
 const ProductList = () => {
@@ -17,7 +19,9 @@ const ProductList = () => {
       try {
         const res = await userRequest.get("products");
         setProducts(res.data);
-      } catch {}
+      } catch (err) {
+        console.log(err);
+      }
     };
     getProducts();
   }, []);
@@ -31,59 +35,65 @@ const ProductList = () => {
   };
 
   return (
-    <div className="productList">
+    <Container className="my-5">
       {/* {products.slice(0, 8).map((item) => (
         <Product product={item} key={item.id} />
       ))} */}
-      <Table striped bordered hover>
+      <span className="mb-2 d-flex justify-content-between align-items-center">
+        <h1>My Products</h1>
+        <Link to="/new-user">
+          <Button variant="success">Create New</Button>
+        </Link>
+      </span>
+
+      <Table striped bordered responsive size="sm">
         <thead>
           <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Description</th>
+            <th>Desc</th>
             <th>Image</th>
-            <th>Stock</th>
             <th>InStock</th>
             <th>Price</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
             <tr>
-              <td>{product._id}</td>
-              <td>{product.title}</td>
-              <td>{product.desc}</td>
               <td>
-                <img className="productThumb" src={product.img} />
-              </td>
-              <td>{product.stock}</td>
-              <td>{product.inStock ? "Yes" : "No"}</td>
-              <td>{product.price}</td>
-              <td className="text-center">
+                <div className="productIdWrapper">{product._id}</div>
                 <div>
                   <Link to={"/product/" + product._id}>
-                    {/* <Button variant="dark">Edit</Button> */}
                     <i className="fas fa-edit editIcon"></i>
                   </Link>
-                  {/* <Button
-                  className="ml-2"
-                  variant="danger"
-                  onClick={() => handleDelete(product._id)}
-                >
-                  Delete
-                </Button> */}
                   <i
                     className="fas fa-trash-alt deleteIcon"
                     onClick={() => handleDelete(product._id)}
                   ></i>
                 </div>
               </td>
+              <td>{product.title}</td>
+              <td>
+                <OverlayTrigger overlay={<Tooltip>{product.desc}</Tooltip>}>
+                  <span>
+                    <span>{product.desc.substring(0, 35) + "..."}</span>
+                  </span>
+                </OverlayTrigger>
+              </td>
+              <td>
+                <img
+                  className="productThumb"
+                  src={product.img}
+                  alt={`${product.title}-thumb`}
+                />
+              </td>
+              <td>{product.inStock ? "Yes" : "No"}</td>
+              <td>${product.price}</td>
             </tr>
           ))}
         </tbody>
       </Table>
-    </div>
+    </Container>
   );
 };
 

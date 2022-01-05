@@ -1,0 +1,189 @@
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+import { Button, Card, ListGroup, Container, Form } from "react-bootstrap";
+import { userRequest } from "../../requestMethods";
+import "./SingleOrder.css";
+
+const SingleOrder = () => {
+  const location = useLocation();
+  const orderId = location.pathname.split("/")[2];
+  const [order, setOrder] = useState({});
+  const [orderProducts, setOrderProducts] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [products, setProducts] = useState([]);
+  const [address, setAddress] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [status, setStatus] = useState(false);
+
+  const [newProductId, setNewProductId] = useState("");
+  const [newAmount, setNewAmount] = useState("");
+
+  useEffect(() => {
+    const getOrder = async () => {
+      const res = await userRequest.get("/orders/" + orderId);
+      setOrder(res.data);
+      setOrderProducts(res.data.products);
+      setUserId(res.data.userId);
+      setAddress(res.data.address);
+      setProducts(res.data.products);
+      setProducts({ ...res.data.products });
+      setAmount(res.data.amount);
+      setStatus(res.data.status);
+    };
+    getOrder();
+  }, [orderId]);
+
+  const handleUpdate = async () => {
+    // try {
+    //   await userRequest.put(`/products/${productId}`, {
+    //     title,
+    //     desc,
+    //     categories,
+    //     price,
+    //     inStock,
+    //     img,
+    //   });
+    //   window.location.replace("/product/" + productId);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
+
+  // const handleProducts = (e) => {
+  //   console.log(e);
+  //   setProducts(e.target.value.split(","));
+  // };
+
+  const handleOrderStatus = () => setStatus(!status);
+
+  const addProduct = () => {
+    let newProduct = { productId: newProductId, amount: newAmount };
+    let array = { ...orderProducts, newProduct };
+    setOrderProducts(array);
+  };
+
+  return (
+    <div className="product">
+      <Container className="productTitleContainer">
+        <h1 className="productTitle">Order</h1>
+        <Link to="/new-product">
+          <Button className="productAddButton">Create New</Button>
+        </Link>
+      </Container>
+      <Container className="productTop d-flex mb-5">
+        <Card className="productCard">
+          <Card.Body>
+            <Card.Title>
+              <span className="listGroupLabel">User ID:&nbsp;</span>
+              {order.userId}
+            </Card.Title>
+            {/* <Card.Text>{order.desc}</Card.Text> */}
+          </Card.Body>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <span className="listGroupLabel">Order ID:&nbsp;</span>
+              {orderId}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Amount:&nbsp;</span>$
+              {order.amount}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Order Status:&nbsp;</span>
+              {order.status ? "Yes" : "No"}
+            </ListGroup.Item>
+            {/* <ListGroup.Item>
+              <span className="listGroupLabel">Products:&nbsp;</span>
+              {orderProducts.map((p) => (
+                <span>
+                  &nbsp;&#8226;<em>{p.productId}</em>
+                </span>
+              ))}
+            </ListGroup.Item> */}
+          </ListGroup>
+        </Card>
+      </Container>
+      <Container>
+        <h2 className="productTitle">Update Order</h2>
+        <Form>
+          <div>
+            <Form.Group className="mb-3">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder={amount}
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                }}
+              />
+            </Form.Group>
+            {/* <ListGroup.Item>
+              <span className="listGroupLabel">Products:&nbsp;</span>
+              {products.map((p) => (
+                <span>
+                  &nbsp;&#8226;<em>{p}</em>
+                </span>
+              ))}
+            </ListGroup.Item> */}
+
+            <Form.Group className="mb-3">
+              <Form.Label>Order Status</Form.Label>
+              <Form.Check
+                onClick={handleOrderStatus}
+                checked={status}
+                type="checkbox"
+                label="Order Status"
+              />
+            </Form.Group>
+
+            <Button onClick={handleUpdate} className="productButton">
+              Update
+            </Button>
+          </div>
+        </Form>
+        {orderProducts.map((p) => (
+          <div>
+            <input
+              type="text"
+              placeholder="newProductId"
+              value={p.productId}
+              onChange={(e) => {
+                setNewProductId(e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="newAmount"
+              value={p.quantity}
+              onChange={(e) => {
+                setNewAmount(e.target.value);
+              }}
+            />
+          </div>
+        ))}
+        <input
+          type="text"
+          placeholder="newProductId"
+          value={newProductId}
+          onChange={(e) => {
+            setNewProductId(e.target.value);
+          }}
+        />
+        <input
+          type="number"
+          placeholder="newAmount"
+          value={newAmount}
+          onChange={(e) => {
+            setNewAmount(e.target.value);
+          }}
+        />
+
+        <button onClick={addProduct}>Make Obj</button>
+      </Container>
+    </div>
+  );
+};
+
+export default SingleOrder;

@@ -1,8 +1,5 @@
-* {
-  margin: 0;
-}
-
 body {
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -15,14 +12,33 @@ code {
     monospace;
 }
 
-.pageTitle {
-  font-size: 24px;
-  font-weight: 300;
-}
-
 a {
   margin: 5px 0px;
   /* font-size: 12px; */
   text-decoration: none;
   cursor: pointer;
+}
+
+/*
+For UserList.jsx and ProductList.jsx
+*/
+.editIcon {
+  color: darkblue;
+  padding: 3px;
+}
+.deleteIcon {
+  color: red;
+  padding: 3px;
+}
+.deleteIcon:hover,
+.editIcon:hover {
+  cursor: pointer;
+}
+
+/*
+For WidgetSmall.jsx and WidgetLarge.jsx
+*/
+.widgetTitle {
+  font-size: 22px;
+  font-weight: 600;
 }

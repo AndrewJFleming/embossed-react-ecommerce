@@ -1,20 +1,18 @@
-.productList {
-  padding: 20px;
+.productIdWrapper {
+  width: auto;
+  overflow-wrap: normal;
 }
 
 .productThumb {
   width: 100px;
 }
 
-.editIcon {
-  color: darkblue;
-  padding: 3px;
-}
-.deleteIcon {
-  color: red;
-  padding: 3px;
-}
-.deleteIcon:hover,
-.editIcon:hover {
-  cursor: pointer;
+@media screen and (max-width: 767px) {
+  .productIdWrapper {
+    width: 70px;
+    overflow-wrap: anywhere;
+  }
+  .productThumb {
+    width: 50px;
+  }
 }

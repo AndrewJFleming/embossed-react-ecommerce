@@ -55,16 +55,20 @@ const SingleProduct = () => {
   }, [productId]);
 
   return (
-    <div className="product">
-      <Container className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
+    <div className="mb-5">
+      <Container className="mt-5 mb-2 d-flex justify-content-between align-items-center">
+        <h1>Product</h1>
         <Link to="/new-product">
-          <Button className="productAddButton">Create New</Button>
+          <Button variant="success">Create New</Button>
         </Link>
       </Container>
-      <Container className="productTop d-flex mb-5">
-        <img src={product.img} alt="" />
-        <Card className="productCard">
+      <Container className="d-flex mb-5">
+        <img
+          className="productImg"
+          src={product.img}
+          alt={`${product.title}-product`}
+        />
+        <Card style={{ width: "100%" }}>
           <Card.Body>
             <Card.Title>{product.title}</Card.Title>
             <Card.Text>{product.desc}</Card.Text>
@@ -93,79 +97,75 @@ const SingleProduct = () => {
           </ListGroup>
         </Card>
       </Container>
-      <Container>
-        <h2 className="productTitle">Update Product</h2>
+      <Container className="mb-5">
+        <h2>Update Product</h2>
         <Form>
-          <div>
-            <Form.Group className="mb-3">
-              <Form.Label>Product Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Product Description</Form.Label>
-              <Form.Control
-                type="textarea"
-                placeholder={desc}
-                value={desc}
-                onChange={(e) => {
-                  setDesc(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={price}
-                value={price}
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Categories</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={categories}
-                value={categories}
-                onChange={handleCat}
-              />
-            </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Product Name</Form.Label>
+            <Form.Control
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Product Description</Form.Label>
+            <Form.Control
+              type="textarea"
+              placeholder={desc}
+              value={desc}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder={price}
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Categories</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder={categories}
+              value={categories}
+              onChange={handleCat}
+            />
+          </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Availability</Form.Label>
-              <Form.Check
-                onClick={handleInStock}
-                checked={inStock}
-                type="checkbox"
-                label="In Stock"
-              />
-            </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Availability</Form.Label>
+            <Form.Check
+              onClick={handleInStock}
+              checked={inStock}
+              type="checkbox"
+              label="In Stock"
+            />
+          </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Photo</Form.Label>
-              <Form.Control
-                name="photo"
-                type="text"
-                placeholder={img}
-                value={img}
-                onChange={(e) => {
-                  setImg(e.target.value);
-                }}
-              />
-            </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Photo</Form.Label>
+            <Form.Control
+              name="photo"
+              type="text"
+              placeholder={img}
+              value={img}
+              onChange={(e) => {
+                setImg(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-            <Button onClick={handleUpdate} className="productButton">
-              Update
-            </Button>
-          </div>
+          <Button onClick={handleUpdate}>Update</Button>
         </Form>
       </Container>
     </div>

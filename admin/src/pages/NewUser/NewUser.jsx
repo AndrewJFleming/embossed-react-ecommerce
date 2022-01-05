@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { userRequest } from "../../requestMethods";
-import "./NewUser.css";
+import { Container, Form, Button } from "react-bootstrap";
 
 const NewUser = () => {
   const [username, setUsername] = useState("");
@@ -19,65 +19,70 @@ const NewUser = () => {
     };
     try {
       const res = await userRequest.post("/auth/register", newUser);
-      // window.location.replace("/user/" + res.data._id);
+      window.location.replace("/user/" + res.data._id);
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="newUser">
-      <h1 className="newUserTitle">New User</h1>
-      <form className="newUserForm">
-        <div className="newUserItem">
-          <label>Username</label>
-          <input
+    <Container className="my-5">
+      <h1>New User</h1>
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
             type="text"
-            placeholder="username"
+            placeholder={username}
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           />
-        </div>
-        <div className="newUserItem">
-          <label>Email</label>
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             type="email"
-            placeholder="email"
+            placeholder={email}
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           />
-        </div>
-        <div className="newUserItem">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="password"
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder={password}
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
-        </div>
-        <div className="newUserItem">
-          <label>Avatar</label>
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Avatar</Form.Label>
+          <Form.Control
             type="text"
-            placeholder="Image Url"
+            placeholder={img}
             value={img}
             onChange={(e) => {
               setImg(e.target.value);
             }}
           />
-        </div>
-        <button onClick={handleSubmit} className="newUserButton">
-          Create
-        </button>
-      </form>
-    </div>
+          <Form.Text muted>
+            Provide URL for existing image on the web.
+          </Form.Text>
+        </Form.Group>
+
+        <Button onClick={handleSubmit}>Create</Button>
+      </Form>
+    </Container>
   );
 };
 

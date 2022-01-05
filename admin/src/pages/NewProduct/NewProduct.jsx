@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 
 import { userRequest } from "../../requestMethods";
-import { Button } from "react-bootstrap";
-import "./NewProduct.css";
+import { Container, Button, Form } from "react-bootstrap";
 
 const NewProduct = () => {
-  // const [inputs, setInputs] = useState({});
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [categories, setCategories] = useState([]);
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState(0);
   const [inStock, setInStock] = useState(false);
   const [img, setImg] = useState("");
 
-  // const handleChange = (e) => {
-  //   setInputs((prev) => {
-  //     return { ...prev, [e.target.name]: e.target.value };
-  //   });
-  // };
-
-  const handleCat = (e) => {
+  const handleCats = (e) => {
     setCategories(e.target.value.split(","));
   };
 
@@ -44,74 +36,82 @@ const NewProduct = () => {
   };
 
   return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New Product</h1>
-      <form className="addProductForm">
-        <div className="addProductItem">
-          <label>Image</label>
-          <input type="file" id="file" onChange={() => {}} />
-        </div>
-        <div className="addProductItem">
-          <label>Title</label>
-          <input
-            name="title"
+    <Container className="my-5">
+      <h1>New Product</h1>
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
             type="text"
-            placeholder="title..."
+            placeholder={title}
+            value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
-        </div>
-        <div className="addProductItem">
-          <label>Description</label>
-          <input
-            name="desc"
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
             type="text"
-            placeholder="description..."
+            placeholder={desc}
+            value={desc}
             onChange={(e) => {
               setDesc(e.target.value);
             }}
           />
-        </div>
-        <div className="addProductItem">
-          <label>Price</label>
-          <input
-            name="price"
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Price</Form.Label>
+          <Form.Control
             type="number"
-            placeholder="price..."
+            placeholder={`$${price}`}
+            value={`$${price}`}
             onChange={(e) => {
               setPrice(e.target.valueAsNumber);
             }}
           />
-        </div>
-        <div className="addProductItem">
-          <label>Categories</label>
-          <input
-            type="text"
-            placeholder="notebooks,postcards"
-            onChange={handleCat}
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Categories</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="stationary,postcards"
+            value={categories}
+            onChange={handleCats}
           />
-        </div>
-        <div className="addProductItem">
-          <label>In Stock</label>
-          <input onClick={handleInStock} checked={inStock} type="checkbox" />
-        </div>
-        <div className="addProductItem">
-          <label>Photo</label>
-          <input
-            name="photo"
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Check
+            type="checkbox"
+            checked={inStock}
+            label="In Stock"
+            onClick={handleInStock}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Photo</Form.Label>
+          <Form.Control
             type="text"
-            placeholder="image url..."
+            placeholder={img}
+            value={img}
             onChange={(e) => {
               setImg(e.target.value);
             }}
           />
-        </div>
-        <Button onClick={handleSubmit} className="addProductButton">
-          Create
-        </Button>
-      </form>
-    </div>
+          <Form.Text muted>
+            Provide URL for existing image on the web.
+          </Form.Text>
+        </Form.Group>
+
+        <Button onClick={handleSubmit}>Create</Button>
+      </Form>
+    </Container>
   );
 };
 

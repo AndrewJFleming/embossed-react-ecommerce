@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, clearUser } from "./userRedux";
 import {
   getProductFailure,
   getProductStart,
@@ -20,14 +20,15 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
+    res.data && window.location.replace("/");
   } catch (err) {
     dispatch(loginFailure());
   }
 };
 
 export const logout = (dispatch) => {
-  // dispatch(clearUser());
-  localStorage.clear();
+  dispatch(clearUser());
+  window.location.replace("/login");
 };
 
 export const getProducts = async (dispatch) => {
