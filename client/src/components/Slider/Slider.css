@@ -1,9 +1,25 @@
+.slideTitle,
+.slideTitle:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 .carouselImage {
   height: 500px;
   object-fit: cover;
-  /* object-position: top; */
 }
 
 .carousel-indicators {
   padding-bottom: 30px;
+}
+
+.carousel-indicators button {
+  border-radius: 5px;
+  padding: 4px 15px;
+  margin: 0 4px;
+  border: 2px solid #aaa;
+}
+
+.carousel-indicators .active {
+  background-color: #000;
 }

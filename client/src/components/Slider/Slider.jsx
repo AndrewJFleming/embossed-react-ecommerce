@@ -31,10 +31,10 @@ function ControlledCarousel() {
             w-100 
             carouselImage"
             src={slide.img}
-            alt="First slide"
+            alt={`${slide.title}-slide`}
           />
           <Carousel.Caption>
-            <Link to={`/product-list/${slide.title}`}>
+            <Link className="slideTitle" to={`/product-list/${slide.title}`}>
               <h3>{slide.title}</h3>
             </Link>
             <p>{slide.desc}</p>
