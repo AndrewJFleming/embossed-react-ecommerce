@@ -13,11 +13,13 @@ const Home = () => {
       <Container>
         <Row className="mt-5">
           <Col>
+            <h3 className="text-center mb-4">Featured Categories</h3>
             <Categories />
           </Col>
         </Row>
         <Row className="mt-5">
           <Col>
+            <h3 className="text-center mb-4">Products</h3>
             <Products />
           </Col>
         </Row>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import "./Slider.css";
 import { Carousel, Container } from "react-bootstrap";
-import { sliderItems } from "../../data";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -16,8 +16,8 @@ function ControlledCarousel() {
   useEffect(() => {
     const getSliderCats = async () => {
       const res = await axios.get("/categories");
-      const isSliderProduct = res.data.filter((x) => !!x.isSlide);
-      setSlides(isSliderProduct);
+      const isSliderCat = res.data.filter((x) => !!x.isSlide);
+      setSlides(isSliderCat);
     };
     getSliderCats();
   }, []);
@@ -34,7 +34,9 @@ function ControlledCarousel() {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>{slide.title}</h3>
+            <Link to={`/product-list/${slide.title}`}>
+              <h3>{slide.title}</h3>
+            </Link>
             <p>{slide.desc}</p>
           </Carousel.Caption>
         </Carousel.Item>
