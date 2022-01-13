@@ -8,7 +8,6 @@ import "./Account.css";
 
 const Account = ({ currentUser }) => {
   const [formData, setFormData] = useState({
-    currentUsername: "",
     username: "",
     email: "",
     currentPassword: "",
@@ -19,7 +18,6 @@ const Account = ({ currentUser }) => {
   useEffect(() => {
     setFormData({
       ...formData,
-      currentUsername: currentUser.username,
       username: currentUser.username,
       email: currentUser.email,
     });

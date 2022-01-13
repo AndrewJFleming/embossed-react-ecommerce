@@ -21,7 +21,8 @@ export const signup = (formData, history) => async (dispatch) => {
 };
 export const updateUser = (id, formData) => async (dispatch) => {
   try {
-    await api.updateUser(id, formData);
+    const { data } = await api.updateUser(id, formData);
+    console.log(data);
     dispatch({ type: LOGOUT });
     dispatch({ type: RESET_CART });
   } catch (error) {
