@@ -20,10 +20,8 @@ const ProductList = () => {
     });
   };
 
-  console.log(filters);
-
   return (
-    <div className="mt-5">
+    <div className="my-5">
       <Container>
         <h2 className="pageTitle">{cat}</h2>
         <div className="filterContainer">
@@ -59,7 +57,7 @@ const ProductList = () => {
       <Container className="mt-3">
         <Products cat={cat} filters={filters} sort={sort} />
       </Container>
-      <Newsletter />
+      {/* <Newsletter /> */}
     </div>
   );
 };

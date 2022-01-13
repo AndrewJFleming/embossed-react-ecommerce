@@ -32,6 +32,7 @@ const Products = ({ cat, filters, sort }) => {
           )
         )
       );
+    console.log(filteredProducts);
   }, [products, cat, filters]);
 
   useEffect(() => {

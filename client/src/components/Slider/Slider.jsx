@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import "./Slider.css";
-import { Carousel, Container } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);

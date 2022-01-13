@@ -2,22 +2,43 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { signin } from "../../redux/actions/auth";
 import "./Auth.css";
 import { Container, Button } from "react-bootstrap";
-import { bgImage } from "../../images/bgImage.jpg";
-import { login } from "../../redux/apiCalls";
+// import { bgImage } from "../../images/bgImage.jpg";
+// import { login } from "../../redux/apiCalls";
+
+const initialState = {
+  username: "",
+  password: "",
+};
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.user);
+  const history = useHistory();
+  // const { isFetching, error } = useSelector((state) => state.user);
+
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   login(dispatch, { username, password });
+  // };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+
+    dispatch(signin(formData, history));
   };
+
+  const handleChange = (e) =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
   return (
     <div className="pageContainer">
@@ -26,17 +47,17 @@ const Login = () => {
         <form>
           <input
             placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            onChange={handleChange}
           />
           <input
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            onChange={handleChange}
           />
-          <Button onClick={handleLogin} disabled={isFetching}>
-            LOGIN
-          </Button>
-          {error && <h6>Error</h6>}
-          <Link to="#">Forgot you password?</Link>
+          <Button onClick={handleLogin}>LOGIN</Button>
+          {/* {error && <h6>Error</h6>} */}
+          {/* <Link to="#">Forgot you password?</Link> */}
           <Link to="/register">Register</Link>
         </form>
       </div>

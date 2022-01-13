@@ -13,13 +13,15 @@ import SingleProduct from "./pages/SingleProduct/SingleProduct";
 import Pay from "./pages/Stripe/Pay";
 import Success from "./pages/Stripe/Success";
 import { useSelector } from "react-redux";
+import Account from "./pages/Account/Account";
 
 const App = () => {
-  const user = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.auth.authData.result);
+
   return (
     <BrowserRouter>
       <Announcement />
-      <TopNav />
+      <TopNav currentUser={user} />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -40,6 +42,9 @@ const App = () => {
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/account/:id">
+          {!user ? <Redirect to="/login" /> : <Account currentUser={user} />}
+        </Route>
         <Route path="/cart">
           <Cart />
         </Route>
@@ -50,7 +55,7 @@ const App = () => {
           <Success />
         </Route>
       </Switch>
-      <Footer />
+      <Footer currentUser={user} />
     </BrowserRouter>
   );
 };

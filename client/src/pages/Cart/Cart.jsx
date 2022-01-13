@@ -1,69 +1,84 @@
-import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import StripeCheckout from "react-stripe-checkout";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import CartItem from "../../components/CartItem/CartItem";
+import { Container, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/actions/cart";
+import { RESET_CART } from "../../redux/constants/actionTypes";
+// import StripeCheckout from "react-stripe-checkout";
 
 import "./Cart.css";
 
-const KEY = process.env.REACT_APP_STRIPE;
+// const KEY = process.env.REACT_APP_STRIPE;
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   const [shipping, setShipping] = useState(5.9);
+  const [subtotal, setSubtotal] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  const dispatch = useDispatch();
+
+  //Calculate cart subtotal
+  useEffect(() => {
+    const sum = cartItems
+      .reduce((price, item) => price + item.price * item.quantity, 0)
+      .toFixed(2);
+    setSubtotal(parseInt(sum));
+  }, [cartItems]);
+
+  //Set number of items in cart
+  useEffect(() => {
+    setCartCount(
+      cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+    );
+  }, [cartItems]);
+
+  const qtyChangeHandler = (type, id, qty) => {
+    if (type === "dec") {
+      qty > 1 && dispatch(addToCart(id, qty - 1));
+    } else {
+      dispatch(addToCart(id, qty + 1));
+    }
+  };
+
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const handleResetCart = () => {
+    dispatch({ type: RESET_CART });
+  };
+
   return (
     <Container className="mb-5">
       <div>
         <h2>YOUR BAG</h2>
         <div className="top">
-          <button className="topButton">CONTINUE SHOPPING</button>
-          <div className="topText">
-            <h5>Shopping Bag(2)</h5>
-            <h5>Your Wishlist (0)</h5>
+          <Link to="/">
+            <Button>CONTINUE SHOPPING</Button>
+          </Link>
+          <div>
+            <h5>Shopping Cart({cartCount})</h5>
+            {/* <h5>Your Wishlist (0)</h5> */}
           </div>
-          <button className="topButton">CHECKOUT NOW</button>
         </div>
         <div className="bottom">
           <div className="info">
-            {cart.products.map((product) => (
-              <React.Fragment>
-                <div className="product">
-                  <div className="productDetail">
-                    <img className="productImage" src={product.img} alt="" />
-                    <div className="details">
-                      <h4>
-                        <b>Product:</b> {product.title}
-                      </h4>
-                      <p>
-                        <b>ID:</b> {product._id}
-                      </p>
-                      <p>
-                        <b>Color:</b> {product.color}
-                      </p>
-                      <p>
-                        <b>Size:</b> {product.size}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="priceDetail">
-                    <div className="productAmountContainer">
-                      <i className="fas fa-plus"></i>
-                      <p className="productAmount">{product.quantity}</p>
-                      <i className="fas fa-minus"></i>
-                    </div>
-                    <p className="productPrice">
-                      $ {product.price * product.quantity}
-                    </p>
-                  </div>
-                </div>
-                <hr />
-              </React.Fragment>
+            {cart.cartItems.map((product) => (
+              <CartItem
+                product={product}
+                removeHandler={removeFromCartHandler}
+                qtyChangeHandler={qtyChangeHandler}
+              />
             ))}
           </div>
           <div className="summary">
             <h2 className="summaryTitle">ORDER SUMMARY</h2>
             <div className="summaryItem">
               <h5>Subtotal</h5>
-              <p>$ {cart.total}</p>
+              <p>$ {subtotal}</p>
             </div>
             <div className="summaryItem">
               <h5>Estimated Shipping</h5>
@@ -75,14 +90,17 @@ const Cart = () => {
             </div>
             <div className="summaryItem">
               <h5>TOTAL</h5>
-              <p>$ {cart.total ? cart.total + shipping : 0}</p>
+              <p>$ {subtotal ? subtotal + shipping : 0}</p>
             </div>
             {/* <StripeCheckout>
             <button>CHECKOUT NOW</button>
             </StripeCheckout> */}
-            <button>CHECKOUT NOW</button>
+            <Button>CHECKOUT NOW</Button>
           </div>
         </div>
+        <Button variant="danger" onClick={handleResetCart}>
+          Clear Cart
+        </Button>
       </div>
     </Container>
   );

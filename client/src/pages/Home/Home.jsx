@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Products from "../../components/Products/Products";
 import Slider from "../../components/Slider/Slider";
@@ -8,7 +8,7 @@ import Categories from "../../components/Categories/Categories";
 
 const Home = () => {
   return (
-    <div>
+    <div className="mb-5">
       <Slider />
       <Container>
         <Row className="mt-5">
@@ -24,7 +24,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <Newsletter />
+      {/* <Newsletter /> */}
     </div>
   );
 };

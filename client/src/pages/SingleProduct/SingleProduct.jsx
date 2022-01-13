@@ -5,7 +5,8 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import "./SingleProduct.css";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import { publicRequest } from "../../requestMethods";
-import { addProduct } from "../../redux/cartRedux";
+// import { addProduct } from "../../redux/cartRedux";
+import { addToCart } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 
 const SingleProduct = () => {
@@ -41,12 +42,17 @@ const SingleProduct = () => {
     }
   };
 
+  // const handleAdd = () => {
+  //   dispatch(addProduct({ ...product, quantity, color, size }));
+  // };
+
   const handleAdd = () => {
-    dispatch(addProduct({ ...product, quantity, color, size }));
+    dispatch(addToCart(product._id, quantity));
+    // history.push(`/cart`);
   };
 
   return (
-    <div className="mt-5">
+    <div className="my-5">
       <Container>
         <Row>
           <Col xs={12} sm={6} md={6} lg={6}>
@@ -98,7 +104,7 @@ const SingleProduct = () => {
           </Col>
         </Row>
       </Container>
-      <Newsletter />
+      {/* <Newsletter /> */}
     </div>
   );
 };

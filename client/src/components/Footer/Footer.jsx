@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 import { Container, Row, Col } from "react-bootstrap";
 
-const Footer = () => {
+const Footer = ({ currentUser }) => {
   return (
     <div className="footerWrapper">
       <Container>
@@ -28,33 +28,26 @@ const Footer = () => {
           <Col className="text-center footerCenter  p-2">
             <h5>Useful Links</h5>
             <ul>
-              <Link to="#" className="link">
+              <Link to="/" className="link">
                 <li>Home</li>
               </Link>
-              <Link to="#" className="link">
-                <li>Wishlist</li>
-              </Link>
-              <Link to="#" className="link">
-                <li>Order Tracking</li>
-              </Link>
-              <Link to="#" className="link">
+              <Link to="cart" className="link">
                 <li>Cart</li>
               </Link>
-              <Link to="#" className="link">
-                <li>Man Fashion</li>
+              <Link to="login" className="link">
+                <li>Login</li>
               </Link>
-              <Link to="#" className="link">
-                <li>Woman Fashion</li>
-              </Link>
-              <Link to="#" className="link">
-                <li>Accessories</li>
-              </Link>
-              <Link to="#" className="link">
-                <li>My Account</li>
-              </Link>
-              <Link to="#" className="link">
+              {currentUser && (
+                <Link to={`account/${currentUser._id}`} className="link">
+                  <li>My Account</li>
+                </Link>
+              )}
+              {/* <Link to="#" className="link">
+                <li>Order Tracking</li>
+              </Link> */}
+              {/* <Link to="#" className="link">
                 <li>Terms</li>
-              </Link>
+              </Link> */}
             </ul>
           </Col>
           <Col className="text-center footerRight p-2">

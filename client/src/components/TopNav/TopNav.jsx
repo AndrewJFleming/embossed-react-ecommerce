@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import {
   Container,
@@ -11,17 +11,32 @@ import {
 } from "react-bootstrap";
 import NavLogo from "../../images/logo.png";
 import "./TopNav.css";
+import { useDispatch } from "react-redux";
+import { LOGOUT } from "../../redux/constants/actionTypes";
+import { RESET_CART } from "../../redux/constants/actionTypes";
 import { useSelector } from "react-redux";
 
-const TopNav = () => {
+const TopNav = ({ currentUser }) => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
-  const quantity = useSelector((state) => state.cart.quantity);
-  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => Number(item.quantity) + qty, 0);
+  };
 
   const handleLogout = () => {
-    // dispatch({ type: "LOGOUT" });
     setExpanded(false);
+    try {
+      dispatch({ type: LOGOUT });
+      dispatch({ type: RESET_CART });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSearch = (e) => {
@@ -36,13 +51,7 @@ const TopNav = () => {
   };
 
   return (
-    <Navbar
-      // className="fixed-top"
-      expanded={expanded}
-      collapseOnSelect
-      expand="lg"
-      variant="dark"
-    >
+    <Navbar expanded={expanded} collapseOnSelect expand="lg" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/" onClick={handleCollapse}>
           <img
@@ -64,7 +73,7 @@ const TopNav = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            {user ? (
+            {currentUser ? (
               <Nav.Link as={Link} to="/" onClick={handleLogout}>
                 Logout
               </Nav.Link>
@@ -80,9 +89,11 @@ const TopNav = () => {
             )}
           </Nav>
           <Nav>
-            {user && <span className="avatar">{user.username}</span>}
+            {currentUser && (
+              <span className="avatar">{currentUser.username}</span>
+            )}
             <Nav.Link as={Link} to="/cart" onClick={handleCollapse}>
-              <i className="fas fa-shopping-basket">&nbsp;{quantity}</i>
+              <i className="fas fa-shopping-basket">&nbsp;({getCartCount()})</i>
             </Nav.Link>
             <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl
