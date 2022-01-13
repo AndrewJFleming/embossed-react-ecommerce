@@ -11,7 +11,7 @@ const Account = ({ currentUser, errorStatus }) => {
     username: "",
     email: "",
     currentPassword: "",
-    password: "",
+    // password: "",
   });
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
