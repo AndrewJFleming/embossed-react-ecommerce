@@ -11,7 +11,6 @@ const Account = ({ currentUser, errorStatus }) => {
     username: "",
     email: "",
     currentPassword: "",
-    // password: "",
   });
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
@@ -54,7 +53,7 @@ const Account = ({ currentUser, errorStatus }) => {
       <div>
         <Form onSubmit={handleUpdate}>
           <Form.Group className="mb-3">
-            <Form.Label>New Username</Form.Label>
+            <Form.Label>Username</Form.Label>
             <Form.Control
               required
               value={formData.username}
@@ -65,7 +64,7 @@ const Account = ({ currentUser, errorStatus }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>New Email</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               required
               value={formData.email}
@@ -77,25 +76,30 @@ const Account = ({ currentUser, errorStatus }) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Current Password</Form.Label>
+            <Form.Text className="text-muted">
+              Input your currently registered password.
+            </Form.Text>
             <Form.Control
               required
               type="text"
               name="currentPassword"
-              placeholder="Current Password"
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>New Password</Form.Label>
-            <Form.Control
-              type="text"
-              name="password"
-              placeholder="New Password"
-              onChange={handleChange}
-            />
+            <Form.Text className="text-muted">
+              Input your new password.
+            </Form.Text>
+            <Form.Control type="text" name="password" onChange={handleChange} />
           </Form.Group>
           <Button type="submit">Update</Button>
-          {error && <h5 className="errorPrompt">Error</h5>}
+          {error && (
+            <div className="mt-2">
+              <h5 className="errorPrompt">Error updating user...</h5>
+              <h6 className="errorPrompt">Is your current password correct?</h6>
+            </div>
+          )}
         </Form>
       </div>
     </Container>
