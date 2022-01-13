@@ -17,6 +17,7 @@ import Account from "./pages/Account/Account";
 
 const App = () => {
   const user = useSelector((state) => state.auth.authData.result);
+  const error = useSelector((state) => state.auth.error);
 
   return (
     <BrowserRouter>
@@ -43,7 +44,11 @@ const App = () => {
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/account/:id">
-          {!user ? <Redirect to="/login" /> : <Account currentUser={user} />}
+          {!user ? (
+            <Redirect to="/login" />
+          ) : (
+            <Account currentUser={user} errorStatus={error} />
+          )}
         </Route>
         <Route path="/cart">
           <Cart />

@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT, RESET_CART } from "../constants/actionTypes";
+import { AUTH, LOGOUT, RESET_CART, AUTH_ERROR } from "../constants/actionTypes";
 import * as api from "../api";
 
 export const signin = (formData, history) => async (dispatch) => {
@@ -27,5 +27,6 @@ export const updateUser = (id, formData) => async (dispatch) => {
     dispatch({ type: RESET_CART });
   } catch (error) {
     console.log(error);
+    dispatch({ type: AUTH_ERROR });
   }
 };
