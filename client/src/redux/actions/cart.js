@@ -1,8 +1,9 @@
 import * as actionTypes from "../constants/actionTypes";
 import axios from "axios";
+import * as api from "../api";
 
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/products/find/${id}`);
+  const { data } = await api.addToCart(id);
 
   dispatch({
     type: actionTypes.ADD_TO_CART,
