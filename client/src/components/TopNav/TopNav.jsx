@@ -67,11 +67,6 @@ const TopNav = ({ currentUser }) => {
           onClick={() => setExpanded(expanded ? false : "expanded")}
         />
         <Navbar.Collapse id="responsive-navbar-nav" className="myResponsive">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/product-list" onClick={handleCollapse}>
-              Products
-            </Nav.Link>
-          </Nav>
           <Nav>
             {currentUser ? (
               <Nav.Link as={Link} to="/" onClick={handleLogout}>

@@ -10,7 +10,7 @@ const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
   const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("oldest");
+  const [sort, setSort] = useState("newest");
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -18,6 +18,7 @@ const ProductList = () => {
       ...filters,
       [e.target.name]: value,
     });
+    console.log(filters);
   };
 
   return (
@@ -25,13 +26,11 @@ const ProductList = () => {
       <Container>
         <h2 className="pageTitle">{cat}</h2>
         <div className="filterContainer">
-          <div className="filter">
-            <h4>Filter Products:</h4>
-            <select id="color" name="color" onChange={handleFilters}>
+          {cat && (
+            <div className="filter">
+              <h5>Filter by Variant:</h5>
+              {/* <select id="color" name="color" onChange={handleFilters}>
               <option value="white">white</option>
-              <option value="black">black</option>
-              <option value="red">red</option>
-              <option value="blue">blue</option>
               <option value="yellow">yellow</option>
               <option value="green">green</option>
             </select>
@@ -41,10 +40,16 @@ const ProductList = () => {
               <option value="M">M</option>
               <option value="L">L</option>
               <option value="XL">XL</option>
-            </select>
-          </div>
+            </select> */}
+              <select id="variants" name="variants" onChange={handleFilters}>
+                <option value="black">black</option>
+                <option value="red">red</option>
+                <option value="blue">blue</option>
+              </select>
+            </div>
+          )}
           <div className="filter">
-            <h4>Sort Products:</h4>
+            <h5>Sort Products:</h5>
             <select id="order" onChange={(e) => setSort(e.target.value)}>
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
