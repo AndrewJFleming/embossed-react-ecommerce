@@ -40,7 +40,7 @@ const App = () => {
           <SingleProduct />
         </Route>
         <Route path="/register">
-          {user ? <Redirect to="/" /> : <Register />}
+          {user ? <Redirect to="/" /> : <Register errorStatus={error} />}
         </Route>
         <Route path="/login">
           {user ? <Redirect to="/" /> : <Login errorStatus={error} />}

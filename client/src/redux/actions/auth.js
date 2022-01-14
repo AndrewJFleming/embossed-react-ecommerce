@@ -18,6 +18,7 @@ export const signup = (formData, history) => async (dispatch) => {
     history.push("/");
   } catch (error) {
     console.log(error);
+    dispatch({ type: AUTH_ERROR });
   }
 };
 export const updateUser = (id, formData) => async (dispatch) => {
