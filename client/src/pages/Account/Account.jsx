@@ -5,6 +5,7 @@ import { Card, Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/actions/auth";
 import "./Account.css";
+import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
 
 const Account = ({ currentUser, errorStatus }) => {
   const [formData, setFormData] = useState({
@@ -94,11 +95,12 @@ const Account = ({ currentUser, errorStatus }) => {
             <Form.Control type="text" name="password" onChange={handleChange} />
           </Form.Group>
           <Button type="submit">Update</Button>
+
           {error && (
-            <div className="mt-2">
-              <h5 className="errorPrompt">Error updating user...</h5>
-              <h6 className="errorPrompt">Is your current password correct?</h6>
-            </div>
+            <ErrorPrompt
+              h5="Error updating user..."
+              h6="Is your current password correct?"
+            />
           )}
         </Form>
       </div>

@@ -42,7 +42,9 @@ const App = () => {
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/login">
+          {user ? <Redirect to="/" /> : <Login errorStatus={error} />}
+        </Route>
         <Route path="/account/:id">
           {!user ? (
             <Redirect to="/login" />
