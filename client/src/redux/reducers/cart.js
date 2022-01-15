@@ -5,18 +5,26 @@ const cartReducer = (state = { cartItems: [] }, action) => {
     case actionTypes.ADD_TO_CART:
       const item = action.payload;
 
+      console.log(item);
+
       const existItem = state.cartItems.find(
-        (x) => x.productId === item.productId
+        (x) => x.productId === item.productId && x.variant === item.variant
       );
 
-      if (existItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.productId === existItem.productId ? item : x
-          ),
-        };
-      } else {
+      // if (existItem) {
+      //   return {
+      //     ...state,
+      //     cartItems: state.cartItems.map((x) =>
+      //       x.productId === existItem.productId ? item : x
+      //     ),
+      //   };
+      // } else {
+      //   return {
+      //     ...state,
+      //     cartItems: [...state.cartItems, item],
+      //   };
+      // }
+      if (!existItem) {
         return {
           ...state,
           cartItems: [...state.cartItems, item],

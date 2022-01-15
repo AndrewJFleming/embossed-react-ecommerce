@@ -3,7 +3,6 @@ import axios from "axios";
 
 import { Row, Col } from "react-bootstrap";
 import CategoryItem from "./CategoryItem/CategoryItem";
-import { categories } from "../../data";
 
 const Categories = () => {
   const [featuredCats, setFeaturedCats] = useState([]);

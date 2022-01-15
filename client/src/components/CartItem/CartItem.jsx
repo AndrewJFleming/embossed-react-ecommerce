@@ -18,7 +18,7 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
         <b>ID:</b> {product.productId}
       </p>
       <p>
-        <b>Variant:</b> {product.variants}
+        <b>Variant:</b> {product.variant}
       </p>
       {/* <p>
         <b>Size:</b> {product.size}

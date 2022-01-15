@@ -14,8 +14,9 @@ const SingleProduct = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [variant, setVariant] = useState("");
+  // const [color, setColor] = useState("");
+  // const [size, setSize] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,12 +24,15 @@ const SingleProduct = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-        if (res.data.color[0]) {
-          setColor(res.data.color[0]);
+        if (res.data.variants[0]) {
+          setVariant(res.data.variants[0]);
         }
-        if (res.data.size[0]) {
-          setSize(res.data.size[0]);
-        }
+        // if (res.data.color[0]) {
+        //   setColor(res.data.color[0]);
+        // }
+        // if (res.data.size[0]) {
+        //   setSize(res.data.size[0]);
+        // }
       } catch {}
     };
     getProduct();
@@ -47,7 +51,7 @@ const SingleProduct = () => {
   // };
 
   const handleAdd = () => {
-    dispatch(addToCart(product._id, quantity));
+    dispatch(addToCart(product._id, quantity, variant));
     // history.push(`/cart`);
   };
 
@@ -67,6 +71,17 @@ const SingleProduct = () => {
               <p className="price">$&nbsp;{product.price}</p>
               <div className="filterContainer">
                 <div className="filter">
+                  <h4>Variants</h4>
+                  <select
+                    id="variants"
+                    onChange={(e) => setVariant(e.target.value)}
+                  >
+                    {product.variants?.map((v) => (
+                      <option value={v}>{v}</option>
+                    ))}
+                  </select>
+                </div>
+                {/* <div className="filter">
                   <h4>Colors</h4>
                   <select
                     id="colors"
@@ -76,15 +91,15 @@ const SingleProduct = () => {
                       <option value={c}>{c}</option>
                     ))}
                   </select>
-                </div>
-                <div className="filter">
+                </div> */}
+                {/* <div className="filter">
                   <h4>Sizes</h4>
                   <select id="sizes" onChange={(e) => setSize(e.target.value)}>
                     {product.size?.map((s) => (
                       <option value={s}>{s}</option>
                     ))}
                   </select>
-                </div>
+                </div> */}
               </div>
               <div className="addContainer">
                 <div className="amountContainer">

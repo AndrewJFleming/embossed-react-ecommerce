@@ -5,6 +5,7 @@ import {
   Container,
   Navbar,
   Nav,
+  NavDropdown,
   Form,
   FormControl,
   Button,
@@ -16,7 +17,7 @@ import { LOGOUT } from "../../redux/constants/actionTypes";
 import { RESET_CART } from "../../redux/constants/actionTypes";
 import { useSelector } from "react-redux";
 
-const TopNav = ({ currentUser }) => {
+const TopNav = ({ currentUser, topNavCats }) => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
   const dispatch = useDispatch();
@@ -67,6 +68,19 @@ const TopNav = ({ currentUser }) => {
           onClick={() => setExpanded(expanded ? false : "expanded")}
         />
         <Navbar.Collapse id="responsive-navbar-nav" className="myResponsive">
+          <Nav>
+            <NavDropdown title="Categories" id="basic-nav-dropdown">
+              {topNavCats?.map((cat) => (
+                <NavDropdown.Item
+                  as={Link}
+                  to={`/product-list/${cat.title}`}
+                  onClick={handleCollapse}
+                >
+                  {cat.title}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
+          </Nav>
           <Nav>
             {currentUser ? (
               <Nav.Link as={Link} to="/" onClick={handleLogout}>
