@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import {
   Container,
@@ -17,13 +18,22 @@ import { LOGOUT } from "../../redux/constants/actionTypes";
 import { RESET_CART } from "../../redux/constants/actionTypes";
 import { useSelector } from "react-redux";
 
-const TopNav = ({ currentUser, topNavCats }) => {
+const TopNav = ({ currentUser }) => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const [topNavCats, setTopNavCats] = useState([]);
+
+  useEffect(() => {
+    const getTopNavCats = async () => {
+      const res = await axios.get("/categories");
+      setTopNavCats(res.data);
+    };
+    getTopNavCats();
+  }, []);
 
   const getCartCount = () => {
     return cartItems.reduce((qty, item) => Number(item.quantity) + qty, 0);
@@ -72,7 +82,7 @@ const TopNav = ({ currentUser, topNavCats }) => {
             <NavDropdown title="Categories" id="basic-nav-dropdown">
               {topNavCats?.map((cat) => (
                 <NavDropdown.Item
-                  key={cat.title}
+                  key={`${cat.title}-navItem`}
                   as={Link}
                   to={`/product-list/${cat.title}`}
                   onClick={handleCollapse}

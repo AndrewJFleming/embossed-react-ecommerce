@@ -5,8 +5,6 @@ const cartReducer = (state = { cartItems: [] }, action) => {
     case actionTypes.ADD_TO_CART:
       const item = action.payload;
 
-      console.log(item);
-
       //check to see if item with productId and variant value already exists in array.
       const existItem = state.cartItems.find(
         (x) => x.cartItemId === item.cartItemId && x.variant === item.variant
@@ -42,7 +40,6 @@ const cartReducer = (state = { cartItems: [] }, action) => {
       };
     case actionTypes.CHANGE_QTY:
       const targetCartItemId = action.payload.cartItemId;
-
       const newQty = action.payload.quantity;
       return {
         ...state,

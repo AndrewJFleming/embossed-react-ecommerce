@@ -86,7 +86,7 @@ const Cart = () => {
           <div className="info">
             {cartItems.map((product) => (
               <CartItem
-                key={product.title}
+                key={`${product.cartItemId}`}
                 product={product}
                 removeHandler={removeFromCartHandler}
                 qtyChangeHandler={qtyChangeHandler}

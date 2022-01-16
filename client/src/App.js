@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import axios from "axios";
 
 import Home from "./pages/Home/Home";
 import Register from "./pages/Auth/Register";
@@ -20,20 +19,11 @@ import Account from "./pages/Account/Account";
 const App = () => {
   const user = useSelector((state) => state.auth.authData.result);
   const error = useSelector((state) => state.auth.error);
-  const [cats, setCats] = useState([]);
-
-  useEffect(() => {
-    const getFeaturedCats = async () => {
-      const res = await axios.get("/categories");
-      setCats(res.data);
-    };
-    getFeaturedCats();
-  }, []);
 
   return (
     <BrowserRouter>
       <Announcement />
-      <TopNav currentUser={user} topNavCats={cats} />
+      <TopNav currentUser={user} />
       <Switch>
         <Route exact path="/">
           <Home />
