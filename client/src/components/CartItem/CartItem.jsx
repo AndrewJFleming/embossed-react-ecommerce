@@ -2,6 +2,7 @@ import React from "react";
 
 import "./CartItem.css";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
   return (
@@ -15,7 +16,10 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
         </h4>
       </Link>
       <p>
-        <b>ID:</b> {product.productId}
+        <b>Product ID:</b> {product.productId}
+      </p>
+      <p>
+        <b>Cart Item ID:</b> {product.cartItemId}
       </p>
       <p>
         <b>Variant:</b> {product.variant}
@@ -24,24 +28,28 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
         <b>Size:</b> {product.size}
       </p> */}
       <div className="amountContainer">
-        <i
-          className="fas fa-minus"
-          onClick={() =>
-            qtyChangeHandler("dec", product.productId, product.quantity)
-          }
-        ></i>
+        <Button>
+          <i
+            className="fas fa-minus"
+            onClick={() =>
+              qtyChangeHandler("dec", product.cartItemId, product.quantity)
+            }
+          ></i>
+        </Button>
         <p className="productAmount">{product.quantity}</p>
-        <i
-          className="fas fa-plus"
-          onClick={() =>
-            qtyChangeHandler("inc", product.productId, product.quantity)
-          }
-        ></i>
+        <Button>
+          <i
+            className="fas fa-plus"
+            onClick={() =>
+              qtyChangeHandler("inc", product.cartItemId, product.quantity)
+            }
+          ></i>
+        </Button>
       </div>
       <p className="productPrice">$ {product.price * product.quantity}</p>
       <button
         className="cartItem__deleteBtn"
-        onClick={() => removeHandler(product.productId)}
+        onClick={() => removeHandler(product.cartItemId, product.variant)}
       >
         <i className="fas fa-trash"></i>
       </button>

@@ -8,6 +8,7 @@ import { publicRequest } from "../../requestMethods";
 // import { addProduct } from "../../redux/cartRedux";
 import { addToCart } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const SingleProduct = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const SingleProduct = () => {
   // const [color, setColor] = useState("");
   // const [size, setSize] = useState("");
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
     const getProduct = async () => {

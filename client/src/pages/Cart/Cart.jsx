@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import CartItem from "../../components/CartItem/CartItem";
 import { Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../redux/actions/cart";
+import {
+  addToCart,
+  removeFromCart,
+  changeQuantity,
+} from "../../redux/actions/cart";
 import { RESET_CART } from "../../redux/constants/actionTypes";
 // import StripeCheckout from "react-stripe-checkout";
 
@@ -35,16 +39,30 @@ const Cart = () => {
     );
   }, [cartItems]);
 
-  const qtyChangeHandler = (type, id, qty) => {
+  // const qtyChangeHandler = (type, id, qty) => {
+  //   if (type === "dec") {
+  //     qty > 1 && dispatch(addToCart(id, qty - 1));
+  //   } else {
+  //     dispatch(addToCart(id, qty + 1));
+  //   }
+  // };
+  // const qtyChangeHandler = (type, p, qty) => {
+  //   if (type === "dec") {
+  //     qty > 1 && dispatch(changeQuantity(p, qty - 1));
+  //   } else {
+  //     dispatch(changeQuantity(p, qty + 1));
+  //   }
+  // };
+  const qtyChangeHandler = (type, cartItemId, qty) => {
     if (type === "dec") {
-      qty > 1 && dispatch(addToCart(id, qty - 1));
+      qty > 1 && dispatch(changeQuantity(cartItemId, qty - 1));
     } else {
-      dispatch(addToCart(id, qty + 1));
+      dispatch(changeQuantity(cartItemId, qty + 1));
     }
   };
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
+  const removeFromCartHandler = (id, variant) => {
+    dispatch(removeFromCart(id, variant));
   };
 
   const handleResetCart = () => {
@@ -66,8 +84,9 @@ const Cart = () => {
         </div>
         <div className="bottom">
           <div className="info">
-            {cart.cartItems.map((product) => (
+            {cartItems.map((product) => (
               <CartItem
+                key={product.title}
                 product={product}
                 removeHandler={removeFromCartHandler}
                 qtyChangeHandler={qtyChangeHandler}

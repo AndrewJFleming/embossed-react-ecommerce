@@ -72,6 +72,7 @@ const TopNav = ({ currentUser, topNavCats }) => {
             <NavDropdown title="Categories" id="basic-nav-dropdown">
               {topNavCats?.map((cat) => (
                 <NavDropdown.Item
+                  key={cat.title}
                   as={Link}
                   to={`/product-list/${cat.title}`}
                   onClick={handleCollapse}

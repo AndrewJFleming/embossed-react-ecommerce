@@ -7,34 +7,49 @@ const cartReducer = (state = { cartItems: [] }, action) => {
 
       console.log(item);
 
+      //check to see if item with productId and variant value already exists in array.
       const existItem = state.cartItems.find(
-        (x) => x.productId === item.productId && x.variant === item.variant
+        (x) => x.cartItemId === item.cartItemId && x.variant === item.variant
       );
 
-      // if (existItem) {
-      //   return {
-      //     ...state,
-      //     cartItems: state.cartItems.map((x) =>
-      //       x.productId === existItem.productId ? item : x
-      //     ),
-      //   };
-      // } else {
-      //   return {
-      //     ...state,
-      //     cartItems: [...state.cartItems, item],
-      //   };
-      // }
-      if (!existItem) {
+      if (existItem) {
+        console.log("if");
+        return {
+          ...state,
+          cartItems: state.cartItems.map((x) =>
+            x.cartItemId === existItem.cartItemId ? item : x
+          ),
+        };
+      } else {
+        console.log("else");
         return {
           ...state,
           cartItems: [...state.cartItems, item],
         };
       }
+    // if (!existItem) {
+    //   return {
+    //     ...state,
+    //     cartItems: [...state.cartItems, item],
+    //   };
+    // }
     case actionTypes.REMOVE_FROM_CART:
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (x) => x.productId !== action.payload
+          (x) => x.cartItemId !== action.payload.pId
+        ),
+      };
+    case actionTypes.CHANGE_QTY:
+      const targetCartItemId = action.payload.cartItemId;
+
+      const newQty = action.payload.quantity;
+      return {
+        ...state,
+        cartItems: state.cartItems.map((cartItem) =>
+          cartItem.cartItemId === targetCartItemId
+            ? { ...cartItem, quantity: newQty }
+            : cartItem
         ),
       };
     case actionTypes.RESET_CART:
