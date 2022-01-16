@@ -7,30 +7,21 @@ const cartReducer = (state = { cartItems: [] }, action) => {
 
       //check to see if item with productId and variant value already exists in array.
       const existItem = state.cartItems.find(
-        (x) => x.cartItemId === item.cartItemId && x.variant === item.variant
+        (x) => x.productId === item.productId && x.variant === item.variant
       );
 
-      if (existItem) {
-        console.log("if");
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.cartItemId === existItem.cartItemId ? item : x
-          ),
-        };
-      } else {
-        console.log("else");
+      if (!existItem) {
+        //If new item is unique, append it to cartItems array.
         return {
           ...state,
           cartItems: [...state.cartItems, item],
         };
+      } else {
+        return {
+          ...state,
+          cartItems: state.cartItems,
+        };
       }
-    // if (!existItem) {
-    //   return {
-    //     ...state,
-    //     cartItems: [...state.cartItems, item],
-    //   };
-    // }
     case actionTypes.REMOVE_FROM_CART:
       return {
         ...state,

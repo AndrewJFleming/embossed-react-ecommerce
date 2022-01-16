@@ -16,8 +16,7 @@ const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState("");
-  // const [color, setColor] = useState("");
-  // const [size, setSize] = useState("");
+  const [addNotice, setAddNotice] = useState(false);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
@@ -54,7 +53,11 @@ const SingleProduct = () => {
 
   const handleAdd = () => {
     dispatch(addToCart(product._id, quantity, variant));
-    // history.push(`/cart`);
+
+    setAddNotice(true);
+    setTimeout(() => {
+      setAddNotice(false);
+    }, 3000);
   };
 
   return (
@@ -116,6 +119,11 @@ const SingleProduct = () => {
                   ></i>
                 </div>
                 <Button onClick={handleAdd}>ADD TO CART</Button>
+                {addNotice && (
+                  <i class="fas fa-cart-plus">
+                    <h6>Added</h6>
+                  </i>
+                )}
               </div>
             </div>
           </Col>
