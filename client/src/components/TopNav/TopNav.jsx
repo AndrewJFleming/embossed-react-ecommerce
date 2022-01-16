@@ -110,7 +110,9 @@ const TopNav = ({ currentUser }) => {
           </Nav>
           <Nav>
             {currentUser && (
-              <span className="avatar">{currentUser.username}</span>
+              <Link to={`account/${currentUser._id}`} className="link">
+                <span className="avatar">{currentUser.username}</span>
+              </Link>
             )}
             <Nav.Link as={Link} to="/cart" onClick={handleCollapse}>
               <i className="fas fa-shopping-basket">&nbsp;({getCartCount()})</i>
