@@ -5,7 +5,7 @@ import CartItem from "../../components/CartItem/CartItem";
 import { Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addToCart,
+  createCart,
   removeFromCart,
   changeQuantity,
 } from "../../redux/actions/cart";
@@ -16,7 +16,7 @@ import "./Cart.css";
 
 // const KEY = process.env.REACT_APP_STRIPE;
 
-const Cart = () => {
+const Cart = ({ currentUserId }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const [shipping, setShipping] = useState(5.9);
@@ -69,6 +69,10 @@ const Cart = () => {
     dispatch({ type: RESET_CART });
   };
 
+  const handleCreateCart = (currentUserId, cartItems) => {
+    dispatch(createCart(currentUserId, cartItems));
+  };
+
   return (
     <Container className="mb-5">
       <div>
@@ -114,7 +118,9 @@ const Cart = () => {
             {/* <StripeCheckout>
             <button>CHECKOUT NOW</button>
             </StripeCheckout> */}
-            <Button>CHECKOUT NOW</Button>
+            <Button onClick={() => handleCreateCart(currentUserId, cartItems)}>
+              CHECKOUT NOW
+            </Button>
           </div>
         </div>
         <Button variant="danger" onClick={handleResetCart}>

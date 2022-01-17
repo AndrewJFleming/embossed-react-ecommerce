@@ -15,3 +15,4 @@ export const signUp = (formData) => API.post("/users/signup", formData);
 export const updateUser = (id, formData) => API.put(`/users/${id}`, formData);
 
 export const addToCart = (id) => API.get(`/products/find/${id}`);
+export const createCart = (newCartData) => API.post("/carts/", newCartData);

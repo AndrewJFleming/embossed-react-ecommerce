@@ -54,7 +54,7 @@ const App = () => {
           )}
         </Route>
         <Route path="/cart">
-          <Cart />
+          <Cart currentUserId={user._id} />
         </Route>
         <Route path="/pay">
           <Pay />
