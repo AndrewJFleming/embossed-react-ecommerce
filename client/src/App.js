@@ -54,7 +54,7 @@ const App = () => {
           <Product />
         </Route>
         <Route path="/product">
-          <SingleProduct />
+          <SingleProduct sales={sales} />
         </Route>
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register errorStatus={error} />}

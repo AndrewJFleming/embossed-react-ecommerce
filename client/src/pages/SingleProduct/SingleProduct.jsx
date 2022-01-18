@@ -10,34 +10,67 @@ import { addToCart } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-const SingleProduct = () => {
+const SingleProduct = ({ sales }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState("");
   const [addNotice, setAddNotice] = useState(false);
+  const [discountNotice, setDiscountNotice] = useState(null);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     try {
+  //       const res = await publicRequest.get("/products/find/" + id);
+  //       setProduct(res.data);
+  //       if (res.data.variants[0]) {
+  //         setVariant(res.data.variants[0]);
+  //       }
+  //       // if (res.data.color[0]) {
+  //       //   setColor(res.data.color[0]);
+  //       // }
+  //       // if (res.data.size[0]) {
+  //       //   setSize(res.data.size[0]);
+  //       // }
+  //     } catch {}
+  //   };
+  //   getProduct();
+  // }, [id]);
   useEffect(() => {
+    let fetchedProduct;
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
-        setProduct(res.data);
+        fetchedProduct = res.data;
         if (res.data.variants[0]) {
           setVariant(res.data.variants[0]);
         }
-        // if (res.data.color[0]) {
-        //   setColor(res.data.color[0]);
-        // }
-        // if (res.data.size[0]) {
-        //   setSize(res.data.size[0]);
-        // }
-      } catch {}
+      } catch {
+        console.log("error occurred fetching product");
+      }
+      let productCopy = fetchedProduct;
+
+      const findDiscount = () => {
+        let result = sales.find((t) => t.productId === productCopy?._id);
+        if (result) {
+          setDiscountNotice(result.percentOff * 100);
+          const updatedProduct = {
+            ...productCopy,
+            price: productCopy.price * result.percentOff,
+          };
+          productCopy = updatedProduct;
+          console.log(productCopy);
+        }
+      };
+
+      findDiscount();
+      setProduct(productCopy);
     };
     getProduct();
-  }, [id]);
+  }, [id, sales]);
 
   const handleQuanity = (type) => {
     if (type === "dec") {
@@ -73,7 +106,15 @@ const SingleProduct = () => {
             <div className="infoContainer">
               <h4>{product.title}</h4>
               <p>{product.desc}</p>
-              <p className="price">$&nbsp;{product.price}</p>
+              <p className={`price ${discountNotice ? "discount-notice" : ""}`}>
+                $&nbsp;{product.price}
+                {discountNotice && (
+                  <span className="percentage-off discount-notice">
+                    &nbsp;
+                    {discountNotice}% Off!
+                  </span>
+                )}
+              </p>
               <div className="filterContainer">
                 <div className="filter">
                   <h4>Variants</h4>
@@ -86,25 +127,6 @@ const SingleProduct = () => {
                     ))}
                   </select>
                 </div>
-                {/* <div className="filter">
-                  <h4>Colors</h4>
-                  <select
-                    id="colors"
-                    onChange={(e) => setColor(e.target.value)}
-                  >
-                    {product.color?.map((c) => (
-                      <option value={c}>{c}</option>
-                    ))}
-                  </select>
-                </div> */}
-                {/* <div className="filter">
-                  <h4>Sizes</h4>
-                  <select id="sizes" onChange={(e) => setSize(e.target.value)}>
-                    {product.size?.map((s) => (
-                      <option value={s}>{s}</option>
-                    ))}
-                  </select>
-                </div> */}
               </div>
               <div className="addContainer">
                 <div className="amountContainer">
