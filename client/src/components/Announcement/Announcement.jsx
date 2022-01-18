@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./Announcement.css";
 import { Container } from "react-bootstrap";
@@ -8,10 +9,10 @@ const Announcement = ({ sales }) => {
     <div className="announcementWrapper w-100">
       <Container className="text-center d-flex justify-content-around">
         {sales.slice(0, 3).map((s) => (
-          <span>
+          <Link to={`/product/${s?.productId}`}>
             {s?.title}&nbsp;
             {s?.percentOff * 100}% Off
-          </span>
+          </Link>
         ))}
       </Container>
     </div>

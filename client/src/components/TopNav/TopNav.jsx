@@ -110,7 +110,7 @@ const TopNav = ({ currentUser }) => {
           </Nav>
           <Nav>
             {currentUser && (
-              <Link to={`account/${currentUser._id}`} className="link">
+              <Link to={`account/${currentUser._id}`} className="avatar-link">
                 <span className="avatar">{currentUser.username}</span>
               </Link>
             )}

@@ -17,16 +17,20 @@
   justify-content: space-between;
 }
 
+.avatar-link {
+  text-decoration: none;
+  color: white;
+}
+.avatar-link:hover {
+  text-decoration: underline;
+  color: white;
+}
 .avatar {
   position: relative;
-  color: white;
   font-size: 16px;
   font-weight: 700;
   margin: 5px 0;
   padding: 4px 0;
-}
-.avatar:hover {
-  text-decoration: none;
 }
 
 @media screen and (max-width: 991px) {

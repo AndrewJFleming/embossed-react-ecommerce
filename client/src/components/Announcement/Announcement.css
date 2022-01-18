@@ -2,3 +2,11 @@
   background-color: blue;
   color: white;
 }
+
+.announcementWrapper a {
+  color: white;
+  text-decoration: none;
+}
+.announcementWrapper a:hover {
+  text-decoration: underline;
+}

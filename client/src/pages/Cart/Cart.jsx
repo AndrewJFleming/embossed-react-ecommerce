@@ -25,14 +25,6 @@ const Cart = ({ currentUserId, sales }) => {
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
 
-  //Calculate cart subtotal
-  useEffect(() => {
-    const sum = cartItems
-      .reduce((price, item) => price + item.price * item.quantity, 0)
-      .toFixed(2);
-    setSubtotal(parseInt(sum));
-  }, [cartItems]);
-
   //Set number of items in cart
   useEffect(() => {
     setCartCount(
@@ -65,16 +57,13 @@ const Cart = ({ currentUserId, sales }) => {
         ++i;
       });
       setCartState(cartItemsCopy);
+      const sum = cartItemsCopy
+        .reduce((price, item) => price + item.price * item.quantity, 0)
+        .toFixed(2);
+      setSubtotal(parseInt(sum));
     };
 
     findMatches();
-
-    // console.log(
-    //   `final value`,
-    //   cartItemsCopy[0].price,
-    //   cartItemsCopy[1].price,
-    //   cartItemsCopy[2].price
-    // );
   }, [cartItems, sales]);
 
   // const qtyChangeHandler = (type, id, qty) => {
@@ -114,7 +103,7 @@ const Cart = ({ currentUserId, sales }) => {
   return (
     <Container className="mb-5">
       <div>
-        <h2>YOUR BAG</h2>
+        <h2>YOUR CART</h2>
         <div className="top">
           <Link to="/">
             <Button>CONTINUE SHOPPING</Button>
@@ -145,10 +134,10 @@ const Cart = ({ currentUserId, sales }) => {
               <h5>Estimated Shipping</h5>
               <p>$ {shipping}</p>
             </div>
-            <div className="summaryItem">
+            {/* <div className="summaryItem">
               <h5>Shipping Discount</h5>
               <p>$ 0</p>
-            </div>
+            </div> */}
             <div className="summaryItem">
               <h5>TOTAL</h5>
               <p>$ {subtotal ? subtotal + shipping : 0}</p>
@@ -156,7 +145,7 @@ const Cart = ({ currentUserId, sales }) => {
             {/* <StripeCheckout>
             <button>CHECKOUT NOW</button>
             </StripeCheckout> */}
-            <Button onClick={() => handleCreateCart(currentUserId, cartItems)}>
+            <Button onClick={() => handleCreateCart(currentUserId, cartState)}>
               CHECKOUT NOW
             </Button>
           </div>
