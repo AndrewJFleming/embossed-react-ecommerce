@@ -16,9 +16,10 @@ import "./Cart.css";
 
 // const KEY = process.env.REACT_APP_STRIPE;
 
-const Cart = ({ currentUserId }) => {
+const Cart = ({ currentUserId, sales }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const [cartState, setCartState] = useState([]);
   const [shipping, setShipping] = useState(5.9);
   const [subtotal, setSubtotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
@@ -38,6 +39,43 @@ const Cart = ({ currentUserId }) => {
       cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
     );
   }, [cartItems]);
+
+  useEffect(() => {
+    let cartItemsCopy = cartItems;
+    let i = 0;
+
+    const findMatches = () => {
+      cartItemsCopy.forEach((element) => {
+        // let result = test.find((t) => t.productId === element.productId);
+        let result = sales.find((t) => t.productId === element.productId);
+        if (result) {
+          const newCartState = [...cartItemsCopy];
+          newCartState[i] = {
+            ...element,
+            price: element.price * result.percentOff,
+          };
+          cartItemsCopy = newCartState;
+          // console.log(
+          //   `foreach: ${i}`,
+          //   cartItemsCopy[0].price,
+          //   cartItemsCopy[1].price,
+          //   cartItemsCopy[2].price
+          // );
+        }
+        ++i;
+      });
+      setCartState(cartItemsCopy);
+    };
+
+    findMatches();
+
+    // console.log(
+    //   `final value`,
+    //   cartItemsCopy[0].price,
+    //   cartItemsCopy[1].price,
+    //   cartItemsCopy[2].price
+    // );
+  }, [cartItems, sales]);
 
   // const qtyChangeHandler = (type, id, qty) => {
   //   if (type === "dec") {
@@ -88,7 +126,7 @@ const Cart = ({ currentUserId }) => {
         </div>
         <div className="bottom">
           <div className="info">
-            {cartItems.map((product) => (
+            {cartState.map((product) => (
               <CartItem
                 key={`${product.cartItemId}`}
                 product={product}

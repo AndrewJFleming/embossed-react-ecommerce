@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import axios from "axios";
 
 import Home from "./pages/Home/Home";
 import Register from "./pages/Auth/Register";
@@ -20,9 +21,24 @@ const App = () => {
   const user = useSelector((state) => state.auth.authData.result);
   const error = useSelector((state) => state.auth.error);
 
+  const [sales, setSales] = useState([]);
+
+  useEffect(() => {
+    const getSales = async () => {
+      try {
+        const res = await axios.get("/sales/");
+        setSales(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSales();
+  }, []);
+
   return (
     <BrowserRouter>
-      <Announcement />
+      {/* {sales && <Announcement sale={sales[0]} />} */}
+      {sales && <Announcement sales={sales} />}
       <TopNav currentUser={user} />
       <Switch>
         <Route exact path="/">
@@ -54,7 +70,7 @@ const App = () => {
           )}
         </Route>
         <Route path="/cart">
-          <Cart currentUserId={user._id} />
+          <Cart currentUserId={user._id} sales={sales} />
         </Route>
         <Route path="/pay">
           <Pay />
