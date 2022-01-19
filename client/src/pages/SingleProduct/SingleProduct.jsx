@@ -5,10 +5,10 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import "./SingleProduct.css";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import { publicRequest } from "../../requestMethods";
-// import { addProduct } from "../../redux/cartRedux";
 import { addToCart } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { CLEAR_ADD_NOTICE } from "../../redux/constants/actionTypes";
 
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
@@ -16,10 +16,9 @@ const SingleProduct = ({ sales }) => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState("");
-  const [addNotice, setAddNotice] = useState(false);
   const [discountNotice, setDiscountNotice] = useState(null);
-  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   const getProduct = async () => {
@@ -39,6 +38,11 @@ const SingleProduct = ({ sales }) => {
   //   };
   //   getProduct();
   // }, [id]);
+
+  useEffect(() => {
+    dispatch({ type: CLEAR_ADD_NOTICE });
+  }, []);
+
   useEffect(() => {
     let fetchedProduct;
     const getProduct = async () => {
@@ -80,17 +84,11 @@ const SingleProduct = ({ sales }) => {
     }
   };
 
-  // const handleAdd = () => {
-  //   dispatch(addProduct({ ...product, quantity, color, size }));
-  // };
-
   const handleAdd = () => {
     dispatch(addToCart(product._id, quantity, variant));
-
-    setAddNotice(true);
-    setTimeout(() => {
-      setAddNotice(false);
-    }, 3000);
+    setTimeout(function () {
+      dispatch({ type: CLEAR_ADD_NOTICE });
+    }, 2000);
   };
 
   return (
@@ -141,10 +139,16 @@ const SingleProduct = ({ sales }) => {
                   ></i>
                 </div>
                 <Button onClick={handleAdd}>ADD TO CART</Button>
-                {addNotice && (
-                  <i class="fas fa-cart-plus">
-                    <h6>Added</h6>
-                  </i>
+                {cart.addToCartNotice && (
+                  <h6
+                    className={`${
+                      cart.addToCartNotice === "Already added..."
+                        ? "discount-notice"
+                        : ""
+                    }`}
+                  >
+                    {cart.addToCartNotice}
+                  </h6>
                 )}
               </div>
             </div>

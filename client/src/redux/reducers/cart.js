@@ -1,6 +1,9 @@
 import * as actionTypes from "../constants/actionTypes";
 
-const cartReducer = (state = { cartItems: [] }, action) => {
+const cartReducer = (
+  state = { cartItems: [], addToCartNotice: null },
+  action
+) => {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
       const item = action.payload;
@@ -15,11 +18,13 @@ const cartReducer = (state = { cartItems: [] }, action) => {
         return {
           ...state,
           cartItems: [...state.cartItems, item],
+          addToCartNotice: "Added",
         };
       } else {
         return {
           ...state,
           cartItems: state.cartItems,
+          addToCartNotice: "Already added...",
         };
       }
     case actionTypes.REMOVE_FROM_CART:
@@ -41,7 +46,9 @@ const cartReducer = (state = { cartItems: [] }, action) => {
         ),
       };
     case actionTypes.RESET_CART:
-      return { ...state, cartItems: [] };
+      return { ...state, cartItems: [], addToCartNotice: null };
+    case actionTypes.CLEAR_ADD_NOTICE:
+      return { ...state, addToCartNotice: null };
     default:
       return state;
   }
