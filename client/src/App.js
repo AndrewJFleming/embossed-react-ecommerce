@@ -70,7 +70,7 @@ const App = () => {
           )}
         </Route>
         <Route path="/cart">
-          <Cart currentUserId={user._id} sales={sales} />
+          <Cart currentUserId={user?._id} sales={sales} />
         </Route>
         <Route path="/pay">
           <Pay />

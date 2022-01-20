@@ -13,7 +13,7 @@ import { CLEAR_ADD_NOTICE } from "../../redux/constants/actionTypes";
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState("");
   const [discountNotice, setDiscountNotice] = useState(null);
@@ -55,23 +55,21 @@ const SingleProduct = ({ sales }) => {
       } catch {
         console.log("error occurred fetching product");
       }
-      let productCopy = fetchedProduct;
 
       const findDiscount = () => {
-        let result = sales.find((t) => t.productId === productCopy?._id);
+        let result = sales.find((t) => t.productId === fetchedProduct?._id);
         if (result) {
           setDiscountNotice(result.percentOff * 100);
           const updatedProduct = {
-            ...productCopy,
-            price: productCopy.price * result.percentOff,
+            ...fetchedProduct,
+            price: fetchedProduct.price * result.percentOff,
           };
-          productCopy = updatedProduct;
-          console.log(productCopy);
+          fetchedProduct = updatedProduct;
         }
       };
 
       findDiscount();
-      setProduct(productCopy);
+      setProduct(fetchedProduct);
     };
     getProduct();
   }, [id, sales]);
@@ -92,69 +90,73 @@ const SingleProduct = ({ sales }) => {
   };
 
   return (
-    <div className="my-5">
-      <Container>
-        <Row>
-          <Col xs={12} sm={6} md={6} lg={6}>
-            <div className="imageContainer">
-              <img className="w-100" src={product.img} />
-            </div>
-          </Col>
-          <Col xs={12} sm={6} md={6} lg={6}>
-            <div className="infoContainer">
-              <h4>{product.title}</h4>
-              <p>{product.desc}</p>
-              <p className={`price ${discountNotice ? "discount-notice" : ""}`}>
-                $&nbsp;{product.price}
-                {discountNotice && (
-                  <span className="percentage-off discount-notice">
-                    &nbsp;
-                    {discountNotice}% Off!
-                  </span>
-                )}
-              </p>
-              <div className="filterContainer">
-                <div className="filter">
-                  <h4>Variants</h4>
-                  <select
-                    id="variants"
-                    onChange={(e) => setVariant(e.target.value)}
-                  >
-                    {product.variants?.map((v) => (
-                      <option value={v}>{v}</option>
-                    ))}
-                  </select>
+    <div className="my-5 singleProduct">
+      {product && (
+        <Container>
+          <Row>
+            <Col xs={12} sm={6} md={6} lg={6}>
+              <div className="imageContainer">
+                <img className="w-100" src={product.img} />
+              </div>
+            </Col>
+            <Col xs={12} sm={6} md={6} lg={6}>
+              <div className="infoContainer">
+                <h4>{product.title}</h4>
+                <p>{product.desc}</p>
+                <p
+                  className={`price ${discountNotice ? "discount-notice" : ""}`}
+                >
+                  $&nbsp;{product.price}
+                  {discountNotice && (
+                    <span className="percentage-off discount-notice">
+                      &nbsp;
+                      {discountNotice}% Off!
+                    </span>
+                  )}
+                </p>
+                <div className="filterContainer">
+                  <div className="filter">
+                    <h4>Variants</h4>
+                    <select
+                      id="variants"
+                      onChange={(e) => setVariant(e.target.value)}
+                    >
+                      {product.variants?.map((v) => (
+                        <option value={v}>{v}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="addContainer">
+                  <div className="amountContainer">
+                    <i
+                      className="fas fa-minus"
+                      onClick={() => handleQuanity("dec")}
+                    ></i>
+                    <p className="productAmount">{quantity}</p>
+                    <i
+                      className="fas fa-plus"
+                      onClick={() => handleQuanity("inc")}
+                    ></i>
+                  </div>
+                  <Button onClick={handleAdd}>ADD TO CART</Button>
+                  {cart.addToCartNotice && (
+                    <h6
+                      className={`${
+                        cart.addToCartNotice === "Already added..."
+                          ? "discount-notice"
+                          : ""
+                      }`}
+                    >
+                      {cart.addToCartNotice}
+                    </h6>
+                  )}
                 </div>
               </div>
-              <div className="addContainer">
-                <div className="amountContainer">
-                  <i
-                    className="fas fa-minus"
-                    onClick={() => handleQuanity("dec")}
-                  ></i>
-                  <p className="productAmount">{quantity}</p>
-                  <i
-                    className="fas fa-plus"
-                    onClick={() => handleQuanity("inc")}
-                  ></i>
-                </div>
-                <Button onClick={handleAdd}>ADD TO CART</Button>
-                {cart.addToCartNotice && (
-                  <h6
-                    className={`${
-                      cart.addToCartNotice === "Already added..."
-                        ? "discount-notice"
-                        : ""
-                    }`}
-                  >
-                    {cart.addToCartNotice}
-                  </h6>
-                )}
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+            </Col>
+          </Row>
+        </Container>
+      )}
       {/* <Newsletter /> */}
     </div>
   );
