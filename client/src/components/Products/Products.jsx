@@ -5,8 +5,9 @@ import { Row, Col } from "react-bootstrap";
 import Product from "./Product/Product";
 // import { popularProducts } from "../../data";
 
-const Products = ({ cat, filters, sort }) => {
+const Products = ({ cat, filters, sort, sales }) => {
   const [products, setProducts] = useState([]);
+  const [productsProcessed, setProductsProcessed] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -24,15 +25,43 @@ const Products = ({ cat, filters, sort }) => {
   }, [cat]);
 
   useEffect(() => {
+    let cartItemsCopy = products;
+    let i = 0;
+
+    console.log(cartItemsCopy);
+    console.log(sales);
+
+    const findMatches = () => {
+      cartItemsCopy.forEach((element) => {
+        let result = sales?.find((s) => s.productId === element._id);
+        if (result) {
+          const newCartState = [...cartItemsCopy];
+          newCartState[i] = {
+            ...element,
+            price: element.price * result.percentOff,
+            discount: result.percentOff,
+            saleName: result.title,
+          };
+          cartItemsCopy = newCartState;
+        }
+        ++i;
+      });
+      setProductsProcessed(cartItemsCopy);
+    };
+
+    findMatches();
+  }, [products, sales]);
+
+  useEffect(() => {
     cat &&
       setFilteredProducts(
-        products.filter((item) =>
+        productsProcessed.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
             item[key].includes(value)
           )
         )
       );
-  }, [products, cat, filters]);
+  }, [productsProcessed, cat, filters]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -58,13 +87,13 @@ const Products = ({ cat, filters, sort }) => {
     <Row>
       {cat
         ? filteredProducts.map((item) => (
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <Product product={item} key={item._id} />
+            <Col xs={12} sm={6} md={4} lg={3} key={item._id}>
+              <Product product={item} />
             </Col>
           ))
-        : products.slice(0, 8).map((item) => (
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <Product product={item} key={item._id} />
+        : productsProcessed.slice(0, 8).map((item) => (
+            <Col xs={12} sm={6} md={4} lg={3} key={item._id}>
+              <Product product={item} />
             </Col>
           ))}
     </Row>

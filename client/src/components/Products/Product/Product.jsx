@@ -26,13 +26,25 @@ const Product = ({ product }) => {
     //     </div>
     //   </div>
     // </div>
-    <Card className="card">
-      <Card.Img className="cardImg" variant="top" src={product.img} />
-      <Card.Body className="cardBody">
-        <Link to={`/product/${product._id}`}>
-          <Card.Title>{product.title}</Card.Title>
-        </Link>
-        <h4 className="">${product.price}</h4>
+    <Card>
+      <Link to={`/product/${product._id}`} className="product-link">
+        <Card.Img className="cardImg" variant="top" src={product.img} />
+      </Link>
+      <Card.Body>
+        <div className="card-inner">
+          <div>
+            <Link to={`/product/${product._id}`} className="product-link">
+              <h5 className="product-title">{product.title}</h5>
+            </Link>
+            <p className="sale-name">
+              {product.saleName && `*${product.saleName}`}
+            </p>
+          </div>
+          <div className={`${product.discount && "discount-notice"}`}>
+            <h5>${product.price}</h5>
+            <p>{product.discount && `%${product.discount * 100} OFF`}</p>
+          </div>
+        </div>
       </Card.Body>
     </Card>
   );

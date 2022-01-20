@@ -19,8 +19,8 @@ const Categories = () => {
   return (
     <Row>
       {featuredCats.slice(0, 3).map((item) => (
-        <Col xs={12} sm={6} md={4} lg={4}>
-          <CategoryItem category={item} key={item._id} />
+        <Col xs={12} sm={6} md={4} lg={4} key={item._id}>
+          <CategoryItem category={item} />
         </Col>
       ))}
     </Row>

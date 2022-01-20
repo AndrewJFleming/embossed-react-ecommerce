@@ -6,7 +6,7 @@ import Products from "../../components/Products/Products";
 import Slider from "../../components/Slider/Slider";
 import Categories from "../../components/Categories/Categories";
 
-const Home = () => {
+const Home = ({ sales }) => {
   return (
     <div className="mb-5">
       <Slider />
@@ -20,7 +20,7 @@ const Home = () => {
         <Row className="mt-5">
           <Col>
             <h3 className="text-center mb-4">Products</h3>
-            <Products />
+            <Products sales={sales} />
           </Col>
         </Row>
       </Container>

@@ -6,7 +6,7 @@ import Newsletter from "../../components/Newsletter/Newsletter";
 import Products from "../../components/Products/Products";
 import { Container } from "react-bootstrap";
 
-const ProductList = () => {
+const ProductList = ({ sales }) => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
   const [filters, setFilters] = useState({});
@@ -60,7 +60,7 @@ const ProductList = () => {
         </div>
       </Container>
       <Container className="mt-3">
-        <Products cat={cat} filters={filters} sort={sort} />
+        <Products cat={cat} filters={filters} sort={sort} sales={sales} />
       </Container>
       {/* <Newsletter /> */}
     </div>

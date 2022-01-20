@@ -57,7 +57,7 @@
 
 .card {
   box-sizing: border-box;
-  height: 400px;
+  height: 370px;
   width: 230px;
   margin: 5px 0;
 }
@@ -70,7 +70,37 @@
   object-fit: cover;
 }
 
-.cardBody {
-  display: flex;
-  justify-content: space-around;
+.card-body {
+  padding: 10px;
+}
+
+.product-link {
+  text-decoration: none;
+  color: darkblue;
+  margin: 0;
+}
+
+.card-inner {
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.product-title {
+  margin-bottom: 0;
+}
+
+.discount-notice p {
+  font-size: small;
+  font-style: italic;
+}
+
+.discount-notice > * {
+  margin-bottom: 0;
+  color: red;
+}
+
+.sale-name {
+  /* font-size: small; */
+  font-weight: lighter;
+  color: darkred;
 }

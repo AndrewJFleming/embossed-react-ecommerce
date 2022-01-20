@@ -25,7 +25,7 @@ function ControlledCarousel() {
   return (
     <Carousel fade activeIndex={index} onSelect={handleSelect}>
       {slides.map((slide) => (
-        <Carousel.Item>
+        <Carousel.Item key={slide._id}>
           <img
             className="d-block 
             w-100 

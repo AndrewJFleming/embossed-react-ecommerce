@@ -42,13 +42,13 @@ const App = () => {
       <TopNav currentUser={user} />
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home sales={sales} />
         </Route>
         {/* <Route path="/product-list">
           <ProductList />
         </Route> */}
         <Route path="/product-list/:category">
-          <ProductList />
+          <ProductList sales={sales} />
         </Route>
         <Route path="/product:id">
           <Product />
