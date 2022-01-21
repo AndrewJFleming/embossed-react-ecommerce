@@ -20,25 +20,6 @@ const SingleProduct = ({ sales }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       const res = await publicRequest.get("/products/find/" + id);
-  //       setProduct(res.data);
-  //       if (res.data.variants[0]) {
-  //         setVariant(res.data.variants[0]);
-  //       }
-  //       // if (res.data.color[0]) {
-  //       //   setColor(res.data.color[0]);
-  //       // }
-  //       // if (res.data.size[0]) {
-  //       //   setSize(res.data.size[0]);
-  //       // }
-  //     } catch {}
-  //   };
-  //   getProduct();
-  // }, [id]);
-
   useEffect(() => {
     dispatch({ type: CLEAR_ADD_NOTICE });
   }, []);
@@ -104,13 +85,13 @@ const SingleProduct = ({ sales }) => {
                 <h4>{product.title}</h4>
                 <p>{product.desc}</p>
                 <h5>Categories</h5>
-                {product.categories.map((item) => (
-                  <span>
+                {product.categories.map((c) => (
+                  <span key={c}>
                     <Link
-                      to={`/product-list/${item}`}
+                      to={`/product-list/${c}`}
                       className="single-product-cat"
                     >
-                      {item}
+                      {c}
                     </Link>
                     &nbsp;
                   </span>
@@ -134,7 +115,9 @@ const SingleProduct = ({ sales }) => {
                       onChange={(e) => setVariant(e.target.value)}
                     >
                       {product.variants?.map((v) => (
-                        <option value={v}>{v}</option>
+                        <option value={v} key={v}>
+                          {v}
+                        </option>
                       ))}
                     </select>
                   </div>

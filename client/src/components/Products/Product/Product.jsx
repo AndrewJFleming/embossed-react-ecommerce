@@ -36,13 +36,24 @@ const Product = ({ product }) => {
             <Link to={`/product/${product._id}`} className="product-link">
               <h5 className="product-title">{product.title}</h5>
             </Link>
-            <p className="sale-name">
-              {product.saleName && `*${product.saleName}`}
-            </p>
+            {product.discount ? (
+              <p className="sale-name">
+                {product.saleName && `*${product.saleName}`}
+              </p>
+            ) : (
+              product?.categories.slice(0, 3).map((c) => (
+                <span key={c}>
+                  <Link to={`/product-list/${c}`} className="product-list-cat">
+                    {c}
+                  </Link>
+                  &nbsp;
+                </span>
+              ))
+            )}
           </div>
           <div className={`${product.discount && "discount-notice"}`}>
             <h5>${product.price}</h5>
-            <p>{product.discount && `%${product.discount * 100} OFF`}</p>
+            <p>{product.discount && `${product.discount * 100}% OFF`}</p>
           </div>
         </div>
       </Card.Body>

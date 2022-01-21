@@ -6,7 +6,7 @@
   width: 230px;
   display: flex;
 
-  justify-content: center;
+  justify-content: space-between;
   background-color: #f5fbfd;
   position: relative;
 }
@@ -82,7 +82,7 @@
 
 .card-inner {
   display: flex !important;
-  justify-content: space-around !important;
+  justify-content: space-between !important;
 }
 
 .product-title {
@@ -103,4 +103,11 @@
   /* font-size: small; */
   font-weight: lighter;
   color: darkred;
+  font-style: italic;
+}
+
+.product-list-cat {
+  color: rgb(0, 0, 139, 0.6);
+  text-decoration: none;
+  font-size: 12px;
 }
