@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Newsletter from "../../components/Newsletter/Newsletter";
+import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import Products from "../../components/Products/Products";
 import Slider from "../../components/Slider/Slider";
 import Categories from "../../components/Categories/Categories";
 
 const Home = ({ sales }) => {
   return (
-    <div className="mb-5">
+    <div>
       <Slider />
       <Container>
         <Row className="mt-5">
@@ -24,7 +24,7 @@ const Home = ({ sales }) => {
           </Col>
         </Row>
       </Container>
-      {/* <Newsletter /> */}
+      {sales && <FeaturedSale sales={sales} />}
     </div>
   );
 };

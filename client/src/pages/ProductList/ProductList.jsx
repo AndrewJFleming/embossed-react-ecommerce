@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import "./ProductList.css";
-import Newsletter from "../../components/Newsletter/Newsletter";
+import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import Products from "../../components/Products/Products";
 import { Container } from "react-bootstrap";
 
@@ -29,22 +29,10 @@ const ProductList = ({ sales }) => {
           {cat && (
             <div className="filter">
               <h5>Filter by Variant:</h5>
-              {/* <select id="color" name="color" onChange={handleFilters}>
-              <option value="white">white</option>
-              <option value="yellow">yellow</option>
-              <option value="green">green</option>
-            </select>
-            <select id="size" name="size" onChange={handleFilters}>
-              <option value="XS">XS</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-            </select> */}
               <select id="variants" name="variants" onChange={handleFilters}>
-                <option value="black">black</option>
                 <option value="red">red</option>
                 <option value="blue">blue</option>
+                <option value="black">black</option>
               </select>
             </div>
           )}
@@ -62,7 +50,7 @@ const ProductList = ({ sales }) => {
       <Container className="mt-3">
         <Products cat={cat} filters={filters} sort={sort} sales={sales} />
       </Container>
-      {/* <Newsletter /> */}
+      <FeaturedSale />
     </div>
   );
 };

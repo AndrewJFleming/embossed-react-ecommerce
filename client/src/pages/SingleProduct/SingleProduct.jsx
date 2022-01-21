@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 
 import { Container, Col, Row, Button } from "react-bootstrap";
 import "./SingleProduct.css";
-import Newsletter from "../../components/Newsletter/Newsletter";
+import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import { publicRequest } from "../../requestMethods";
 import { addToCart } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
@@ -153,7 +153,7 @@ const SingleProduct = ({ sales }) => {
           <span className="pId">PRODUCT ID: {product._id}</span>
         </Container>
       )}
-      {/* <Newsletter /> */}
+      <FeaturedSale />
     </div>
   );
 };

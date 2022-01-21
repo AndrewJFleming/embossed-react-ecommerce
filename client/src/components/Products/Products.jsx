@@ -28,9 +28,6 @@ const Products = ({ cat, filters, sort, sales }) => {
     let cartItemsCopy = products;
     let i = 0;
 
-    console.log(cartItemsCopy);
-    console.log(sales);
-
     const findMatches = () => {
       cartItemsCopy.forEach((element) => {
         let result = sales?.find((s) => s.productId === element._id);
