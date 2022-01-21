@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import { Container, Col, Row, Button } from "react-bootstrap";
 import "./SingleProduct.css";
@@ -103,6 +103,18 @@ const SingleProduct = ({ sales }) => {
               <div className="infoContainer">
                 <h4>{product.title}</h4>
                 <p>{product.desc}</p>
+                <h5>Categories</h5>
+                {product.categories.map((item) => (
+                  <span>
+                    <Link
+                      to={`/product-list/${item}`}
+                      className="single-product-cat"
+                    >
+                      {item}
+                    </Link>
+                    &nbsp;
+                  </span>
+                ))}
                 <p
                   className={`price ${discountNotice ? "discount-notice" : ""}`}
                 >
@@ -155,6 +167,7 @@ const SingleProduct = ({ sales }) => {
               </div>
             </Col>
           </Row>
+          <span className="pId">PRODUCT ID: {product._id}</span>
         </Container>
       )}
       {/* <Newsletter /> */}
