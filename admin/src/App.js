@@ -14,9 +14,9 @@ import NewUser from "./pages/NewUser/NewUser";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const admin = useSelector((state) => state.user.currentUser.isAdmin);
+  // const admin = useSelector((state) => state.user.currentUser.isAdmin);
+  const admin = useSelector((state) => state.auth.authData.result.isAdmin);
 
-  console.log(admin);
   return (
     <BrowserRouter>
       <Switch>

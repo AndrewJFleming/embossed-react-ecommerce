@@ -10,7 +10,7 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-import { logout } from "../../redux/apiCalls";
+// import { logout } from "../../redux/apiCalls";
 import "./TopNav.css";
 
 const TopNav = () => {
@@ -22,8 +22,8 @@ const TopNav = () => {
   };
 
   const handleLogout = () => {
-    logout(dispatch);
-    setExpanded(false);
+    // logout(dispatch);
+    // setExpanded(false);
   };
 
   return (
