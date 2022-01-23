@@ -24,6 +24,7 @@ const UserList = () => {
   const handleDelete = async (id) => {
     try {
       await userRequest.delete(`/users/${id}`);
+      window.location.replace("/users/");
     } catch (err) {
       console.log(err);
     }
@@ -44,8 +45,7 @@ const UserList = () => {
             <th>UserID</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Admin</th>
-            <th>Avatar</th>
+            <th>IsAdmin</th>
             {/* <th>Transaction</th> */}
           </tr>
         </thead>
@@ -72,15 +72,6 @@ const UserList = () => {
                 ) : (
                   <i className="fas fa-user standardUserIcon"></i>
                 )}
-              </td>
-              <td>
-                <Link to={"/user/" + user._id}>
-                  <img
-                    className="userThumb"
-                    src={user.img}
-                    alt={`${user.username}-thumb`}
-                  />
-                </Link>
               </td>
               {/* <td>{user.transaction}</td> */}
             </tr>

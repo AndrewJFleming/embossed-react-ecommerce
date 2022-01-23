@@ -4,31 +4,33 @@ import { userRequest } from "../../requestMethods";
 import { Container, Button, Form } from "react-bootstrap";
 
 const NewProduct = () => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [price, setPrice] = useState(0);
-  const [inStock, setInStock] = useState(false);
-  const [img, setImg] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    desc: "",
+    categories: [],
+    variants: [],
+    price: 0,
+    inStock: false,
+    img: "",
+  });
 
-  const handleCats = (e) => {
-    setCategories(e.target.value.split(","));
+  const handleChange = (e) =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+  const handleSplit = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value.split(","),
+    });
   };
-
-  const handleInStock = () => setInStock(!inStock);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newProduct = {
-      title,
-      desc,
-      categories,
-      price,
-      inStock,
-      img,
-    };
     try {
-      const res = await userRequest.post("/products", newProduct);
+      const res = await userRequest.post("/products", formData);
       window.location.replace("/product/" + res.data._id);
     } catch (err) {
       console.log(err);
@@ -40,14 +42,13 @@ const NewProduct = () => {
       <h1>New Product</h1>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>Title</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder={title}
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            placeholder="product name"
+            value={formData.title}
+            name="title"
+            onChange={handleChange}
           />
         </Form.Group>
 
@@ -55,11 +56,10 @@ const NewProduct = () => {
           <Form.Label>Description</Form.Label>
           <Form.Control
             type="text"
-            placeholder={desc}
-            value={desc}
-            onChange={(e) => {
-              setDesc(e.target.value);
-            }}
+            placeholder="description"
+            value={formData.desc}
+            name="desc"
+            onChange={handleChange}
           />
         </Form.Group>
 
@@ -67,10 +67,14 @@ const NewProduct = () => {
           <Form.Label>Price</Form.Label>
           <Form.Control
             type="number"
-            placeholder={`$${price}`}
-            value={`$${price}`}
+            placeholder={formData.price}
+            value={formData.price}
+            name="price"
             onChange={(e) => {
-              setPrice(e.target.valueAsNumber);
+              setFormData({
+                ...formData,
+                price: e.target.valueAsNumber,
+              });
             }}
           />
         </Form.Group>
@@ -78,19 +82,35 @@ const NewProduct = () => {
         <Form.Group className="mb-3">
           <Form.Label>Categories</Form.Label>
           <Form.Control
-            type="email"
+            type="text"
             placeholder="stationary,postcards"
-            value={categories}
-            onChange={handleCats}
+            name="categories"
+            value={formData.categories}
+            onChange={handleSplit}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Variants</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="red,blue"
+            name="variants"
+            value={formData.variants}
+            onChange={handleSplit}
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Check
             type="checkbox"
-            checked={inStock}
+            checked={formData.inStock}
             label="In Stock"
-            onClick={handleInStock}
+            onClick={(e) => {
+              setFormData({
+                ...formData,
+                inStock: !formData.inStock,
+              });
+            }}
           />
         </Form.Group>
 
@@ -98,11 +118,10 @@ const NewProduct = () => {
           <Form.Label>Photo</Form.Label>
           <Form.Control
             type="text"
-            placeholder={img}
-            value={img}
-            onChange={(e) => {
-              setImg(e.target.value);
-            }}
+            placeholder={formData.img}
+            value={formData.img}
+            name="img"
+            onChange={handleChange}
           />
           <Form.Text muted>
             Provide URL for existing image on the web.

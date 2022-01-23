@@ -13,7 +13,6 @@ const SingleUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-  const [img, setImg] = useState("");
 
   useEffect(() => {
     const getPost = async () => {
@@ -22,24 +21,36 @@ const SingleUser = () => {
       setUsername(res.data.username);
       setEmail(res.data.email);
       setIsAdmin(res.data.isAdmin);
-      setImg(res.data.img);
     };
     getPost();
   }, [userId]);
 
   const handleUpdate = async () => {
     try {
-      await userRequest.put(`/users/${userId}`, {
+      await userRequest.put(`/users/admin/${userId}`, {
+        // await userRequest.put(`/users/${userId}`, {
         username,
         email,
         password,
-        img,
+        isAdmin,
       });
       window.location.replace("/user/" + userId);
     } catch (err) {
       console.log(err);
     }
   };
+  // const handleUpdate = async () => {
+  //   try {
+  //     await userRequest.put(`/users/${userId}`, {
+  //       username,
+  //       email,
+  //       password,
+  //     });
+  //     window.location.replace("/user/" + userId);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleIsAdmin = () => setIsAdmin(!isAdmin);
 
@@ -51,12 +62,7 @@ const SingleUser = () => {
           <Button variant="success">Create New</Button>
         </Link>
       </Container>
-      <Container className="d-flex mb-5">
-        <img
-          className="userImg"
-          src={user.img}
-          alt={`${user.username}-avatar`}
-        />
+      <Container className="mb-5">
         <Card style={{ width: "100%" }}>
           <Card.Body>
             <Card.Title>{user.username}</Card.Title>
@@ -106,7 +112,7 @@ const SingleUser = () => {
           <Form.Group className="mb-3">
             <Form.Label>New Password</Form.Label>
             <Form.Control
-              name="photo"
+              name="password"
               type="password"
               placeholder="password"
               onChange={(e) => {
@@ -121,20 +127,7 @@ const SingleUser = () => {
               onClick={handleIsAdmin}
               checked={isAdmin}
               type="checkbox"
-              label="In Stock"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Photo</Form.Label>
-            <Form.Control
-              name="photo"
-              type="text"
-              placeholder={img}
-              value={img}
-              onChange={(e) => {
-                setImg(e.target.value);
-              }}
+              label="Is Admin"
             />
           </Form.Group>
 

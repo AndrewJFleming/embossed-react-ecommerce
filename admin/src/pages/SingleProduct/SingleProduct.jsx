@@ -9,11 +9,11 @@ const SingleProduct = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
-  const [productCats, setProductCats] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [categories, setCategories] = useState([]);
-  const [price, setPrice] = useState(null);
+  const [variants, setVariants] = useState([]);
+  const [price, setPrice] = useState(0);
   const [inStock, setInStock] = useState(false);
   const [img, setImg] = useState("");
 
@@ -23,6 +23,7 @@ const SingleProduct = () => {
         title,
         desc,
         categories,
+        variants,
         price,
         inStock,
         img,
@@ -36,6 +37,9 @@ const SingleProduct = () => {
   const handleCat = (e) => {
     setCategories(e.target.value.split(","));
   };
+  const handleVariants = (e) => {
+    setVariants(e.target.value.split(","));
+  };
 
   const handleInStock = () => setInStock(!inStock);
 
@@ -43,10 +47,10 @@ const SingleProduct = () => {
     const getPost = async () => {
       const res = await userRequest.get("/products/find/" + productId);
       setProduct(res.data);
-      setProductCats(res.data.categories);
       setTitle(res.data.title);
       setDesc(res.data.desc);
       setCategories(res.data.categories);
+      setVariants(res.data.variants);
       setPrice(res.data.price);
       setInStock(res.data.inStock);
       setImg(res.data.img);
@@ -88,9 +92,17 @@ const SingleProduct = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <span className="listGroupLabel">Categories:&nbsp;</span>
-              {productCats.map((cat) => (
+              {categories.map((c) => (
                 <span>
-                  &nbsp;&#8226;<em>{cat}</em>
+                  &nbsp;&#8226;<em>{c}</em>
+                </span>
+              ))}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Variants:&nbsp;</span>
+              {variants.map((v) => (
+                <span>
+                  &nbsp;&#8226;<em>{v}</em>
                 </span>
               ))}
             </ListGroup.Item>
@@ -124,11 +136,11 @@ const SingleProduct = () => {
           <Form.Group className="mb-3">
             <Form.Label>Price</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               placeholder={price}
               value={price}
               onChange={(e) => {
-                setPrice(e.target.value);
+                setPrice(e.target.valueAsNumber);
               }}
             />
           </Form.Group>
@@ -139,6 +151,15 @@ const SingleProduct = () => {
               placeholder={categories}
               value={categories}
               onChange={handleCat}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Variants</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder={variants}
+              value={variants}
+              onChange={handleVariants}
             />
           </Form.Group>
 

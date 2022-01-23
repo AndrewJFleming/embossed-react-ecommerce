@@ -2,24 +2,28 @@ import React, { useState } from "react";
 
 import { userRequest } from "../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
+import "./NewUser.css";
 
 const NewUser = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [img, setImg] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    isAdmin: false,
+  });
+
+  const handleChange = (e) =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = {
-      username,
-      email,
-      password,
-      img,
-    };
     try {
-      const res = await userRequest.post("/auth/register", newUser);
-      window.location.replace("/user/" + res.data._id);
+      const res = await userRequest.post("/users/signup", formData);
+      // const res = await userRequest.post("/users/signup", newUser);
+      window.location.replace("/user/" + res.data.result._id);
     } catch (err) {
       console.log(err);
     }
@@ -33,11 +37,10 @@ const NewUser = () => {
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
-            placeholder={username}
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
+            placeholder={formData.username}
+            value={formData.username}
+            name="username"
+            onChange={handleChange}
           />
         </Form.Group>
 
@@ -45,10 +48,24 @@ const NewUser = () => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
-            placeholder={email}
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
+            placeholder={formData.email}
+            value={formData.email}
+            name="email"
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-4">
+          <Form.Label>Is Admin</Form.Label>
+          <Form.Check
+            className="checkbox-input"
+            type="checkbox"
+            checked={formData.isAdmin}
+            onClick={(e) => {
+              setFormData({
+                ...formData,
+                isAdmin: !formData.isAdmin,
+              });
             }}
           />
         </Form.Group>
@@ -57,27 +74,11 @@ const NewUser = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="text"
-            placeholder={password}
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            placeholder={formData.password}
+            value={formData.password}
+            name="password"
+            onChange={handleChange}
           />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Avatar</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder={img}
-            value={img}
-            onChange={(e) => {
-              setImg(e.target.value);
-            }}
-          />
-          <Form.Text muted>
-            Provide URL for existing image on the web.
-          </Form.Text>
         </Form.Group>
 
         <Button onClick={handleSubmit}>Create</Button>
