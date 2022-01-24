@@ -1,0 +1,16 @@
+.listGroupLabel {
+  font-weight: bold;
+}
+
+.product-card-img {
+  object-fit: cover;
+  max-height: 300px;
+}
+
+.product-card-Id-wrapper {
+  font-size: 12px;
+}
+
+.product-card-Id {
+  font-weight: bold;
+}

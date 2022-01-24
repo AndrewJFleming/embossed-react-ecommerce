@@ -9,51 +9,51 @@ const SingleProduct = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [variants, setVariants] = useState([]);
-  const [price, setPrice] = useState(0);
-  const [inStock, setInStock] = useState(false);
-  const [img, setImg] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    desc: "",
+    categories: [],
+    variants: [],
+    price: 0,
+    inStock: false,
+    img: "",
+  });
 
   const handleUpdate = async () => {
     try {
-      await userRequest.put(`/products/${productId}`, {
-        title,
-        desc,
-        categories,
-        variants,
-        price,
-        inStock,
-        img,
-      });
+      await userRequest.put(`/products/${productId}`, formData);
       window.location.replace("/product/" + productId);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleCat = (e) => {
-    setCategories(e.target.value.split(","));
-  };
-  const handleVariants = (e) => {
-    setVariants(e.target.value.split(","));
-  };
+  const handleChange = (e) =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
-  const handleInStock = () => setInStock(!inStock);
+  const handleSplit = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value.split(","),
+    });
+  };
 
   useEffect(() => {
     const getPost = async () => {
       const res = await userRequest.get("/products/find/" + productId);
       setProduct(res.data);
-      setTitle(res.data.title);
-      setDesc(res.data.desc);
-      setCategories(res.data.categories);
-      setVariants(res.data.variants);
-      setPrice(res.data.price);
-      setInStock(res.data.inStock);
-      setImg(res.data.img);
+      setFormData({
+        title: res.data.title,
+        desc: res.data.desc,
+        categories: res.data.categories,
+        variants: res.data.variants,
+        price: res.data.price,
+        inStock: res.data.inStock,
+        img: res.data.img,
+      });
     };
     getPost();
   }, [productId]);
@@ -92,7 +92,7 @@ const SingleProduct = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <span className="listGroupLabel">Categories:&nbsp;</span>
-              {categories.map((c) => (
+              {formData.categories.map((c) => (
                 <span>
                   &nbsp;&#8226;<em>{c}</em>
                 </span>
@@ -100,7 +100,7 @@ const SingleProduct = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <span className="listGroupLabel">Variants:&nbsp;</span>
-              {variants.map((v) => (
+              {formData.variants.map((v) => (
                 <span>
                   &nbsp;&#8226;<em>{v}</em>
                 </span>
@@ -116,31 +116,32 @@ const SingleProduct = () => {
             <Form.Label>Product Name</Form.Label>
             <Form.Control
               type="text"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
+              value={formData.title}
+              name="title"
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Product Description</Form.Label>
             <Form.Control
               type="textarea"
-              placeholder={desc}
-              value={desc}
-              onChange={(e) => {
-                setDesc(e.target.value);
-              }}
+              placeholder={formData.desc}
+              value={formData.desc}
+              name="desc"
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
-              placeholder={price}
-              value={price}
+              placeholder={formData.price}
+              value={formData.price}
               onChange={(e) => {
-                setPrice(e.target.valueAsNumber);
+                setFormData({
+                  ...formData,
+                  price: e.target.valueAsNumber,
+                });
               }}
             />
           </Form.Group>
@@ -148,26 +149,33 @@ const SingleProduct = () => {
             <Form.Label>Categories</Form.Label>
             <Form.Control
               type="text"
-              placeholder={categories}
-              value={categories}
-              onChange={handleCat}
+              placeholder={formData.categories}
+              value={formData.categories}
+              name="categories"
+              onChange={handleSplit}
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Variants</Form.Label>
             <Form.Control
               type="text"
-              placeholder={variants}
-              value={variants}
-              onChange={handleVariants}
+              placeholder={formData.variants}
+              value={formData.variants}
+              name="variants"
+              onChange={handleSplit}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Availability</Form.Label>
             <Form.Check
-              onClick={handleInStock}
-              checked={inStock}
+              onClick={(e) => {
+                setFormData({
+                  ...formData,
+                  inStock: !formData.inStock,
+                });
+              }}
+              checked={formData.inStock}
               type="checkbox"
               label="In Stock"
             />
@@ -176,13 +184,11 @@ const SingleProduct = () => {
           <Form.Group className="mb-3">
             <Form.Label>Photo</Form.Label>
             <Form.Control
-              name="photo"
+              name="img"
               type="text"
-              placeholder={img}
-              value={img}
-              onChange={(e) => {
-                setImg(e.target.value);
-              }}
+              placeholder={formData.img}
+              value={formData.img}
+              onChange={handleChange}
             />
           </Form.Group>
 

@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 
 import { userRequest } from "../../requestMethods";
 import { Container, Table, Button } from "react-bootstrap";
-import { userRows } from "../../dummyData";
 import "./UserList.css";
 
 const UserList = () => {
-  const [users, setUsers] = useState(userRows);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const getUsers = async () => {

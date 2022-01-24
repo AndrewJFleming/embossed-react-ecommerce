@@ -9,50 +9,40 @@ const SingleUser = () => {
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
   const [user, setUser] = useState({});
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    isAdmin: false,
+  });
+
+  const handleChange = (e) =>
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
   useEffect(() => {
     const getPost = async () => {
       const res = await userRequest.get("/users/find/" + userId);
       setUser(res.data);
-      setUsername(res.data.username);
-      setEmail(res.data.email);
-      setIsAdmin(res.data.isAdmin);
+      setFormData({
+        username: res.data.username,
+        email: res.data.email,
+        isAdmin: res.data.isAdmin,
+      });
     };
     getPost();
   }, [userId]);
 
   const handleUpdate = async () => {
     try {
-      await userRequest.put(`/users/admin/${userId}`, {
-        // await userRequest.put(`/users/${userId}`, {
-        username,
-        email,
-        password,
-        isAdmin,
-      });
+      await userRequest.put(`/users/admin/${userId}`, formData);
       window.location.replace("/user/" + userId);
     } catch (err) {
       console.log(err);
     }
   };
-  // const handleUpdate = async () => {
-  //   try {
-  //     await userRequest.put(`/users/${userId}`, {
-  //       username,
-  //       email,
-  //       password,
-  //     });
-  //     window.location.replace("/user/" + userId);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  const handleIsAdmin = () => setIsAdmin(!isAdmin);
 
   return (
     <div className="mb-5">
@@ -90,10 +80,9 @@ const SingleUser = () => {
             <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
+              value={formData.username}
+              name="username"
+              onChange={handleChange}
             />
           </Form.Group>
 
@@ -101,33 +90,35 @@ const SingleUser = () => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder={email}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              placeholder={formData.email}
+              value={formData.email}
+              name="email"
+              onChange={handleChange}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>New Password</Form.Label>
             <Form.Control
-              name="password"
               type="password"
               placeholder="password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              name="password"
+              onChange={handleChange}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Admin Status</Form.Label>
             <Form.Check
-              onClick={handleIsAdmin}
-              checked={isAdmin}
               type="checkbox"
               label="Is Admin"
+              checked={formData.isAdmin}
+              onClick={(e) => {
+                setFormData({
+                  ...formData,
+                  isAdmin: !formData.isAdmin,
+                });
+              }}
             />
           </Form.Group>
 

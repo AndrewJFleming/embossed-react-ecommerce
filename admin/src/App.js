@@ -10,6 +10,8 @@ import NewProduct from "./pages/NewProduct/NewProduct";
 import UserList from "./pages/UserList/UserList";
 import SingleUser from "./pages/SingleUser/SingleUser";
 import NewUser from "./pages/NewUser/NewUser";
+import CartList from "./pages/CartList/CartList";
+import SingleCart from "./pages/SingleCart/SingleCart";
 // import SingleOrder from "./pages/SingleOrder/SingleOrder";
 import { useSelector } from "react-redux";
 
@@ -43,6 +45,12 @@ const App = () => {
           </Route>
           <Route path="/new-product">
             {admin ? <NewProduct /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/carts">
+            {admin ? <CartList /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/cart/:cartId">
+            {admin ? <SingleCart /> : <Redirect to="/login" />}
           </Route>
         </React.Fragment>
       </Switch>

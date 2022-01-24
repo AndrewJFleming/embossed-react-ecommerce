@@ -6,6 +6,7 @@ import {
   Container,
   Navbar,
   Nav,
+  NavDropdown,
   Form,
   FormControl,
   Button,
@@ -43,19 +44,49 @@ const TopNav = () => {
           onClick={() => setExpanded(expanded ? false : "expanded")}
         />
         <Navbar.Collapse id="responsive-navbar-nav" className="myResponsive">
+          <Nav>
+            <NavDropdown title="Products" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                as={Link}
+                to="/products"
+                onClick={handleCollapse}
+              >
+                Products List
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to="/new-product"
+                onClick={handleCollapse}
+              >
+                <em>New Product</em>
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Users" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/users" onClick={handleCollapse}>
+                Users List
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to="/new-user"
+                onClick={handleCollapse}
+              >
+                <em>New User</em>
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown title="Carts" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/carts" onClick={handleCollapse}>
+                Carts List
+              </NavDropdown.Item>
+              {/* <NavDropdown.Item
+                as={Link}
+                to="/new-user"
+                onClick={handleCollapse}
+              >
+                <em>New User</em>
+              </NavDropdown.Item> */}
+            </NavDropdown>
+          </Nav>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/products" onClick={handleCollapse}>
-              Products
-            </Nav.Link>
-            <Nav.Link as={Link} to="/new-product" onClick={handleCollapse}>
-              <em>New Product</em>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/users" onClick={handleCollapse}>
-              Users
-            </Nav.Link>
-            <Nav.Link as={Link} to="/new-user" onClick={handleCollapse}>
-              <em>New User</em>
-            </Nav.Link>
             <Nav.Link as={Link} to="/login" onClick={handleCollapse}>
               Login
             </Nav.Link>
