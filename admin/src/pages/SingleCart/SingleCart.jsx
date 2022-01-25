@@ -99,11 +99,17 @@ const SingleCart = () => {
     }
   }, [allProducts, addCartProduct]);
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const updatedCartProducts = {
+      userId: cartProducts.userId,
+      products: [...cartProducts.products, formFields],
+    };
+    console.log(updatedCartProducts);
     if (formFields.quantity > 0) {
       try {
-        await userRequest.put(`/products/${cartId}`, cartProducts);
-        window.location.replace("/product/" + cartId);
+        await userRequest.put(`/carts/${cartId}`, updatedCartProducts);
+        window.location.replace("/cart/" + cartId);
       } catch (err) {
         console.log(err);
       }
