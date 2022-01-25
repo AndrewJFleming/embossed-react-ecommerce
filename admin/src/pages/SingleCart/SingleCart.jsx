@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import * as uuid from "uuid";
 
 import {
   Row,
@@ -21,15 +22,18 @@ const SingleCart = () => {
     userId: "",
     products: [],
   });
-
-  const handleUpdate = async () => {
-    try {
-      await userRequest.put(`/products/${cartId}`, cartProducts);
-      window.location.replace("/product/" + cartId);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [allProducts, setAllProducts] = useState([]);
+  const [addCartProduct, setAddCartProduct] = useState({
+    productId: "",
+  });
+  const [variantOptions, setVariantOptions] = useState({
+    variants: [],
+  });
+  const [formFields, setFormFields] = useState({
+    title: "",
+    price: 0,
+    quantity: 0,
+  });
 
   useEffect(() => {
     const getCart = async () => {
@@ -44,27 +48,85 @@ const SingleCart = () => {
   }, [cartId]);
 
   useEffect(() => {
-    console.log(cartProducts.products);
-  }, [cartProducts]);
+    const getProducts = async () => {
+      try {
+        const res = await userRequest.get("products");
+        setAllProducts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    const found = allProducts.find(
+      (product) => product._id === addCartProduct.productId
+    );
+    if (found) {
+      setVariantOptions({
+        ...variantOptions,
+        variants: found?.variants,
+      });
+
+      setFormFields({
+        ...formFields,
+        userId: cartProducts.userId,
+        cartItemId: uuid.v4(),
+        title: found?.title,
+        productId: found?._id,
+        img: found?.img,
+        price: found?.price,
+        quantity: 1,
+        variant: found?.variants[0],
+      });
+    } else {
+      setVariantOptions({
+        ...variantOptions,
+        variants: [],
+      });
+
+      setFormFields({
+        ...formFields,
+        cartItemId: "",
+        title: "",
+        productId: "",
+        img: "",
+        price: "",
+        quantity: 0,
+        variant: "",
+      });
+    }
+  }, [allProducts, addCartProduct]);
+
+  const handleUpdate = async () => {
+    if (formFields.quantity > 0) {
+      try {
+        await userRequest.put(`/products/${cartId}`, cartProducts);
+        window.location.replace("/product/" + cartId);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("Quantity must be greater than 0.");
+    }
+  };
 
   return (
     <div className="mb-5">
-      <Container className="mt-5 mb-2 d-flex justify-content-between align-items-center">
+      <Container className="mt-5 mb-2">
         <h1>Cart</h1>
-        <Link to="/new-product">
-          <Button variant="success">Create New</Button>
-        </Link>
       </Container>
       <Container className="mb-3">
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <span className="listGroupLabel">Cart ID:&nbsp;</span>
-              {cart?._id}
-            </ListGroup.Item>
-            <ListGroup.Item>
               <span className="listGroupLabel">User ID:&nbsp;</span>
               <Link to={`/user/${cart?.userId}`}>{cart?.userId}</Link>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Cart ID:&nbsp;</span>
+              {cart?._id}
             </ListGroup.Item>
           </ListGroup>
         </Card>
@@ -104,37 +166,7 @@ const SingleCart = () => {
                       <span className="listGroupLabel">Qty:&nbsp;</span>
                       {p.quantity}
                     </li>
-                    <li>
-                      <span className="listGroupLabel">InStock?:&nbsp;</span>
-                      {p.inStock ? <span>Yes</span> : <span>No</span>}
-                    </li>
                   </ul>
-                  {/* <ListGroup variant="flush">
-                    <ListGroup.Item>
-                      <span className="listGroupLabel">ProductID:&nbsp;</span>
-                      {p.productId}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <span className="listGroupLabel">CartItemID:&nbsp;</span>
-                      {p.cartItemId}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <span className="listGroupLabel">Variant:&nbsp;</span>
-                      {p.variant}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <span className="listGroupLabel">Price:&nbsp;</span>$
-                      {p.price}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <span className="listGroupLabel">Qty:&nbsp;</span>
-                      {p.quantity}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <span className="listGroupLabel">InStock?:&nbsp;</span>
-                      {p.inStock ? <span>Yes</span> : <span>No</span>}
-                    </ListGroup.Item>
-                  </ListGroup> */}
                 </Card.Body>
               </Card>
             </Col>
@@ -143,89 +175,100 @@ const SingleCart = () => {
       </Container>
       <Container className="mb-5">
         <h2>Update Cart Products</h2>
-        {/* <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Product Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={formData.title}
-              name="title"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Product Description</Form.Label>
-            <Form.Control
-              type="textarea"
-              placeholder={formData.desc}
-              value={formData.desc}
-              name="desc"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder={formData.price}
-              value={formData.price}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  price: e.target.valueAsNumber,
-                });
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Categories</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder={formData.categories}
-              value={formData.categories}
-              name="categories"
-              onChange={handleSplit}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Variants</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder={formData.variants}
-              value={formData.variants}
-              name="variants"
-              onChange={handleSplit}
-            />
-          </Form.Group>
+        <Row>
+          <Col>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Select
+                  onChange={(e) => {
+                    setAddCartProduct({
+                      ...addCartProduct,
+                      productId: e.target.value,
+                    });
+                  }}
+                >
+                  <option>Select Product</option>
+                  {allProducts?.map((p) => (
+                    <option value={p._id}>{p.title}</option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Availability</Form.Label>
-            <Form.Check
-              onClick={(e) => {
-                setFormData({
-                  ...formData,
-                  inStock: !formData.inStock,
-                });
-              }}
-              checked={formData.inStock}
-              type="checkbox"
-              label="In Stock"
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Photo</Form.Label>
-            <Form.Control
-              name="img"
-              type="text"
-              placeholder={formData.img}
-              value={formData.img}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Button onClick={handleUpdate}>Update</Button>
-        </Form> */}
+              <Form.Group className="mb-3">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={formFields.price}
+                  onChange={(e) => {
+                    setFormFields({
+                      ...formFields,
+                      price: e.target.valueAsNumber,
+                    });
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Quantity</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={formFields.quantity}
+                  onChange={(e) => {
+                    setFormFields({
+                      ...formFields,
+                      quantity: e.target.valueAsNumber,
+                    });
+                  }}
+                />
+              </Form.Group>
+              {variantOptions.variants.length > 0 && (
+                <Form.Group className="mb-3">
+                  <Form.Select
+                    onChange={(e) => {
+                      setFormFields({
+                        ...formFields,
+                        variant: e.target.value,
+                      });
+                    }}
+                  >
+                    <option>Variant</option>
+                    {variantOptions.variants?.map((v) => (
+                      <option value={v}>{v}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              )}
+              <Button onClick={handleUpdate}>Add to Cart</Button>
+            </Form>
+          </Col>
+          <Col>
+            <Card className="my-2">
+              {formFields.img ? (
+                <Card.Img
+                  className="product-card-img"
+                  variant="top"
+                  src={formFields?.img}
+                />
+              ) : (
+                <h6
+                  className="text-center p-5 m-0 font-italic"
+                  style={{ opacity: "0.75", backgroundColor: "lightgray" }}
+                >
+                  Product Image
+                </h6>
+              )}
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <span className="listGroupLabel">Product ID:&nbsp;</span>
+                  {formFields?.productId}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <span className="listGroupLabel">Cart Item ID:&nbsp;</span>
+                  {formFields?.cartItemId}
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
