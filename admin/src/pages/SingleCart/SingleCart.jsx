@@ -99,22 +99,62 @@ const SingleCart = () => {
     }
   }, [allProducts, addCartProduct]);
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const updatedCartProducts = {
-      userId: cartProducts.userId,
-      products: [...cartProducts.products, formFields],
-    };
-    console.log(updatedCartProducts);
-    if (formFields.quantity > 0) {
-      try {
-        await userRequest.put(`/carts/${cartId}`, updatedCartProducts);
-        window.location.replace("/cart/" + cartId);
-      } catch (err) {
-        console.log(err);
-      }
+  // const handleUpdate = async (e) => {
+  //   e.preventDefault();
+  //   const updatedCart = {
+  //     userId: cartProducts.userId,
+  //     products: [...cartProducts.products, formFields],
+  //   };
+  //   if (formFields.quantity > 0) {
+  //     try {
+  //       await userRequest.put(`/carts/${cartId}`, updatedCart);
+  //       window.location.replace("/cart/" + cartId);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   } else {
+  //     console.log("Quantity must be greater than 0.");
+  //   }
+  // };
+
+  // const handleDelete = async (cartItemId) => {
+  //   const updatedCart = {
+  //     userId: cartProducts.userId,
+  //     products: cartProducts.products.filter(
+  //       (p) => p.cartItemId !== cartItemId
+  //     ),
+  //   };
+  //   try {
+  //     await userRequest.put(`/carts/${cartId}`, updatedCart);
+  //     window.location.replace("/cart/" + cartId);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  //Combined both updateHandlers into one.
+  const handleUpdate = async (cartItemId) => {
+    let updatedCart;
+    if (typeof cartItemId === "string") {
+      updatedCart = {
+        userId: cartProducts.userId,
+        products: cartProducts.products.filter(
+          (p) => p.cartItemId !== cartItemId
+        ),
+      };
     } else {
-      console.log("Quantity must be greater than 0.");
+      //handler for adding products has no prop
+      //so cartItemId equals event object instead of string
+      updatedCart = {
+        userId: cartProducts.userId,
+        products: [...cartProducts.products, formFields],
+      };
+    }
+    try {
+      await userRequest.put(`/carts/${cartId}`, updatedCart);
+      window.location.replace("/cart/" + cartId);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -149,8 +189,13 @@ const SingleCart = () => {
                   src={p.img}
                 />
                 <Card.Body>
-                  <h6>{p.title}</h6>
-
+                  <div className="d-flex justify-content-between w-100">
+                    <h6>{p.title}</h6>
+                    <i
+                      className="fas fa-trash-alt deleteIcon"
+                      onClick={() => handleUpdate(p.cartItemId)}
+                    ></i>
+                  </div>
                   <div className="product-card-Id-wrapper">
                     <span className="product-card-Id">ProductID:&nbsp;</span>
                     <Link to={`/product/${p.productId}`}>{p.productId}</Link>
@@ -218,6 +263,7 @@ const SingleCart = () => {
                 <Form.Control
                   type="number"
                   value={formFields.quantity}
+                  min="1"
                   onChange={(e) => {
                     setFormFields({
                       ...formFields,
