@@ -99,39 +99,6 @@ const SingleCart = () => {
     }
   }, [allProducts, addCartProduct]);
 
-  // const handleUpdate = async (e) => {
-  //   e.preventDefault();
-  //   const updatedCart = {
-  //     userId: cartProducts.userId,
-  //     products: [...cartProducts.products, formFields],
-  //   };
-  //   if (formFields.quantity > 0) {
-  //     try {
-  //       await userRequest.put(`/carts/${cartId}`, updatedCart);
-  //       window.location.replace("/cart/" + cartId);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   } else {
-  //     console.log("Quantity must be greater than 0.");
-  //   }
-  // };
-
-  // const handleDelete = async (cartItemId) => {
-  //   const updatedCart = {
-  //     userId: cartProducts.userId,
-  //     products: cartProducts.products.filter(
-  //       (p) => p.cartItemId !== cartItemId
-  //     ),
-  //   };
-  //   try {
-  //     await userRequest.put(`/carts/${cartId}`, updatedCart);
-  //     window.location.replace("/cart/" + cartId);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   //Combined both updateHandlers into one.
   const handleUpdate = async (cartItemId) => {
     let updatedCart;
@@ -173,6 +140,12 @@ const SingleCart = () => {
             <ListGroup.Item>
               <span className="listGroupLabel">Cart ID:&nbsp;</span>
               {cart?._id}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Total:&nbsp;</span>$
+              {cart?.products
+                .reduce((price, item) => price + item.price * item.quantity, 0)
+                .toFixed(2)}
             </ListGroup.Item>
           </ListGroup>
         </Card>
