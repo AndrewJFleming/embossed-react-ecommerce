@@ -73,18 +73,21 @@ const TopNav = () => {
                 <em>New User</em>
               </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Carts" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/carts" onClick={handleCollapse}>
-                Carts List
+            <NavDropdown title="Sales" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/sales" onClick={handleCollapse}>
+                Sales List
               </NavDropdown.Item>
-              {/* <NavDropdown.Item
+              <NavDropdown.Item
                 as={Link}
-                to="/new-user"
+                to="/new-sale"
                 onClick={handleCollapse}
               >
-                <em>New User</em>
-              </NavDropdown.Item> */}
+                <em>New Sale</em>
+              </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link as={Link} to="/carts" onClick={handleCollapse}>
+              Carts List
+            </Nav.Link>
           </Nav>
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/login" onClick={handleCollapse}>

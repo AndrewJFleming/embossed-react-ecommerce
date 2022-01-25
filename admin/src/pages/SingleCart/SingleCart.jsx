@@ -92,7 +92,7 @@ const SingleCart = () => {
         title: "",
         productId: "",
         img: "",
-        price: "",
+        price: 0,
         quantity: 0,
         variant: "",
       });
@@ -198,7 +198,7 @@ const SingleCart = () => {
         </Row>
       </Container>
       <Container className="mb-5">
-        <h2>Update Cart Products</h2>
+        <h2>Add Cart Product</h2>
         <Row>
           <Col>
             <Form>
@@ -223,6 +223,7 @@ const SingleCart = () => {
                 <Form.Control
                   type="number"
                   value={formFields.price}
+                  min="0"
                   onChange={(e) => {
                     setFormFields({
                       ...formFields,
