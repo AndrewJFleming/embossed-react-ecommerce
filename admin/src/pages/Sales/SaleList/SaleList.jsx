@@ -47,6 +47,7 @@ const SaleList = () => {
             <th>ProductId</th>
             <th>IsActive</th>
             <th>IsFeatured</th>
+            <th>BG Img</th>
           </tr>
         </thead>
         <tbody>
@@ -73,6 +74,11 @@ const SaleList = () => {
               </td>
               <td>{s.isActive ? <span>Yes</span> : <span>No</span>}</td>
               <td>{s.isFeatured ? <span>Yes</span> : <span>No</span>}</td>
+              <td>
+                <Link to={"/sale/" + s._id}>
+                  <img className="userThumb" src={s.img} />
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

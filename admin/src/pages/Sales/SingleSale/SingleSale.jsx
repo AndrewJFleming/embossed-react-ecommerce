@@ -80,7 +80,40 @@ const SingleSale = () => {
         </Link>
       </Container>
       <Container className="d-flex mb-5">
-        <img className="productImg" src={sale.img} alt={`${sale.title}-sale`} />
+        {sale.img ? (
+          <img
+            className="productImg"
+            src={sale.img}
+            alt={`${sale.title}-sale`}
+          />
+        ) : (
+          <div
+            className="d-flex mr-4"
+            style={{
+              alignItems: "center",
+              backgroundColor: "lightgray",
+            }}
+          >
+            <h6
+              className="text-center p-5 m-0 font-italic"
+              style={{
+                opacity: "0.75",
+              }}
+            >
+              Product Image
+            </h6>
+          </div>
+          // <h6
+          //   className="text-center p-5 m-0 font-italic"
+          //   style={{
+          //     opacity: "0.75",
+          //     backgroundColor: "lightgray",
+          //   }}
+          // >
+          //   Product Image
+          // </h6>
+        )}
+
         <Card style={{ width: "100%" }}>
           <Card.Body>
             <Card.Title>{sale.title}</Card.Title>
