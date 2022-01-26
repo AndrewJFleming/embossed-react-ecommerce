@@ -29,6 +29,7 @@ const ProductList = () => {
   const handleDelete = async (id) => {
     try {
       await userRequest.delete(`/products/${id}`);
+      window.location.replace("/products/");
     } catch (err) {
       console.log(err);
     }
@@ -36,9 +37,6 @@ const ProductList = () => {
 
   return (
     <Container className="my-5">
-      {/* {products.slice(0, 8).map((item) => (
-        <Product product={item} key={item.id} />
-      ))} */}
       <span className="mb-2 d-flex justify-content-between align-items-center">
         <h1>My Products</h1>
         <Link to="/new-user">

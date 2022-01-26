@@ -127,8 +127,15 @@ const SingleCart = () => {
 
   return (
     <div className="mb-5">
-      <Container className="mt-5 mb-2">
-        <h1>Cart</h1>
+      <Container className="mt-3">
+        <Link to="/carts">
+          <i class="fas fa-arrow-left">
+            &nbsp;<span className="back-link-text">BACK</span>
+          </i>
+        </Link>
+        <div className="mt-3 mb-2">
+          <h1>Cart</h1>
+        </div>
       </Container>
       <Container className="mb-3">
         <Card>

@@ -60,11 +60,18 @@ const SingleProduct = () => {
 
   return (
     <div className="mb-5">
-      <Container className="mt-5 mb-2 d-flex justify-content-between align-items-center">
-        <h1>Product</h1>
-        <Link to="/new-product">
-          <Button variant="success">Create New</Button>
+      <Container className="mt-3">
+        <Link to="/products">
+          <i class="fas fa-arrow-left">
+            &nbsp;<span className="back-link-text">BACK</span>
+          </i>
         </Link>
+        <div className="mt-3 mb-2 d-flex justify-content-between align-items-center">
+          <h1>Product</h1>
+          <Link to="/new-product">
+            <Button variant="success">Create New</Button>
+          </Link>
+        </div>
       </Container>
       <Container className="d-flex mb-5">
         <img
