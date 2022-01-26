@@ -70,6 +70,8 @@ const NewProduct = () => {
             placeholder={formData.price}
             value={formData.price}
             name="price"
+            min="0"
+            step="0.01"
             onChange={(e) => {
               setFormData({
                 ...formData,

@@ -20,14 +20,14 @@ const CartList = () => {
     getCarts();
   }, []);
 
-  // const handleDelete = async (id) => {
-  //   try {
-  //     await userRequest.delete(`/users/${id}`);
-  //     window.location.replace("/users/");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const handleDelete = async (id) => {
+    try {
+      await userRequest.delete(`/carts/${id}`);
+      window.location.replace("/carts/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container className="my-5">
@@ -55,10 +55,10 @@ const CartList = () => {
                   <Link to={"/cart/" + cart._id}>
                     <i className="fas fa-edit editIcon"></i>
                   </Link>
-                  {/* <i
+                  <i
                     className="fas fa-trash-alt deleteIcon"
-                    onClick={() => handleDelete(user._id)}
-                  ></i> */}
+                    onClick={() => handleDelete(cart._id)}
+                  ></i>
                 </div>
               </td>
               <td>

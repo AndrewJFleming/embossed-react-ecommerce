@@ -39,7 +39,7 @@ const ProductList = () => {
     <Container className="my-5">
       <span className="mb-2 d-flex justify-content-between align-items-center">
         <h1>My Products</h1>
-        <Link to="/new-user">
+        <Link to="/new-product">
           <Button variant="success">Create New</Button>
         </Link>
       </span>
