@@ -8,7 +8,7 @@ import {
   Tooltip,
   OverlayTrigger,
 } from "react-bootstrap";
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import "./ProductList.css";
 
 const ProductList = () => {

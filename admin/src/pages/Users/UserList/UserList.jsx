@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import { Container, Table, Button } from "react-bootstrap";
 import "./UserList.css";
 

@@ -11,7 +11,7 @@ import {
   Container,
   Form,
 } from "react-bootstrap";
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import "./SingleCart.css";
 
 const SingleCart = () => {

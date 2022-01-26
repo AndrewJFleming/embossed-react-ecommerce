@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { Button, Card, ListGroup, Container, Form } from "react-bootstrap";
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import "./SingleProduct.css";
 
 const SingleProduct = () => {

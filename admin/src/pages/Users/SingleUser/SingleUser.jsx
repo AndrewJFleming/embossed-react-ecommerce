@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { Button, Container, Form, Card, ListGroup } from "react-bootstrap";
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import "./SingleUser.css";
 
 const SingleUser = () => {

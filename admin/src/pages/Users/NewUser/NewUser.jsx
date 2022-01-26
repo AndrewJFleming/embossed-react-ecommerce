@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
 import "./NewUser.css";
 

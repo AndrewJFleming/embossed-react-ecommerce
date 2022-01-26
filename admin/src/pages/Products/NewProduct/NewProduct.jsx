@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { userRequest } from "../../requestMethods";
+import { userRequest } from "../../../requestMethods";
 import { Container, Button, Form } from "react-bootstrap";
 
 const NewProduct = () => {

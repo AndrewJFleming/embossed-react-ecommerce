@@ -4,18 +4,17 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import TopNav from "./components/TopNav/TopNav";
-import ProductList from "./pages/ProductList/ProductList";
-import SingleProduct from "./pages/SingleProduct/SingleProduct";
-import NewProduct from "./pages/NewProduct/NewProduct";
-import UserList from "./pages/UserList/UserList";
-import SingleUser from "./pages/SingleUser/SingleUser";
-import NewUser from "./pages/NewUser/NewUser";
-import CartList from "./pages/CartList/CartList";
-import SingleCart from "./pages/SingleCart/SingleCart";
+import ProductList from "./pages/Products/ProductList/ProductList";
+import SingleProduct from "./pages/Products/SingleProduct/SingleProduct";
+import NewProduct from "./pages/Products/NewProduct/NewProduct";
+import UserList from "./pages/Users/UserList/UserList";
+import SingleUser from "./pages/Users/SingleUser/SingleUser";
+import NewUser from "./pages/Users/NewUser/NewUser";
+import CartList from "./pages/Carts/CartList/CartList";
+import SingleCart from "./pages/Carts/SingleCart/SingleCart";
 import SaleList from "./pages/Sales/SaleList/SaleList";
 import SingleSale from "./pages/Sales/SingleSale/SingleSale";
 import NewSale from "./pages/Sales/NewSale/NewSale";
-// import SingleOrder from "./pages/SingleOrder/SingleOrder";
 import { useSelector } from "react-redux";
 
 const App = () => {
