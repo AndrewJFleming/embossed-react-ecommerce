@@ -61,7 +61,7 @@ const ProductList = () => {
           {products.map((product) => (
             <tr>
               <td>
-                <div className="productIdWrapper">{product._id}</div>
+                <div className="longIdWrapper">{product._id}</div>
                 <div>
                   <Link to={"/product/" + product._id}>
                     <i className="fas fa-edit editIcon"></i>

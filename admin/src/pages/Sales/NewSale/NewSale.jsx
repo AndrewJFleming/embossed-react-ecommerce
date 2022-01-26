@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { userRequest } from "../../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
@@ -6,11 +6,26 @@ import "./NewSale.css";
 
 const NewSale = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    isAdmin: false,
+    title: "",
+    percentOff: 0,
+    productId: "",
+    isActive: false,
+    isFeatured: false,
   });
+  const [allProducts, setAllProducts] = useState([]);
+
+  //Get products to populate select dropdown.
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await userRequest.get("products");
+        setAllProducts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProducts();
+  }, []);
 
   const handleChange = (e) =>
     setFormData({
@@ -21,9 +36,8 @@ const NewSale = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await userRequest.post("/users/signup", formData);
-      // const res = await userRequest.post("/users/signup", newUser);
-      window.location.replace("/user/" + res.data.result._id);
+      const res = await userRequest.post("/sales/", formData);
+      window.location.replace("/sale/" + res.data._id);
     } catch (err) {
       console.log(err);
     }
@@ -34,51 +48,90 @@ const NewSale = () => {
       <h1>New Sale</h1>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
-            placeholder={formData.username}
-            value={formData.username}
-            name="username"
+            placeholder={formData.title}
+            value={formData.title}
+            name="title"
             onChange={handleChange}
           />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Select
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                productId: e.target.value,
+              });
+            }}
+          >
+            <option>Select Product</option>
+            {allProducts?.map((p) => (
+              <option value={p._id}>{p.title}</option>
+            ))}
+          </Form.Select>
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Percent Off</Form.Label>
           <Form.Control
-            type="email"
+            type="number"
             placeholder={formData.email}
             value={formData.email}
-            name="email"
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-4">
-          <Form.Label>Is Admin</Form.Label>
-          <Form.Check
-            className="checkbox-input"
-            type="checkbox"
-            checked={formData.isAdmin}
-            onClick={(e) => {
+            min="0"
+            max="1"
+            step="0.01"
+            name="percentOff"
+            onChange={(e) => {
               setFormData({
                 ...formData,
-                isAdmin: !formData.isAdmin,
+                percentOff: e.target.valueAsNumber,
               });
             }}
           />
+          <Form.Text muted>
+            Percentage the discounted product's price will be reduced by.
+          </Form.Text>
+          <Form.Text muted>
+            *<em>Input desired discount in decimal form.</em>
+          </Form.Text>
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder={formData.password}
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
+        <Form.Group className="mb-4">
+          <Form.Label>Is Active</Form.Label>
+          <Form.Check
+            className="checkbox-input"
+            type="checkbox"
+            checked={formData.isActive}
+            onClick={(e) => {
+              setFormData({
+                ...formData,
+                isActive: !formData.isActive,
+              });
+            }}
           />
+          <Form.Text muted className="mt-4">
+            Determine whether sale discount percentage will be applied to
+            respective product.
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-4">
+          <Form.Label>Is Featured</Form.Label>
+          <Form.Check
+            className="checkbox-input"
+            type="checkbox"
+            checked={formData.isFeatured}
+            onClick={(e) => {
+              setFormData({
+                ...formData,
+                isFeatured: !formData.isFeatured,
+              });
+            }}
+          />
+          <Form.Text muted className="mt-4">
+            Determine whether sale will be featured on site banner.
+          </Form.Text>
         </Form.Group>
 
         <Button onClick={handleSubmit}>Create</Button>

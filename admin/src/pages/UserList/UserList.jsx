@@ -52,7 +52,7 @@ const UserList = () => {
           {users.map((user) => (
             <tr>
               <td>
-                <div className="userIdWrapper">{user._id}</div>
+                <div className="longIdWrapper">{user._id}</div>
                 <div>
                   <Link to={"/user/" + user._id}>
                     <i className="fas fa-edit editIcon"></i>

@@ -1,4 +1,4 @@
-.userIdWrapper {
+.longIdWrapper {
   width: auto;
   overflow-wrap: normal;
 }
@@ -11,8 +11,8 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 767px) {
-  .userIdWrapper {
+@media screen and (max-width: 991px) {
+  .longIdWrapper {
     width: 70px;
     overflow-wrap: anywhere;
   }

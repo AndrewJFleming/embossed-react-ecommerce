@@ -50,7 +50,7 @@ const CartList = () => {
           {carts.map((cart) => (
             <tr>
               <td>
-                <div className="userIdWrapper">{cart._id}</div>
+                <div className="longIdWrapper">{cart._id}</div>
                 <div>
                   <Link to={"/cart/" + cart._id}>
                     <i className="fas fa-edit editIcon"></i>
@@ -61,7 +61,9 @@ const CartList = () => {
                   ></i> */}
                 </div>
               </td>
-              <td>{cart.userId}</td>
+              <td>
+                <div className="longIdWrapper">{cart.userId}</div>
+              </td>
               <td>{cart.products.length}</td>
             </tr>
           ))}

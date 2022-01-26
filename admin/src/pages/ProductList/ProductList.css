@@ -1,4 +1,4 @@
-.productIdWrapper {
+.longIdWrapper {
   width: auto;
   overflow-wrap: normal;
 }
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .productIdWrapper {
+  .longIdWrapper {
     width: 70px;
     overflow-wrap: anywhere;
   }
