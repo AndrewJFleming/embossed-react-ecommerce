@@ -4,7 +4,7 @@ import WidgetLarge from "../../components/WidgetLarge/WidgetLarge";
 
 const Home = () => {
   return (
-    <Container className="mt-3 mb-5">
+    <Container className="my-5">
       <Row>
         <Col xs={12} sm={3} md={4}>
           <WidgetSmall />

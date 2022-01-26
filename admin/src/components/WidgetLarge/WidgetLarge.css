@@ -27,8 +27,18 @@
   color: #2a7ade;
 }
 
+.longIdWrapper {
+  width: auto;
+  overflow-wrap: normal;
+}
+
 @media screen and (max-width: 767px) {
   .orderUserIdWrapper {
+    width: 70px;
+    overflow-wrap: anywhere;
+  }
+
+  .longIdWrapper {
     width: 70px;
     overflow-wrap: anywhere;
   }

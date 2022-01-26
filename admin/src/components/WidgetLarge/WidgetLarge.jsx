@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 
 import { Container, Table } from "react-bootstrap";
@@ -19,46 +18,63 @@ const Button = ({ type, orderId }) => {
 };
 
 const WidgetLarge = () => {
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
+  const [carts, setCarts] = useState([]);
 
   useEffect(() => {
-    const getOrders = async () => {
+    const getCarts = async () => {
       try {
-        const res = await userRequest.get("orders");
-        setOrders(res.data);
-      } catch {}
+        const res = await userRequest.get("carts");
+        setCarts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
-    getOrders();
+    getCarts();
   }, []);
+  // useEffect(() => {
+  //   const getOrders = async () => {
+  //     try {
+  //       const res = await userRequest.get("orders");
+  //       setOrders(res.data);
+  //     } catch {}
+  //   };
+  //   getOrders();
+  // }, []);
 
   return (
     <Container>
-      <h3 className="widgetTitle">Latest Transactions</h3>
+      <h3 className="widgetTitle">MyCarts</h3>
       <Table responsive size="sm" className="widgetLgTable">
         <thead>
           <tr className="widgetLgTr">
-            <th className="widgetLgTh">Customer Id</th>
+            <th className="widgetLgTh">Cart Id</th>
+            <th className="widgetLgTh">User Id</th>
             <th className="widgetLgTh">Date</th>
-            <th className="widgetLgTh">Amount</th>
-            <th className="widgetLgTh">Status</th>
+            <th className="widgetLgTh">Product Count</th>
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
-            <tr className="widgetLgTr" key={order._id}>
+          {carts.map((cart) => (
+            <tr className="widgetLgTr" key={cart._id}>
               <td className="widgetLgUser">
-                <Link to={"/user/" + order.userId}>
-                  <div className="orderUserIdWrapper">{order.userId}</div>
+                <Link to={"/cart/" + cart._id}>
+                  <div className="orderUserIdWrapper longIdWrapper">
+                    {cart._id}
+                  </div>
+                </Link>
+              </td>
+              <td className="widgetLgUser">
+                <Link to={"/user/" + cart.userId}>
+                  <div className="orderUserIdWrapper longIdWrapper">
+                    {cart.userId}
+                  </div>
                 </Link>
               </td>
               <td className="widgetLgDate">
-                {/* {format(order.createdAt)} */}
-                {new Date(order.createdAt).toDateString()}
+                {new Date(cart.createdAt).toDateString()}
               </td>
-              <td className="widgetLgAmount">${order.amount}</td>
-              <td className="widgetLgStatus">
-                <Button type={order.status} orderId={order._id} />
-              </td>
+              <td className="widgetLgAmount">{cart.products.length}</td>
             </tr>
           ))}
         </tbody>

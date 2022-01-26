@@ -20,7 +20,8 @@ const WidgetSmall = () => {
 
   return (
     <Container className="pb-3">
-      <h3 className="widgetTitle">New Members</h3>
+      <h3 className="widgetTitle">New Users</h3>
+      <hr className="mt-0" />
       <ul className="widgetSmList">
         {users.map((user) => (
           <li className="widgetSmListItem" key={user._id}>
