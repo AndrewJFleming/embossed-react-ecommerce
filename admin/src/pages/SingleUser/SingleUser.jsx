@@ -23,7 +23,7 @@ const SingleUser = () => {
     });
 
   useEffect(() => {
-    const getPost = async () => {
+    const getUser = async () => {
       const res = await userRequest.get("/users/find/" + userId);
       setUser(res.data);
       setFormData({
@@ -32,7 +32,7 @@ const SingleUser = () => {
         isAdmin: res.data.isAdmin,
       });
     };
-    getPost();
+    getUser();
   }, [userId]);
 
   const handleUpdate = async () => {

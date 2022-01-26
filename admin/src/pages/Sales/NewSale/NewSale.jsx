@@ -11,6 +11,7 @@ const NewSale = () => {
     productId: "",
     isActive: false,
     isFeatured: false,
+    img: "",
   });
   const [allProducts, setAllProducts] = useState([]);
 
@@ -57,6 +58,7 @@ const NewSale = () => {
             onChange={handleChange}
           />
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Select
             onChange={(e) => {
@@ -77,8 +79,7 @@ const NewSale = () => {
           <Form.Label>Percent Off</Form.Label>
           <Form.Control
             type="number"
-            placeholder={formData.email}
-            value={formData.email}
+            value={formData.percentOff}
             min="0"
             max="1"
             step="0.01"
@@ -131,6 +132,19 @@ const NewSale = () => {
           />
           <Form.Text muted className="mt-4">
             Determine whether sale will be featured on site banner.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Sale Banner Image</Form.Label>
+          <Form.Control
+            type="text"
+            value={formData.img}
+            name="img"
+            onChange={handleChange}
+          />
+          <Form.Text muted>
+            BG Image that will be featured on sale banner.
           </Form.Text>
         </Form.Group>
 

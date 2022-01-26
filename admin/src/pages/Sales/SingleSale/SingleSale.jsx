@@ -7,14 +7,30 @@ import "./SingleSale.css";
 
 const SingleSale = () => {
   const location = useLocation();
-  const userId = location.pathname.split("/")[2];
-  const [user, setUser] = useState({});
+  const saleId = location.pathname.split("/")[2];
+  const [sale, setSale] = useState({});
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    isAdmin: false,
+    title: "",
+    percentOff: 0,
+    productId: "",
+    isActive: false,
+    isFeatured: false,
+    img: "",
   });
+  const [allProducts, setAllProducts] = useState([]);
+
+  //Get products to populate select dropdown.
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await userRequest.get("products");
+        setAllProducts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProducts();
+  }, []);
 
   const handleChange = (e) =>
     setFormData({
@@ -23,22 +39,33 @@ const SingleSale = () => {
     });
 
   useEffect(() => {
-    const getPost = async () => {
-      const res = await userRequest.get("/users/find/" + userId);
-      setUser(res.data);
+    const getSale = async () => {
+      const res = await userRequest.get("/sales/find/" + saleId);
+      setSale(res.data);
       setFormData({
-        username: res.data.username,
-        email: res.data.email,
-        isAdmin: res.data.isAdmin,
+        title: res.data.title,
+        percentOff: res.data.percentOff,
+        productId: res.data.productId,
+        isActive: res.data.isActive,
+        isFeatured: res.data.isFeatured,
+        img: res.data.img,
       });
     };
-    getPost();
-  }, [userId]);
+    getSale();
+  }, [saleId]);
+
+  useEffect(() => {
+    const foundProduct = allProducts.find((p) => p._id === sale.productId);
+    setSale({
+      ...sale,
+      productTitle: foundProduct?.title,
+    });
+  }, [formData]);
 
   const handleUpdate = async () => {
     try {
-      await userRequest.put(`/users/admin/${userId}`, formData);
-      window.location.replace("/user/" + userId);
+      await userRequest.put(`/sales/${saleId}`, formData);
+      window.location.replace("/sale/" + saleId);
     } catch (err) {
       console.log(err);
     }
@@ -48,78 +75,131 @@ const SingleSale = () => {
     <div className="mb-5">
       <Container className="mt-5 mb-2 d-flex justify-content-between align-items-center">
         <h1>Sale</h1>
-        <Link to="/new-user">
+        <Link to="/new-sale">
           <Button variant="success">Create New</Button>
         </Link>
       </Container>
-      <Container className="mb-5">
+      <Container className="d-flex mb-5">
+        <img className="productImg" src={sale.img} alt={`${sale.title}-sale`} />
         <Card style={{ width: "100%" }}>
           <Card.Body>
-            <Card.Title>{user.username}</Card.Title>
+            <Card.Title>{sale.title}</Card.Title>
           </Card.Body>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <span className="listGroupLabel">User ID:&nbsp;</span>
-              {userId}
+              <span className="listGroupLabel">Sale ID:&nbsp;</span>
+              {saleId}
             </ListGroup.Item>
             <ListGroup.Item>
-              <span className="listGroupLabel">Email:&nbsp;</span>
-              {user.email}
+              <span className="listGroupLabel">Discounted Product:&nbsp;</span>
+              <Link to={`/product/${sale.productId}`}>{sale.productTitle}</Link>
             </ListGroup.Item>
             <ListGroup.Item>
-              <span className="listGroupLabel">Is Admin:&nbsp;</span>
-              {user.isAdmin ? "Yes" : "No"}
+              <span className="listGroupLabel">Percent Off:&nbsp;</span>
+              {sale.percentOff * 100}%
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Is Active:&nbsp;</span>
+              {sale.isActive ? "Yes" : "No"}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <span className="listGroupLabel">Is Featured:&nbsp;</span>
+              {sale.isFeatured ? "Yes" : "No"}
             </ListGroup.Item>
           </ListGroup>
         </Card>
       </Container>
       <Container>
-        <h2>Update User</h2>
+        <h2>Update Sale</h2>
         <Form>
           <Form.Group className="mb-3">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
-              value={formData.username}
-              name="username"
+              value={formData.title}
+              name="title"
               onChange={handleChange}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder={formData.email}
-              value={formData.email}
-              name="email"
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>New Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="password"
-              name="password"
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Admin Status</Form.Label>
-            <Form.Check
-              type="checkbox"
-              label="Is Admin"
-              checked={formData.isAdmin}
-              onClick={(e) => {
+            <Form.Select
+              onChange={(e) => {
                 setFormData({
                   ...formData,
-                  isAdmin: !formData.isAdmin,
+                  productId: e.target.value,
+                });
+              }}
+            >
+              <option>Select Product</option>
+              {allProducts?.map((p) => (
+                <option value={p._id}>{p.title}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Percent Off</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder={formData.percentOff}
+              value={formData.percentOff}
+              min="0"
+              max="1"
+              step="0.01"
+              name="percentOff"
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  percentOff: e.target.valueAsNumber,
                 });
               }}
             />
+            <Form.Text muted>
+              *<em>Input desired discount in decimal form.</em>
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              label="Is Active"
+              checked={formData.isActive}
+              onClick={(e) => {
+                setFormData({
+                  ...formData,
+                  isActive: !formData.isActive,
+                });
+              }}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              label="Is Featured"
+              checked={formData.isFeatured}
+              onClick={(e) => {
+                setFormData({
+                  ...formData,
+                  isFeatured: !formData.isFeatured,
+                });
+              }}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Sale Banner Image</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder={formData.img}
+              value={formData.img}
+              name="img"
+              onChange={handleChange}
+            />
+            <Form.Text muted>
+              BG Image that will be featured on sale banner.
+            </Form.Text>
           </Form.Group>
 
           <Button onClick={handleUpdate} className="productButton">
