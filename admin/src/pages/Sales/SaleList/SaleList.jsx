@@ -22,8 +22,8 @@ const SaleList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await userRequest.delete(`/users/${id}`);
-      window.location.replace("/users/");
+      await userRequest.delete(`/sales/${id}`);
+      window.location.replace("/sales/");
     } catch (err) {
       console.log(err);
     }
@@ -41,10 +41,10 @@ const SaleList = () => {
       <Table striped bordered responsive size="sm">
         <thead>
           <tr>
-            <th>saleId</th>
-            <th>title</th>
-            <th>% off</th>
-            <th>productId</th>
+            <th>SaleId</th>
+            <th>Title</th>
+            <th>Discount</th>
+            <th>ProductId</th>
             <th>IsActive</th>
             <th>IsFeatured</th>
           </tr>
@@ -65,9 +65,11 @@ const SaleList = () => {
                 </div>
               </td>
               <td>{s.title}</td>
-              <td>{s.percentOff}</td>
+              <td>{s.percentOff * 100}%</td>
               <td>
-                <div className="userIdWrapper">{s.productId}</div>
+                <Link to={"/product/" + s.productId}>
+                  <div className="userIdWrapper">{s.productId}</div>
+                </Link>
               </td>
               <td>{s.isActive ? <span>Yes</span> : <span>No</span>}</td>
               <td>{s.isFeatured ? <span>Yes</span> : <span>No</span>}</td>
