@@ -39,6 +39,11 @@ const WidgetSmall = () => {
                 {user.isAdmin && <i className="fas fa-user-shield"></i>}
               </h5>
             </Link>
+            &nbsp;
+            {new Intl.DateTimeFormat("en", {
+              day: "2-digit",
+              month: "short",
+            }).format(new Date(user.createdAt))}
           </li>
         ))}
       </ul>

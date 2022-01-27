@@ -5,20 +5,7 @@ import { Container, Table } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
 import "./WidgetLarge.css";
 
-const Button = ({ type, orderId }) => {
-  return (
-    // <Link to={"/order/" + orderId}>
-    <Link to="#">
-      <button className={`widgetLgButton ${type}`}>
-        {type}&nbsp;
-        {/* <i className="fas fa-external-link-alt fa-xs"></i> */}
-      </button>
-    </Link>
-  );
-};
-
 const WidgetLarge = () => {
-  // const [orders, setOrders] = useState([]);
   const [carts, setCarts] = useState([]);
 
   useEffect(() => {
@@ -32,15 +19,6 @@ const WidgetLarge = () => {
     };
     getCarts();
   }, []);
-  // useEffect(() => {
-  //   const getOrders = async () => {
-  //     try {
-  //       const res = await userRequest.get("orders");
-  //       setOrders(res.data);
-  //     } catch {}
-  //   };
-  //   getOrders();
-  // }, []);
 
   return (
     <Container>
@@ -51,7 +29,7 @@ const WidgetLarge = () => {
             <th className="widgetLgTh">Cart Id</th>
             <th className="widgetLgTh">User Id</th>
             <th className="widgetLgTh">Date</th>
-            <th className="widgetLgTh">Product Count</th>
+            <th className="widgetLgTh">Products</th>
           </tr>
         </thead>
         <tbody>
@@ -59,16 +37,12 @@ const WidgetLarge = () => {
             <tr className="widgetLgTr" key={cart._id}>
               <td className="widgetLgUser">
                 <Link to={"/cart/" + cart._id}>
-                  <div className="orderUserIdWrapper longIdWrapper">
-                    {cart._id}
-                  </div>
+                  <div className="widgetIdWrapper">{cart._id}</div>
                 </Link>
               </td>
               <td className="widgetLgUser">
                 <Link to={"/user/" + cart.userId}>
-                  <div className="orderUserIdWrapper longIdWrapper">
-                    {cart.userId}
-                  </div>
+                  <div className="widgetIdWrapper">{cart.userId}</div>
                 </Link>
               </td>
               <td className="widgetLgDate">

@@ -61,6 +61,22 @@ const TopNav = () => {
                 <em>New Product</em>
               </NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown title="Categories" id="basic-nav-dropdown">
+              <NavDropdown.Item
+                as={Link}
+                to="/categories"
+                onClick={handleCollapse}
+              >
+                Category List
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to="/new-category"
+                onClick={handleCollapse}
+              >
+                <em>New Category</em>
+              </NavDropdown.Item>
+            </NavDropdown>
             <NavDropdown title="Users" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/users" onClick={handleCollapse}>
                 Users List

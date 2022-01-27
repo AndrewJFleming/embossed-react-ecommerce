@@ -1,0 +1,18 @@
+.longIdWrapper {
+  width: auto;
+  overflow-wrap: normal;
+}
+
+.productThumb {
+  width: 100px;
+}
+
+@media screen and (max-width: 767px) {
+  .longIdWrapper {
+    width: 70px;
+    overflow-wrap: anywhere;
+  }
+  .productThumb {
+    width: 50px;
+  }
+}
