@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // import { logout } from "../../redux/apiCalls";
 import "./TopNav.css";
 
@@ -28,13 +20,7 @@ const TopNav = () => {
   };
 
   return (
-    <Navbar
-      // className="fixed-top"
-      expanded={expanded}
-      collapseOnSelect
-      expand="lg"
-      variant="dark"
-    >
+    <Navbar expanded={expanded} collapseOnSelect expand="lg" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/" onClick={handleCollapse}>
           <span className="navLogoText">EMBOSSED Admin</span>

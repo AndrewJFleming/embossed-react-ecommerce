@@ -11,37 +11,13 @@
   color: rgb(255, 217, 223);
 }
 
-.topImg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  padding: 3px;
-}
-
 .myResponsive {
   display: flex;
   justify-content: space-between;
 }
 
-.avatar {
-  position: relative;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 5px 0;
-  padding: 4px 0;
-}
-.avatar:hover {
-  text-decoration: none;
-}
-
 @media screen and (max-width: 991px) {
   .myResponsive {
     display: block;
-  }
-  .navSearch {
-    margin: 10px 0 5px;
   }
 }

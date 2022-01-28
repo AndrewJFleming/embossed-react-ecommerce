@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Button, Container, Form, Card, ListGroup } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
-import "./SingleUser.css";
 
 const SingleUser = () => {
   const location = useLocation();
@@ -129,9 +128,7 @@ const SingleUser = () => {
             />
           </Form.Group>
 
-          <Button onClick={handleUpdate} className="productButton">
-            Update
-          </Button>
+          <Button onClick={handleUpdate}>Update</Button>
         </Form>
       </Container>
     </div>

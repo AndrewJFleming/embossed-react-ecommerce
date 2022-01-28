@@ -9,7 +9,6 @@ import {
   OverlayTrigger,
 } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
-import "./CategoryList.css";
 
 const CategoryList = () => {
   const [cats, setCats] = useState([]);

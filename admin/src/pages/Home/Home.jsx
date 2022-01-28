@@ -1,22 +1,22 @@
 import { Container, Row, Col } from "react-bootstrap";
-import WidgetSmall from "../../components/WidgetSmall/WidgetSmall";
-import WidgetLarge from "../../components/WidgetLarge/WidgetLarge";
-import FeaturedContent from "../../components/FeaturedContent/FeaturedContent";
+import NewUsers from "../../components/NewUsers/NewUsers";
+import MyCarts from "../../components/MyCarts/MyCarts";
+import ActiveSales from "../../components/ActiveSales/ActiveSales";
 
 const Home = () => {
   return (
-    <Container className="my-5">
-      <Row>
+    <Container className="mt-5">
+      <Row className="mb-3">
         <Col xs={12} sm={3} md={4}>
-          <WidgetSmall />
+          <NewUsers />
         </Col>
         <Col xs={12} sm={9} md={8}>
-          <WidgetLarge />
+          <MyCarts />
         </Col>
       </Row>
       <Row>
         <Col xs={12} sm={12} md={12}>
-          <FeaturedContent />
+          <ActiveSales />
         </Col>
       </Row>
     </Container>

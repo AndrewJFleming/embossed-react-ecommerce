@@ -37,16 +37,12 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* {sales && <Announcement sale={sales[0]} />} */}
       {sales && <Announcement sales={sales} />}
       <TopNav currentUser={user} />
       <Switch>
         <Route exact path="/">
           <Home sales={sales} />
         </Route>
-        {/* <Route path="/product-list">
-          <ProductList />
-        </Route> */}
         <Route path="/product-list/:category">
           <ProductList sales={sales} />
         </Route>

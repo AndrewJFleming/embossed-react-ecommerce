@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { userRequest } from "../../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
-import "./NewSale.css";
 
 const NewSale = () => {
   const [formData, setFormData] = useState({
@@ -100,10 +99,9 @@ const NewSale = () => {
         </Form.Group>
 
         <Form.Group className="mb-4">
-          <Form.Label>Is Active</Form.Label>
           <Form.Check
-            className="checkbox-input"
             type="checkbox"
+            label="Is Active"
             checked={formData.isActive}
             onClick={(e) => {
               setFormData({
@@ -112,16 +110,15 @@ const NewSale = () => {
               });
             }}
           />
-          <Form.Text muted className="mt-4">
+          <Form.Text muted>
             Determine whether sale discount percentage will be applied to
             respective product.
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-4">
-          <Form.Label>Is Featured</Form.Label>
           <Form.Check
-            className="checkbox-input"
             type="checkbox"
+            label="Is Featured"
             checked={formData.isFeatured}
             onClick={(e) => {
               setFormData({
@@ -130,7 +127,7 @@ const NewSale = () => {
               });
             }}
           />
-          <Form.Text muted className="mt-4">
+          <Form.Text muted>
             Determine whether sale will be featured on site banner.
           </Form.Text>
         </Form.Group>

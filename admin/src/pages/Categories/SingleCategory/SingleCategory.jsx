@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Button, Card, ListGroup, Container, Form } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
-import "./SingleCategory.css";
 
 const SingleCategory = () => {
   const location = useLocation();
@@ -64,7 +63,7 @@ const SingleCategory = () => {
       </Container>
       <Container className="d-flex mb-5">
         <img
-          className="catImg"
+          className="cardImg"
           src={category.img}
           alt={`${category.title}-cat`}
         />

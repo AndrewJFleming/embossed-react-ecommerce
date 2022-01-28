@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Button, Container, Form, Card, ListGroup } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
-import "./SingleSale.css";
 
 const SingleSale = () => {
   const location = useLocation();
@@ -88,11 +87,7 @@ const SingleSale = () => {
       </Container>
       <Container className="d-flex mb-5">
         {sale.img ? (
-          <img
-            className="productImg"
-            src={sale.img}
-            alt={`${sale.title}-sale`}
-          />
+          <img className="cardImg" src={sale.img} alt={`${sale.title}-sale`} />
         ) : (
           <div
             className="d-flex mr-4"
@@ -110,18 +105,9 @@ const SingleSale = () => {
               Product Image
             </h6>
           </div>
-          // <h6
-          //   className="text-center p-5 m-0 font-italic"
-          //   style={{
-          //     opacity: "0.75",
-          //     backgroundColor: "lightgray",
-          //   }}
-          // >
-          //   Product Image
-          // </h6>
         )}
 
-        <Card style={{ width: "100%" }}>
+        <Card className="w-100">
           <Card.Body>
             <Card.Title>{sale.title}</Card.Title>
           </Card.Body>
@@ -242,9 +228,7 @@ const SingleSale = () => {
             </Form.Text>
           </Form.Group>
 
-          <Button onClick={handleUpdate} className="productButton">
-            Update
-          </Button>
+          <Button onClick={handleUpdate}>Update</Button>
         </Form>
       </Container>
     </div>

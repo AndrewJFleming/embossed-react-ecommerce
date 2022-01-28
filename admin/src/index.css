@@ -14,17 +14,31 @@ code {
 
 a {
   margin: 5px 0px;
-  /* font-size: 12px; */
   text-decoration: none;
   cursor: pointer;
 }
 
-.back-link-text {
-  font-family: sans-serif;
+.standardUserIcon {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 /*
-For UserList.jsx and ProductList.jsx
+For Single Pages
+*/
+.back-link-text {
+  font-family: sans-serif;
+}
+.listGroupLabel {
+  font-weight: bold;
+}
+.cardImg {
+  margin-right: 20px;
+  object-fit: cover;
+  width: 200px;
+}
+
+/*
+For List Pages
 */
 .editIcon {
   color: darkblue;
@@ -38,6 +52,9 @@ For UserList.jsx and ProductList.jsx
 .editIcon:hover {
   cursor: pointer;
 }
+.productThumb {
+  width: 80px;
+}
 
 /*
 For WidgetSmall.jsx and WidgetLarge.jsx
@@ -45,4 +62,22 @@ For WidgetSmall.jsx and WidgetLarge.jsx
 .widgetTitle {
   font-size: 22px;
   font-weight: 600;
+}
+
+/*
+Truncate long IDs in tables
+*/
+.longIdWrapper {
+  width: auto;
+  overflow-wrap: normal;
+}
+
+@media screen and (max-width: 991px) {
+  .productThumb {
+    width: 50px;
+  }
+  .longIdWrapper {
+    width: 70px;
+    overflow-wrap: anywhere;
+  }
 }

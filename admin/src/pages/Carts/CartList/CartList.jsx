@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { userRequest } from "../../../requestMethods";
-import { Container, Table, Button } from "react-bootstrap";
-import "./CartList.css";
+import { Container, Table } from "react-bootstrap";
 
 const CartList = () => {
   const [carts, setCarts] = useState([]);
@@ -33,9 +32,6 @@ const CartList = () => {
     <Container className="my-5">
       <span className="mb-2 d-flex justify-content-between align-items-center">
         <h1>My Carts</h1>
-        {/* <Link to="/new-user">
-          <Button variant="success">Create New</Button>
-        </Link> */}
       </span>
 
       <Table striped bordered responsive size="sm">
@@ -62,7 +58,9 @@ const CartList = () => {
                 </div>
               </td>
               <td>
-                <div className="longIdWrapper">{cart.userId}</div>
+                <Link to={"/user/" + cart.userId}>
+                  <div className="longIdWrapper">{cart.userId}</div>
+                </Link>
               </td>
               <td>{cart.products.length}</td>
             </tr>

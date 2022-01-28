@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { userRequest } from "../../../requestMethods";
 import { Container, Table, Button } from "react-bootstrap";
-import "./SaleList.css";
 
 const SaleList = () => {
   const [sales, setSales] = useState([]);
@@ -76,7 +75,11 @@ const SaleList = () => {
               <td>{s.isFeatured ? <span>Yes</span> : <span>No</span>}</td>
               <td>
                 <Link to={"/sale/" + s._id}>
-                  <img className="userThumb" src={s.img} />
+                  <img
+                    className="productThumb"
+                    src={s.img}
+                    alt={`${s.title}-banner`}
+                  />
                 </Link>
               </td>
             </tr>

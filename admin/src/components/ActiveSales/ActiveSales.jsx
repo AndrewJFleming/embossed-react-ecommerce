@@ -3,21 +3,8 @@ import { Link } from "react-router-dom";
 
 import { Container, Table } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
-import "./FeaturedContent.css";
 
-const Button = ({ type, orderId }) => {
-  return (
-    // <Link to={"/order/" + orderId}>
-    <Link to="#">
-      <button className={`widgetLgButton ${type}`}>
-        {type}&nbsp;
-        {/* <i className="fas fa-external-link-alt fa-xs"></i> */}
-      </button>
-    </Link>
-  );
-};
-
-const FeaturedContent = () => {
+const ActiveSales = () => {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -44,19 +31,19 @@ const FeaturedContent = () => {
         </span>
       </h3>
 
-      <Table responsive size="sm" className="widgetLgTable">
+      <Table responsive size="sm">
         <thead>
-          <tr className="widgetLgTr">
-            <th className="widgetLgTh">Cat Name</th>
-            <th className="widgetLgTh">Banner</th>
+          <tr>
+            <th>Sale Name</th>
+            <th>Banner</th>
           </tr>
         </thead>
         <tbody>
           {sales.map(
             (s) =>
               s.isActive && (
-                <tr className="widgetLgTr">
-                  <td className="widgetLgUser">
+                <tr>
+                  <td>
                     <div>
                       <Link to={"/sale/" + s._id}>
                         <span>{s.title}</span>
@@ -73,7 +60,7 @@ const FeaturedContent = () => {
                       </span>
                     </div>
                   </td>
-                  <td className="widgetLgUser">
+                  <td>
                     <div>
                       {s.isFeatured ? <span>Yes</span> : <span>No</span>}
                     </div>
@@ -87,4 +74,4 @@ const FeaturedContent = () => {
   );
 };
 
-export default FeaturedContent;
+export default ActiveSales;

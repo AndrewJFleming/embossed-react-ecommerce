@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Container } from "react-bootstrap";
 import { userRequest } from "../../requestMethods";
-import "./WidgetSmall.css";
+import "./NewUsers.css";
 
 const WidgetSmall = () => {
   const [users, setUsers] = useState([]);
@@ -19,31 +19,29 @@ const WidgetSmall = () => {
   }, []);
 
   return (
-    <Container className="pb-3">
+    <Container>
       <h3 className="widgetTitle">New Users</h3>
       <hr className="mt-0" />
-      <ul className="widgetSmList">
+      <ul className="NewUsersList">
         {users.map((user) => (
-          <li className="widgetSmListItem" key={user._id}>
-            <img
-              src={
-                user.img ||
-                "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"
-              }
-              alt={`${user.username}-thumb`}
-              className="widgetSmImg"
-            />
+          <li className="NewUsersListItem" key={user._id}>
+            {user.isAdmin ? (
+              <i className="fas fa-user-shield"></i>
+            ) : (
+              <i className="fas fa-user standardUserIcon"></i>
+            )}
             <Link to={"/user/" + user._id}>
-              <h5 className="widgetSmUsername">
+              <h6 className="NewUsersUsername">
                 {user.username}
                 {user.isAdmin && <i className="fas fa-user-shield"></i>}
-              </h5>
+              </h6>
             </Link>
-            &nbsp;
-            {new Intl.DateTimeFormat("en", {
-              day: "2-digit",
-              month: "short",
-            }).format(new Date(user.createdAt))}
+            <span className="NewUsersUsername">
+              {new Intl.DateTimeFormat("en", {
+                day: "2-digit",
+                month: "short",
+              }).format(new Date(user.createdAt))}
+            </span>
           </li>
         ))}
       </ul>

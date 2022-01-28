@@ -9,7 +9,6 @@ import {
   OverlayTrigger,
 } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
-import "./ProductList.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);

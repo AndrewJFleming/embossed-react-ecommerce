@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { userRequest } from "../../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
-import "./NewUser.css";
 
 const NewUser = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +21,6 @@ const NewUser = () => {
     e.preventDefault();
     try {
       const res = await userRequest.post("/users/signup", formData);
-      // const res = await userRequest.post("/users/signup", newUser);
       window.location.replace("/user/" + res.data.result._id);
     } catch (err) {
       console.log(err);
@@ -56,9 +54,8 @@ const NewUser = () => {
         </Form.Group>
 
         <Form.Group className="mb-4">
-          <Form.Label>Is Admin</Form.Label>
           <Form.Check
-            className="checkbox-input"
+            label="Is Admin"
             type="checkbox"
             checked={formData.isAdmin}
             onClick={(e) => {

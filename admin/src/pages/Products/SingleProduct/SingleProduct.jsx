@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Button, Card, ListGroup, Container, Form } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
-import "./SingleProduct.css";
 
 const SingleProduct = () => {
   const location = useLocation();
@@ -75,7 +74,7 @@ const SingleProduct = () => {
       </Container>
       <Container className="d-flex mb-5">
         <img
-          className="productImg"
+          className="cardImg"
           src={product.img}
           alt={`${product.title}-product`}
         />

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { userRequest } from "../../../requestMethods";
 import { Container, Table, Button } from "react-bootstrap";
-import "./UserList.css";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -45,7 +44,6 @@ const UserList = () => {
             <th>Username</th>
             <th>Email</th>
             <th>IsAdmin</th>
-            {/* <th>Transaction</th> */}
           </tr>
         </thead>
         <tbody>
@@ -72,7 +70,6 @@ const UserList = () => {
                   <i className="fas fa-user standardUserIcon"></i>
                 )}
               </td>
-              {/* <td>{user.transaction}</td> */}
             </tr>
           ))}
         </tbody>
