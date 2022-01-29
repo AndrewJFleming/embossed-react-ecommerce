@@ -35,8 +35,8 @@ const Login = ({ errorStatus }) => {
     setError(errorStatus);
     setTimeout(function () {
       dispatch({ type: CLEAR_AUTH_ERROR });
-    }, 2000);
-  }, [errorStatus]);
+    }, 3000);
+  }, [errorStatus, dispatch]);
 
   return (
     <Container className="mt-5">
@@ -66,12 +66,7 @@ const Login = ({ errorStatus }) => {
         </Form.Group>
       </Form>
       <Button onClick={handleLogin}>Login</Button>
-      {error && (
-        <ErrorPrompt
-          h5="Error logging in..."
-          h6="Are your login creds correct?"
-        />
-      )}
+      {error && <ErrorPrompt h5="Error logging in..." h6={errorStatus} />}
     </Container>
   );
 };

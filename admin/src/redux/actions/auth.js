@@ -7,7 +7,9 @@ export const signin = (formData, history) => async (dispatch) => {
     dispatch({ type: AUTH, data });
     history.push("/");
   } catch (error) {
-    console.log(error);
-    dispatch({ type: AUTH_ERROR });
+    // console.log(error);
+    const authError = error.response.data.message;
+    console.log(authError);
+    dispatch({ type: AUTH_ERROR, authError });
   }
 };

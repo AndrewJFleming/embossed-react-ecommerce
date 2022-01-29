@@ -4,7 +4,7 @@ import { Alert } from "react-bootstrap";
 
 const ErrorPrompt = ({ h5, h6 }) => {
   return (
-    <Alert variant="danger">
+    <Alert className="mt-3" variant="danger">
       <h5>{h5}</h5>
       <h6>{h6}</h6>
     </Alert>
