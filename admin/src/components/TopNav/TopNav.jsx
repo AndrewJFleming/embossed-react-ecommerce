@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-// import { logout } from "../../redux/apiCalls";
+import { LOGOUT } from "../../redux/constants/actionTypes";
 import "./TopNav.css";
 
 const TopNav = () => {
@@ -15,8 +15,13 @@ const TopNav = () => {
   };
 
   const handleLogout = () => {
-    // logout(dispatch);
-    // setExpanded(false);
+    setExpanded(false);
+    try {
+      dispatch({ type: LOGOUT });
+      window.location.replace("/login/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

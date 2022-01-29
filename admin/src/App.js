@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   // const admin = useSelector((state) => state.user.currentUser.isAdmin);
-  const admin = useSelector((state) => state.auth.authData.result.isAdmin);
+  const admin = useSelector((state) => state.auth.authData.result?.isAdmin);
 
   return (
     <BrowserRouter>
