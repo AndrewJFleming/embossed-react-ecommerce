@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import "./ProductList.css";
@@ -11,6 +11,10 @@ const ProductList = ({ sales }) => {
   const cat = location.pathname.split("/")[2];
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleFilters = (e) => {
     const value = e.target.value;

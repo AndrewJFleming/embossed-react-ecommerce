@@ -22,7 +22,8 @@ const SingleProduct = ({ sales }) => {
 
   useEffect(() => {
     dispatch({ type: CLEAR_ADD_NOTICE });
-  }, []);
+    window.scrollTo(0, 0);
+  }, [dispatch]);
 
   useEffect(() => {
     let fetchedProduct;
