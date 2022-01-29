@@ -66,7 +66,7 @@ const Login = ({ errorStatus }) => {
         </Form.Group>
       </Form>
       <Button onClick={handleLogin}>Login</Button>
-      {error && <ErrorPrompt h5="Error logging in..." h6={errorStatus} />}
+      {error && <ErrorPrompt h5="Login Error:" h6={errorStatus} />}
     </Container>
   );
 };

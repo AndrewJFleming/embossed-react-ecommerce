@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { CLEAR_AUTH_ERROR } from "../../../redux/constants/actionTypes";
+import { createUser } from "../../../redux/actions/auth";
 import { userRequest } from "../../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
+import ErrorPrompt from "../../../shared/components/ErrorPrompt/ErrorPrompt";
 
-const NewUser = () => {
+const NewUser = ({ errorStatus }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     isAdmin: false,
   });
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(errorStatus);
+    setTimeout(function () {
+      dispatch({ type: CLEAR_AUTH_ERROR });
+    }, 3000);
+  }, [errorStatus, dispatch]);
 
   const handleChange = (e) =>
     setFormData({
@@ -17,15 +32,21 @@ const NewUser = () => {
       [e.target.name]: e.target.value,
     });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await userRequest.post("/users/signup", formData);
-      window.location.replace("/user/" + res.data.result._id);
-    } catch (err) {
-      console.log(err);
-    }
+
+    dispatch(createUser(formData, history));
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await userRequest.post("/users/signup", formData);
+  //     window.location.replace("/user/" + res.data.result._id);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <Container className="my-5">
@@ -79,6 +100,7 @@ const NewUser = () => {
         </Form.Group>
 
         <Button onClick={handleSubmit}>Create</Button>
+        {error && <ErrorPrompt h5="Create Error:" h6={errorStatus} />}
       </Form>
     </Container>
   );
