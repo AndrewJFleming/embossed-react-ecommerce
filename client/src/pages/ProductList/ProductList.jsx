@@ -22,7 +22,7 @@ const ProductList = ({ sales }) => {
   };
 
   return (
-    <div className="my-5">
+    <div className="mt-5">
       <Container>
         <h2 className="pageTitle">{cat}</h2>
         <div className="filterContainer">
@@ -50,7 +50,7 @@ const ProductList = ({ sales }) => {
       <Container className="mt-3">
         <Products cat={cat} filters={filters} sort={sort} sales={sales} />
       </Container>
-      <FeaturedSale />
+      <FeaturedSale sales={sales} />
     </div>
   );
 };

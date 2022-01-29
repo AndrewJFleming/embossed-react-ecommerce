@@ -8,7 +8,7 @@ const FeaturedSale = ({ sales }) => {
   const [featSale, setFeatSale] = useState(null);
 
   useEffect(() => {
-    const featSales = sales.filter((sales) => sales.isFeatured);
+    const featSales = sales.filter((sales) => sales?.isFeatured);
     //In case no sales are set as featured, feature the first sales array item.
     //In case multiple sales are set as featured, display the first featSales array item.
     setFeatSale(featSale ? featSales[0] : sales[0]);
@@ -19,16 +19,13 @@ const FeaturedSale = ({ sales }) => {
       className="newsletterWrapper"
       style={{ backgroundImage: `url(${featSale?.img})` }}
     >
-      <h2>{featSale?.title}</h2>
-      <p>{featSale?.desc}</p>
-
-      <Button
-        variant="warning"
-        as={Link}
+      <Link
+        className="featured-sale-link"
         to={`/product/${featSale?.productId}`}
       >
-        Take a look!
-      </Button>
+        <h2>{featSale?.title}</h2>
+      </Link>
+      <p>{featSale?.desc}</p>
     </div>
   );
 };

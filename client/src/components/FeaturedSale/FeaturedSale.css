@@ -10,10 +10,13 @@
   color: white;
 }
 
-.newsletterWrapper h2 {
+.featured-sale-link {
   z-index: 100;
   font-size: 70px;
   margin-bottom: 20px;
+  text-decoration: none;
+  color: goldenrod;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 .newsletterWrapper p {
   z-index: 100;
@@ -21,9 +24,7 @@
   font-weight: 300;
   margin-bottom: 20px;
 }
-.btn {
-  z-index: 100 !important;
-}
+
 .newsletterWrapper::before {
   content: "";
   position: absolute;

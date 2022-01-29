@@ -71,7 +71,7 @@ const SingleProduct = ({ sales }) => {
   };
 
   return (
-    <div className="my-5 singleProduct">
+    <div className="mt-5 singleProduct">
       {product && (
         <Container>
           <Row>
@@ -153,7 +153,7 @@ const SingleProduct = ({ sales }) => {
           <span className="pId">PRODUCT ID: {product._id}</span>
         </Container>
       )}
-      <FeaturedSale />
+      <FeaturedSale sales={sales} />
     </div>
   );
 };
