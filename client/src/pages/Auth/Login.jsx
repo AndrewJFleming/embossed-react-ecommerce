@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import { signin } from "../../redux/actions/auth";
 import "./Auth.css";
-import { Container, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
 import { CLEAR_AUTH_ERROR } from "../../redux/constants/actionTypes";
 // import { bgImage } from "../../images/bgImage.jpg";
@@ -30,6 +30,9 @@ const Login = ({ errorStatus }) => {
 
   useEffect(() => {
     setError(errorStatus);
+    setTimeout(function () {
+      dispatch({ type: CLEAR_AUTH_ERROR });
+    }, 2000);
   }, [errorStatus]);
 
   const handleLogin = (e) => {

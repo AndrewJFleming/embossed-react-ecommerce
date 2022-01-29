@@ -23,11 +23,14 @@ import { useSelector } from "react-redux";
 const App = () => {
   // const admin = useSelector((state) => state.user.currentUser.isAdmin);
   const admin = useSelector((state) => state.auth.authData.result?.isAdmin);
+  const error = useSelector((state) => state.auth.error);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login">{!admin ? <Login /> : <Redirect to="/" />}</Route>
+        <Route path="/login">
+          {!admin ? <Login errorStatus={error} /> : <Redirect to="/" />}
+        </Route>
         <React.Fragment>
           <TopNav />
           <Route exact path="/">

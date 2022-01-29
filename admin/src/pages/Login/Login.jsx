@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { Container, Form, Button } from "react-bootstrap";
 import { signin } from "../../redux/actions/auth";
+import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
+import { CLEAR_AUTH_ERROR } from "../../redux/constants/actionTypes";
 
-const Login = () => {
+const Login = ({ errorStatus }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const [error, setError] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,6 +26,17 @@ const Login = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+  useEffect(() => {
+    dispatch({ type: CLEAR_AUTH_ERROR });
+  }, []);
+
+  useEffect(() => {
+    setError(errorStatus);
+    setTimeout(function () {
+      dispatch({ type: CLEAR_AUTH_ERROR });
+    }, 2000);
+  }, [errorStatus]);
 
   return (
     <Container className="mt-5">
@@ -52,6 +66,12 @@ const Login = () => {
         </Form.Group>
       </Form>
       <Button onClick={handleLogin}>Login</Button>
+      {error && (
+        <ErrorPrompt
+          h5="Error logging in..."
+          h6="Are your login creds correct?"
+        />
+      )}
     </Container>
   );
 };
