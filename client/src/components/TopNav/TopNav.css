@@ -33,6 +33,10 @@
   padding: 4px 0;
 }
 
+.nav-cart-link {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 991px) {
   .myResponsive {
     display: block;

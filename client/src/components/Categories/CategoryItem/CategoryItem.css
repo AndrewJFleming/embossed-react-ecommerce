@@ -1,7 +1,6 @@
 .catItemWrapper {
   flex: 1;
-  margin: 3px;
-  height: 70vh;
+  height: 50vh;
   position: relative;
 }
 .catItemWrapper img {
@@ -31,4 +30,16 @@
   color: gray;
   cursor: pointer;
   font-weight: 600;
+}
+
+@media screen and (max-width: 991px) {
+  .catItemWrapper {
+    height: 30vh;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .catItemWrapper {
+    margin-top: 15px;
+  }
 }

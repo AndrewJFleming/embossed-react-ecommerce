@@ -83,7 +83,8 @@ const SingleProduct = ({ sales }) => {
             </Col>
             <Col xs={12} sm={6} md={6} lg={6}>
               <div className="infoContainer">
-                <h4>{product.title}</h4>
+                <h4 className="single-product-title">{product.title}</h4>
+                <span className="pId">PRODUCT ID: {product._id}</span>
                 <p>{product.desc}</p>
                 <h5>Categories</h5>
                 {product.categories.map((c) => (
@@ -123,7 +124,7 @@ const SingleProduct = ({ sales }) => {
                     </select>
                   </div>
                 </div>
-                <div className="addContainer">
+                <div className="addContainer d-flex w-100">
                   <div className="amountContainer">
                     <i
                       className="fas fa-minus"
@@ -151,7 +152,6 @@ const SingleProduct = ({ sales }) => {
               </div>
             </Col>
           </Row>
-          <span className="pId">PRODUCT ID: {product._id}</span>
         </Container>
       )}
       <FeaturedSale sales={sales} />

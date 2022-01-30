@@ -1,6 +1,7 @@
 .pId {
   font-size: 12px;
   font-weight: lighter;
+  color: rgb(0, 0, 0, 0.5);
 }
 
 .price {
@@ -46,8 +47,8 @@
   font-size: 14px;
 }
 
-@media screen and (max-width: 767px) {
-  .addContainer {
-    width: "100%";
+@media screen and (max-width: 575px) {
+  .single-product-title {
+    margin-top: 15px;
   }
 }

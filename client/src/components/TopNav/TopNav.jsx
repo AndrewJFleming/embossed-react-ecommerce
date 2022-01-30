@@ -114,8 +114,13 @@ const TopNav = ({ currentUser }) => {
                 <span className="avatar">{currentUser.username}</span>
               </Link>
             )}
-            <Nav.Link as={Link} to="/cart" onClick={handleCollapse}>
-              <i className="fas fa-shopping-basket">&nbsp;({getCartCount()})</i>
+            <Nav.Link
+              className="nav-cart-link"
+              as={Link}
+              to="/cart"
+              onClick={handleCollapse}
+            >
+              <i className="fas fa-shopping-basket"></i>&nbsp;({getCartCount()})
             </Nav.Link>
             <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl

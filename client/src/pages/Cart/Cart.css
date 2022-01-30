@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .topButton {
@@ -72,11 +72,11 @@
 }
 
 .summary {
-  flex: 1;
+  /* flex: 1; */
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 50vh;
+  /* height: 50vh; */
 }
 
 .summaryTitle {

@@ -57,11 +57,9 @@
 
 .card {
   box-sizing: border-box;
-  width: 230px;
   margin: 5px 0;
 }
 .cardImg {
-  width: 228px;
   height: 298px;
   z-index: 2;
   padding: 0;

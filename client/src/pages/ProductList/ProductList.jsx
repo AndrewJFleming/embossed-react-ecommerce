@@ -29,7 +29,7 @@ const ProductList = ({ sales }) => {
     <div className="mt-5">
       <Container>
         <h2 className="pageTitle">{cat}</h2>
-        <div className="filterContainer">
+        <div className="mt-4 filterContainer d-flex justify-content-between">
           {cat && (
             <div className="filter">
               <h5>Filter by Variant:</h5>

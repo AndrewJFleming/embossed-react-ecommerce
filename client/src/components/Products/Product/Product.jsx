@@ -10,22 +10,6 @@ const Product = ({ product }) => {
   const style = hovered ? { opacity: "1" } : {};
 
   return (
-    // <div
-    //   className="productContainer"
-    //   onMouseEnter={() => setHovered(true)}
-    //   onMouseLeave={() => setHovered(false)}
-    // >
-    //   <div className="circle"></div>
-    //   <img src={product.img} alt="product thumb" />
-    //   <div className="iconsWrapper" style={style}>
-    //     <div className="productIcon">
-    //       <Link to={`/product/${product._id}`}>
-    //         <h5 className="">{product.title}</h5>
-    //       </Link>
-    //       <h5 className="">&nbsp;${product.price}</h5>
-    //     </div>
-    //   </div>
-    // </div>
     <Card>
       <Link to={`/product/${product._id}`} className="product-link">
         <Card.Img className="cardImg" variant="top" src={product.img} />

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import CartItem from "../../components/CartItem/CartItem";
-import { Container, Button } from "react-bootstrap";
+import CartItem from "./CartItem/CartItem";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createCart,
@@ -66,20 +66,6 @@ const Cart = ({ currentUserId, sales }) => {
     findMatches();
   }, [cartItems, sales]);
 
-  // const qtyChangeHandler = (type, id, qty) => {
-  //   if (type === "dec") {
-  //     qty > 1 && dispatch(addToCart(id, qty - 1));
-  //   } else {
-  //     dispatch(addToCart(id, qty + 1));
-  //   }
-  // };
-  // const qtyChangeHandler = (type, p, qty) => {
-  //   if (type === "dec") {
-  //     qty > 1 && dispatch(changeQuantity(p, qty - 1));
-  //   } else {
-  //     dispatch(changeQuantity(p, qty + 1));
-  //   }
-  // };
   const qtyChangeHandler = (type, cartItemId, qty) => {
     if (type === "dec") {
       qty > 1 && dispatch(changeQuantity(cartItemId, qty - 1));
@@ -101,19 +87,20 @@ const Cart = ({ currentUserId, sales }) => {
   };
 
   return (
-    <Container className="mb-5">
-      <div>
-        <h2>YOUR CART</h2>
-        <div className="top">
-          <Link to="/">
-            <Button>CONTINUE SHOPPING</Button>
-          </Link>
-          <div>
-            <h5>Shopping Cart({cartCount})</h5>
-            {/* <h5>Your Wishlist (0)</h5> */}
-          </div>
+    <Container className="my-5">
+      <h2>MY CART</h2>
+      <div className="top mt-3 mb-5">
+        <Link to="/">
+          <Button variant="success">CONTINUE SHOPPING</Button>
+        </Link>
+        <div>
+          <h5>
+            <i class="fas fa-shopping-cart"></i>({cartCount})
+          </h5>
         </div>
-        <div className="bottom">
+      </div>
+      <Row>
+        <Col className="bottom" xs={12} sm={8} lg={8}>
           <div className="info">
             {cartState.map((product) => (
               <CartItem
@@ -124,8 +111,10 @@ const Cart = ({ currentUserId, sales }) => {
               />
             ))}
           </div>
-          <div className="summary">
-            <h2 className="summaryTitle">ORDER SUMMARY</h2>
+        </Col>
+        <Col xs={12} sm={4} lg={4}>
+          <div className="summary mb-5">
+            <h4 className="summaryTitle">ORDER SUMMARY</h4>
             <div className="summaryItem">
               <h5>Subtotal</h5>
               <p>$ {subtotal}</p>
@@ -134,10 +123,6 @@ const Cart = ({ currentUserId, sales }) => {
               <h5>Estimated Shipping</h5>
               <p>$ {shipping}</p>
             </div>
-            {/* <div className="summaryItem">
-              <h5>Shipping Discount</h5>
-              <p>$ 0</p>
-            </div> */}
             <div className="summaryItem">
               <h5>TOTAL</h5>
               <p>$ {subtotal ? subtotal + shipping : 0}</p>
@@ -149,11 +134,11 @@ const Cart = ({ currentUserId, sales }) => {
               CHECKOUT NOW
             </Button>
           </div>
-        </div>
-        <Button variant="danger" onClick={handleResetCart}>
-          Clear Cart
-        </Button>
-      </div>
+        </Col>
+      </Row>
+      <Button variant="danger" onClick={handleResetCart}>
+        Clear Cart
+      </Button>
     </Container>
   );
 };
