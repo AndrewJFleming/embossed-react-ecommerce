@@ -36,6 +36,18 @@
 .discount-notice {
   color: red;
 }
+
+.add-button-wrapper {
+  position: relative;
+}
+
+.notice-alert {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 .percentage-off {
   font-size: 22px;
   font-weight: bold;

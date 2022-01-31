@@ -34,10 +34,12 @@ function ControlledCarousel() {
             alt={`${slide.title}-slide`}
           />
           <Carousel.Caption>
-            <Link className="slideTitle" to={`/product-list/${slide.title}`}>
-              <h3>{slide.title}</h3>
-            </Link>
-            <p>{slide.desc}</p>
+            <div className="caption-wrapper">
+              <Link className="slide-title" to={`/product-list/${slide.title}`}>
+                <h3>{slide.title}</h3>
+              </Link>
+              <p className="slide-desc">{slide.desc}</p>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

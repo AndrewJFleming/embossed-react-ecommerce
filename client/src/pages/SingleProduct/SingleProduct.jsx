@@ -137,17 +137,19 @@ const SingleProduct = ({ sales }) => {
                       onClick={() => handleQuanity("inc")}
                     ></i>
                   </div>
-                  <Button onClick={handleAdd}>ADD TO CART</Button>
-                  {cart.addToCartNotice && (
-                    <h6
-                      className={`${
-                        cart.addToCartNotice === "Already added..." &&
-                        "discount-notice"
-                      }`}
-                    >
-                      {cart.addToCartNotice}
-                    </h6>
-                  )}
+                  <div className="add-button-wrapper">
+                    <Button onClick={handleAdd}>ADD TO CART</Button>
+                    {cart.addToCartNotice && (
+                      <h6
+                        className={`notice-alert ${
+                          cart.addToCartNotice === "Already added..." &&
+                          "discount-notice"
+                        }`}
+                      >
+                        {cart.addToCartNotice}
+                      </h6>
+                    )}
+                  </div>
                 </div>
               </div>
             </Col>

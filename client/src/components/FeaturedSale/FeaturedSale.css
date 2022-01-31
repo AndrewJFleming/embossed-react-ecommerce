@@ -18,6 +18,11 @@
   color: goldenrod;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
+.featured-sale-link:hover {
+  color: gold;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
 .newsletterWrapper p {
   z-index: 100;
   font-size: 24px;

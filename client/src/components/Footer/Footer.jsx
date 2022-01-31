@@ -1,10 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import "./Footer.css";
 import { Container, Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { LOGOUT } from "../../redux/constants/actionTypes";
+import { RESET_CART } from "../../redux/constants/actionTypes";
 
 const Footer = ({ currentUser }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    try {
+      dispatch({ type: LOGOUT });
+      dispatch({ type: RESET_CART });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="footerWrapper">
       <Container>
@@ -34,20 +50,25 @@ const Footer = ({ currentUser }) => {
               <Link to="cart" className="link">
                 <li>Cart</li>
               </Link>
-              <Link to="login" className="link">
-                <li>Login</li>
-              </Link>
-              {currentUser && (
-                <Link to={`account/${currentUser._id}`} className="link">
-                  <li>My Account</li>
-                </Link>
+              {currentUser ? (
+                <React.Fragment>
+                  <Link to={`account/${currentUser._id}`} className="link">
+                    <li>My Account</li>
+                  </Link>
+                  <Link as={Link} to="/" onClick={handleLogout}>
+                    <li>Logout</li>
+                  </Link>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <Link as={Link} to="/login">
+                    <li>Login</li>
+                  </Link>
+                  <Link as={Link} to="/register">
+                    <li>Register</li>
+                  </Link>
+                </React.Fragment>
               )}
-              {/* <Link to="#" className="link">
-                <li>Order Tracking</li>
-              </Link> */}
-              {/* <Link to="#" className="link">
-                <li>Terms</li>
-              </Link> */}
             </ul>
           </Col>
           <Col className="text-center footerRight p-2">
