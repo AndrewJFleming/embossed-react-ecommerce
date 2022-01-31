@@ -1,15 +1,15 @@
-.catItemWrapper {
+.cat-item-wrapper {
   position: relative;
   height: 50vh;
   border-radius: 5px;
 }
-.catItemWrapper img {
+.cat-item-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
-.catItemInfo {
+.cat-item-info {
   position: absolute;
   top: 0;
   left: 0;
@@ -23,11 +23,11 @@
   border-radius: 5px;
   text-shadow: 3px 3px 3px rgb(0, 0, 0, 0.75);
 }
-.catItemInfo h5 {
+.cat-item-title {
   color: white;
   margin-bottom: 20px;
 }
-.catItemInfo button {
+.cat-item-info button {
   border: none;
   padding: 10px;
   background-color: white;
@@ -39,13 +39,13 @@
 }
 
 @media screen and (max-width: 991px) {
-  .catItemWrapper {
+  .cat-item-wrapper {
     height: 30vh;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .catItemWrapper {
+  .cat-item-wrapper {
     margin-top: 15px;
   }
 }

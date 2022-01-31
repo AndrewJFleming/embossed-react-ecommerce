@@ -5,11 +5,11 @@ import "./CategoryItem.css";
 
 const CategoryItem = ({ category }) => {
   return (
-    <div className="catItemWrapper">
+    <div className="cat-item-wrapper">
       <Link to={`/product-list/${category.title}`}>
         <img src={category.img} alt={`${category.title} homepage cart thumb`} />
-        <div className="catItemInfo">
-          <h5>{category.title}</h5>
+        <div className="cat-item-info">
+          <h5 className="cat-item-title">{category.title}</h5>
           <button>Explore</button>
         </div>
       </Link>

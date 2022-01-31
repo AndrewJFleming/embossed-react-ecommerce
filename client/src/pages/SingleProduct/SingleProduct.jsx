@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 
 import { Container, Col, Row, Button } from "react-bootstrap";
-import "./SingleProduct.css";
 import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import { publicRequest } from "../../requestMethods";
 import { addToCart } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { CLEAR_ADD_NOTICE } from "../../redux/constants/actionTypes";
+import "./SingleProduct.css";
 
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
@@ -78,12 +78,12 @@ const SingleProduct = ({ sales }) => {
         <Container>
           <Row>
             <Col xs={12} sm={6} md={6} lg={6}>
-              <div className="imageContainer">
+              <div>
                 <img className="w-100" src={product.img} />
               </div>
             </Col>
             <Col xs={12} sm={6} md={6} lg={6}>
-              <div className="infoContainer">
+              <div>
                 <h4 className="single-product-title">{product.title}</h4>
                 <span className="pId">PRODUCT ID: {product._id}</span>
                 <p>{product.desc}</p>
@@ -125,20 +125,22 @@ const SingleProduct = ({ sales }) => {
                     </select>
                   </div>
                 </div>
-                <div className="addContainer d-flex w-100">
-                  <div className="amountContainer">
+                <div className="add-container d-flex w-100">
+                  <div className="amount-container">
                     <i
                       className="fas fa-minus"
                       onClick={() => handleQuanity("dec")}
                     ></i>
-                    <p className="productAmount">{quantity}</p>
+                    <p className="product-amount">{quantity}</p>
                     <i
                       className="fas fa-plus"
                       onClick={() => handleQuanity("inc")}
                     ></i>
                   </div>
                   <div className="add-button-wrapper">
-                    <Button onClick={handleAdd}>ADD TO CART</Button>
+                    <Button variant="warning" onClick={handleAdd}>
+                      ADD TO CART
+                    </Button>
                     {cart.addToCartNotice && (
                       <h6
                         className={`notice-alert ${

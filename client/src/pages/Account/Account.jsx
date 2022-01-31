@@ -4,7 +4,6 @@ import { CLEAR_AUTH_ERROR } from "../../redux/constants/actionTypes";
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/actions/auth";
-import "./Account.css";
 import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
 
 const Account = ({ currentUser, errorStatus }) => {

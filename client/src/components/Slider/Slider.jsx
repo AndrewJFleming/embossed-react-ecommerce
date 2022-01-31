@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import "./Slider.css";
 import { Carousel } from "react-bootstrap";
+import "./Slider.css";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -27,9 +27,7 @@ function ControlledCarousel() {
       {slides.map((slide) => (
         <Carousel.Item key={slide._id}>
           <img
-            className="d-block 
-            w-100 
-            carouselImage"
+            className="carouselImage"
             src={slide.img}
             alt={`${slide.title}-slide`}
           />

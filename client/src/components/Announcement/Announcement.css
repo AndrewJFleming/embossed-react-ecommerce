@@ -1,9 +1,10 @@
 .announcementWrapper {
-  background-color: blue;
-  color: white;
+  background-color: #d13c36;
+  width: 100%;
 }
 
 .announcementWrapper a {
+  font-weight: bolder;
   color: white;
   text-decoration: none;
 }

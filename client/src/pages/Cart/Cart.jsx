@@ -91,7 +91,7 @@ const Cart = ({ currentUserId, sales }) => {
       <h2>MY CART</h2>
       <div className="top mt-3 mb-5">
         <Link to="/">
-          <Button variant="success">CONTINUE SHOPPING</Button>
+          <Button variant="outline-danger">CONTINUE SHOPPING</Button>
         </Link>
         <div>
           <h5>
@@ -130,7 +130,10 @@ const Cart = ({ currentUserId, sales }) => {
             {/* <StripeCheckout>
             <button>CHECKOUT NOW</button>
             </StripeCheckout> */}
-            <Button onClick={() => handleCreateCart(currentUserId, cartState)}>
+            <Button
+              variant="warning"
+              onClick={() => handleCreateCart(currentUserId, cartState)}
+            >
               CHECKOUT NOW
             </Button>
           </div>

@@ -26,11 +26,11 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
           <p>
             <b>Variant:</b> {product.variant}
           </p>
-          <p className="productPrice">$ {product.price * product.quantity}</p>
+          <p className="product-price">$ {product.price * product.quantity}</p>
         </div>
         <div className="controls-wrapper d-flex justify-content-between">
-          <div className="amountContainer">
-            <Button>
+          <div className="amount-container">
+            <Button variant="secondary">
               <i
                 className="fas fa-minus"
                 onClick={() =>
@@ -38,8 +38,8 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
                 }
               ></i>
             </Button>
-            <p className="productAmount">{product.quantity}</p>
-            <Button>
+            <p className="product-amount">{product.quantity}</p>
+            <Button variant="secondary">
               <i
                 className="fas fa-plus"
                 onClick={() =>

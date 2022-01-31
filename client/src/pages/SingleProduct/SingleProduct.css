@@ -1,6 +1,5 @@
 .pId {
   font-size: 12px;
-  font-weight: lighter;
   color: rgb(0, 0, 0, 0.5);
 }
 
@@ -9,20 +8,20 @@
   font-size: 40px;
 }
 
-.addContainer {
+.add-container {
   width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.amountContainer {
+.amount-container {
   display: flex;
   align-items: center;
   font-weight: 700;
 }
 
-.productAmount {
+.product-amount {
   width: 30px;
   height: 30px;
   border-radius: 10px;
@@ -34,7 +33,7 @@
 }
 
 .discount-notice {
-  color: red;
+  color: #d13c36;
 }
 
 .add-button-wrapper {

@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 const TopNav = ({ currentUser }) => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
@@ -35,9 +36,14 @@ const TopNav = ({ currentUser }) => {
     getTopNavCats();
   }, []);
 
-  const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.quantity) + qty, 0);
-  };
+  useEffect(() => {
+    const getCartCount = () => {
+      setCartCount(
+        cartItems.reduce((qty, item) => Number(item.quantity) + qty, 0)
+      );
+    };
+    getCartCount();
+  }, [cartItems]);
 
   const handleLogout = () => {
     setExpanded(false);
@@ -71,7 +77,7 @@ const TopNav = ({ currentUser }) => {
             className="d-inline-block align-top"
             alt="site logo"
           />
-          <span className="navLogoText">EMBOSSED</span>
+          <span className="pl-1">EMBOSSED</span>
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -123,8 +129,10 @@ const TopNav = ({ currentUser }) => {
               to="/cart"
               onClick={handleCollapse}
             >
-              <i className="fas fa-shopping-basket"></i>
-              <span>&nbsp;({getCartCount()})</span>
+              <span className={`${cartCount && "positive-cart"}`}>
+                <i className="fas fa-shopping-basket"></i>
+                &nbsp;({cartCount})
+              </span>
             </Nav.Link>
             <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl
@@ -134,7 +142,7 @@ const TopNav = ({ currentUser }) => {
                 aria-label="Search"
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button variant="outline-light" type="submit" className="ml-1">
+              <Button variant="outline-light" type="submit" className="ml-2">
                 Search
               </Button>
             </Form>

@@ -1,3 +1,13 @@
+.carouselImage {
+  display: block;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.caption-wrapper {
+  margin-bottom: 15px;
+}
 .slide-title,
 .slide-title:hover {
   color: #fff;
@@ -10,15 +20,6 @@
   text-shadow: 1px 1px 1px rgb(0, 0, 0, 1);
 }
 
-.caption-wrapper {
-  margin-bottom: 15px;
-}
-
-.carouselImage {
-  height: 500px;
-  object-fit: cover;
-}
-
 .carousel-indicators {
   padding-bottom: 30px;
 }
@@ -27,7 +28,6 @@
   border-radius: 5px;
   padding: 4px 15px;
   margin: 0 4px;
-  /* border: 1px solid #aaa; */
   border: none;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
 }

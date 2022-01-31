@@ -1,8 +1,7 @@
-.newsletterWrapper {
+.featured-sale-wrapper {
   position: relative;
   margin-top: 30px;
   height: 60vh;
-  /* background-color: #fcf5f5; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,14 +22,13 @@
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
   text-decoration: none;
 }
-.newsletterWrapper p {
+.featured-sale-wrapper p {
   z-index: 100;
   font-size: 24px;
   font-weight: 300;
-  margin-bottom: 20px;
 }
 
-.newsletterWrapper::before {
+.featured-sale-wrapper::before {
   content: "";
   position: absolute;
   top: 0px;
@@ -40,10 +38,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 @media screen and (max-width: 767px) {
-  .newsletterWrapper p {
+  .featured-sale-wrapper p {
     text-align: center;
-  }
-  .newsletterWrapper form {
-    width: 80%;
   }
 }

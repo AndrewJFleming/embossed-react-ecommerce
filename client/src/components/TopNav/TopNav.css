@@ -1,15 +1,6 @@
 .navbar {
-  background-color: #151431;
+  background-color: #263233;
   font-family: "Open Sans", sans-serif;
-}
-
-.topImg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  padding: 3px;
 }
 
 .myResponsive {
@@ -19,7 +10,7 @@
 
 .avatar-link {
   text-decoration: none;
-  color: white !important;
+  color: #daa520 !important;
 }
 .avatar-link:hover {
   text-decoration: underline;
@@ -33,6 +24,10 @@
   padding: 4px 0;
 }
 
+.positive-cart {
+  color: white !important;
+}
+
 .nav-cart-link {
   text-decoration: none;
 }
@@ -40,11 +35,15 @@
   margin: 5px 0;
 }
 
+.navSearch {
+  align-items: center;
+}
+
 @media screen and (max-width: 991px) {
   .myResponsive {
     display: block;
   }
   .navSearch {
-    margin: 10px 0 5px;
+    margin: 5px 0;
   }
 }
