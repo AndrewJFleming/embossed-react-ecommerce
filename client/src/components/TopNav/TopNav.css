@@ -19,7 +19,7 @@
 
 .avatar-link {
   text-decoration: none;
-  color: white;
+  color: white !important;
 }
 .avatar-link:hover {
   text-decoration: underline;
@@ -35,6 +35,9 @@
 
 .nav-cart-link {
   text-decoration: none;
+}
+.nav-cart-link i {
+  margin: 5px 0;
 }
 
 @media screen and (max-width: 991px) {

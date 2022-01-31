@@ -40,6 +40,7 @@ const CartList = () => {
             <th>Cart ID</th>
             <th>User ID</th>
             <th>Products Count</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -62,7 +63,16 @@ const CartList = () => {
                   <div className="longIdWrapper">{cart.userId}</div>
                 </Link>
               </td>
-              <td>{cart.products.length}</td>
+              <td style={{ width: "150px" }}>{cart.products.length}</td>
+              <td>
+                $
+                {cart?.products
+                  .reduce(
+                    (price, item) => price + item.price * item.quantity,
+                    0
+                  )
+                  .toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
 import "./SingleCart.css";
+import ImagePlaceholder from "../../../shared/components/ImagePlaceholder/ImagePlaceholder";
 
 const SingleCart = () => {
   const location = useLocation();
@@ -282,12 +283,7 @@ const SingleCart = () => {
                   src={formFields?.img}
                 />
               ) : (
-                <h6
-                  className="text-center p-5 m-0 font-italic"
-                  style={{ opacity: "0.75", backgroundColor: "lightgray" }}
-                >
-                  Product Image
-                </h6>
+                <ImagePlaceholder />
               )}
               <ListGroup variant="flush">
                 <ListGroup.Item>

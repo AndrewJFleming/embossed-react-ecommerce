@@ -44,7 +44,7 @@ const Cart = ({ currentUserId, sales }) => {
           const newCartState = [...cartItemsCopy];
           newCartState[i] = {
             ...element,
-            price: element.price * result.percentOff,
+            price: element.price - element.price * result.percentOff,
           };
           cartItemsCopy = newCartState;
           // console.log(

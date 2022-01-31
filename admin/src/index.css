@@ -32,7 +32,6 @@ For Single Pages
   font-weight: bold;
 }
 .cardImg {
-  margin-right: 20px;
   object-fit: cover;
   width: 200px;
 }

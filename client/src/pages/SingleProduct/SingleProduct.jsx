@@ -44,7 +44,8 @@ const SingleProduct = ({ sales }) => {
           setDiscountNotice(result.percentOff * 100);
           const updatedProduct = {
             ...fetchedProduct,
-            price: fetchedProduct.price * result.percentOff,
+            price:
+              fetchedProduct.price - fetchedProduct.price * result.percentOff,
           };
           fetchedProduct = updatedProduct;
         }
@@ -140,9 +141,8 @@ const SingleProduct = ({ sales }) => {
                   {cart.addToCartNotice && (
                     <h6
                       className={`${
-                        cart.addToCartNotice === "Already added..."
-                          ? "discount-notice"
-                          : ""
+                        cart.addToCartNotice === "Already added..." &&
+                        "discount-notice"
                       }`}
                     >
                       {cart.addToCartNotice}

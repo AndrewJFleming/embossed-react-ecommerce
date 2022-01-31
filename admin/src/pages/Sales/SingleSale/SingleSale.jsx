@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Button, Container, Form, Card, ListGroup } from "react-bootstrap";
 import { userRequest } from "../../../requestMethods";
+import PercentInput from "../../../shared/components/PercentInput/PercentInput";
+import ImagePlaceholder from "../../../shared/components/ImagePlaceholder/ImagePlaceholder";
 
 const SingleSale = () => {
   const location = useLocation();
@@ -10,6 +12,7 @@ const SingleSale = () => {
   const [sale, setSale] = useState({});
   const [formData, setFormData] = useState({
     title: "",
+    desc: "",
     percentOff: 0,
     productId: "",
     isActive: false,
@@ -17,6 +20,7 @@ const SingleSale = () => {
     img: "",
   });
   const [allProducts, setAllProducts] = useState([]);
+  const [reminder, setReminder] = useState(false);
 
   //Get products to populate select dropdown.
   useEffect(() => {
@@ -43,6 +47,7 @@ const SingleSale = () => {
       setSale(res.data);
       setFormData({
         title: res.data.title,
+        desc: res.data.desc,
         percentOff: res.data.percentOff,
         productId: res.data.productId,
         isActive: res.data.isActive,
@@ -85,31 +90,17 @@ const SingleSale = () => {
           </Link>
         </div>
       </Container>
-      <Container className="d-flex mb-5">
+      <Container className="d-flex mb-3">
         {sale.img ? (
           <img className="cardImg" src={sale.img} alt={`${sale.title}-sale`} />
         ) : (
-          <div
-            className="d-flex mr-4"
-            style={{
-              alignItems: "center",
-              backgroundColor: "lightgray",
-            }}
-          >
-            <h6
-              className="text-center p-5 m-0 font-italic"
-              style={{
-                opacity: "0.75",
-              }}
-            >
-              Product Image
-            </h6>
-          </div>
+          <ImagePlaceholder />
         )}
 
-        <Card className="w-100">
+        <Card className="w-100 ml-3">
           <Card.Body>
             <Card.Title>{sale.title}</Card.Title>
+            <Card.Text>{sale.desc}</Card.Text>
           </Card.Body>
           <ListGroup variant="flush">
             <ListGroup.Item>
@@ -149,6 +140,16 @@ const SingleSale = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              value={formData.desc}
+              name="desc"
+              onChange={handleChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
             <Form.Select
               onChange={(e) => {
                 setFormData({
@@ -164,27 +165,12 @@ const SingleSale = () => {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Percent Off</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder={formData.percentOff}
-              value={formData.percentOff}
-              min="0"
-              max="1"
-              step="0.01"
-              name="percentOff"
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  percentOff: e.target.valueAsNumber,
-                });
-              }}
-            />
-            <Form.Text muted>
-              *<em>Input desired discount in decimal form.</em>
-            </Form.Text>
-          </Form.Group>
+          <PercentInput
+            formData={formData}
+            setFormData={setFormData}
+            reminder={reminder}
+            setReminder={setReminder}
+          />
 
           <Form.Group className="mb-3">
             <Form.Check

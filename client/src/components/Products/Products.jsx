@@ -35,7 +35,7 @@ const Products = ({ cat, filters, sort, sales }) => {
           const newCartState = [...cartItemsCopy];
           newCartState[i] = {
             ...element,
-            price: element.price * result.percentOff,
+            price: element.price - element.price * result.percentOff,
             discount: result.percentOff,
             saleName: result.title,
           };

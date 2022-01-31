@@ -2,17 +2,21 @@ import React, { useState, useEffect } from "react";
 
 import { userRequest } from "../../../requestMethods";
 import { Container, Form, Button } from "react-bootstrap";
+import "./NewSale.css";
+import PercentInput from "../../../shared/components/PercentInput/PercentInput";
 
 const NewSale = () => {
   const [formData, setFormData] = useState({
     title: "",
-    percentOff: 0,
+    desc: "",
+    percentOff: 0.01,
     productId: "",
     isActive: false,
     isFeatured: false,
     img: "",
   });
   const [allProducts, setAllProducts] = useState([]);
+  const [reminder, setReminder] = useState(false);
 
   //Get products to populate select dropdown.
   useEffect(() => {
@@ -48,17 +52,6 @@ const NewSale = () => {
       <h1>New Sale</h1>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder={formData.title}
-            value={formData.title}
-            name="title"
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
           <Form.Select
             onChange={(e) => {
               setFormData({
@@ -75,28 +68,33 @@ const NewSale = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Percent Off</Form.Label>
+          <Form.Label>Title</Form.Label>
           <Form.Control
-            type="number"
-            value={formData.percentOff}
-            min="0"
-            max="1"
-            step="0.01"
-            name="percentOff"
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                percentOff: e.target.valueAsNumber,
-              });
-            }}
+            type="text"
+            placeholder={formData.title}
+            value={formData.title}
+            name="title"
+            onChange={handleChange}
           />
-          <Form.Text muted>
-            Percentage the discounted product's price will be reduced by.
-          </Form.Text>
-          <Form.Text muted>
-            *<em>Input desired discount in decimal form.</em>
-          </Form.Text>
         </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder={formData.desc}
+            value={formData.desc}
+            name="desc"
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <PercentInput
+          formData={formData}
+          setFormData={setFormData}
+          reminder={reminder}
+          setReminder={setReminder}
+        />
 
         <Form.Group className="mb-4">
           <Form.Check

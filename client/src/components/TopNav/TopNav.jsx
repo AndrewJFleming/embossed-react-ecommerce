@@ -110,17 +110,21 @@ const TopNav = ({ currentUser }) => {
           </Nav>
           <Nav>
             {currentUser && (
-              <Link to={`account/${currentUser._id}`} className="avatar-link">
+              <Link
+                to={`account/${currentUser._id}`}
+                className="avatar-link nav-link"
+              >
                 <span className="avatar">{currentUser.username}</span>
               </Link>
             )}
             <Nav.Link
-              className="nav-cart-link"
+              className="nav-cart-link nav-link"
               as={Link}
               to="/cart"
               onClick={handleCollapse}
             >
-              <i className="fas fa-shopping-basket"></i>&nbsp;({getCartCount()})
+              <i className="fas fa-shopping-basket"></i>
+              <span>&nbsp;({getCartCount()})</span>
             </Nav.Link>
             <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl

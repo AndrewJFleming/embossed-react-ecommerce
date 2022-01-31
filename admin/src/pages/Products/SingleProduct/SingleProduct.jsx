@@ -72,13 +72,13 @@ const SingleProduct = () => {
           </Link>
         </div>
       </Container>
-      <Container className="d-flex mb-5">
+      <Container className="d-flex mb-3">
         <img
           className="cardImg"
           src={product.img}
           alt={`${product.title}-product`}
         />
-        <Card style={{ width: "100%" }}>
+        <Card className="w-100  ml-3">
           <Card.Body>
             <Card.Title>{product.title}</Card.Title>
             <Card.Text>{product.desc}</Card.Text>
