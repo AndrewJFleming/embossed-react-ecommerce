@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import "./Auth.css";
-import { Container, Form, Button } from "react-bootstrap";
-import { bgImage } from "../../images/bgImage.jpg";
+import { Form, Button } from "react-bootstrap";
+import bgImage from "../../images/auth-bg-img.jpeg";
 import { signup } from "../../redux/actions/auth";
 import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
 import { CLEAR_AUTH_ERROR } from "../../redux/constants/actionTypes";
@@ -40,7 +40,12 @@ const Register = ({ errorStatus }) => {
     });
 
   return (
-    <div className="pageContainer">
+    <div
+      className="pageContainer"
+      style={{
+        background: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(${bgImage})`,
+      }}
+    >
       <div className="pageWrapper">
         <h2 className="page-title">CREATE AN ACCOUNT</h2>
         <Form onSubmit={handleRegister}>

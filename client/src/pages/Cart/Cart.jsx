@@ -12,6 +12,7 @@ import {
 import { RESET_CART } from "../../redux/constants/actionTypes";
 // import StripeCheckout from "react-stripe-checkout";
 
+import { useLocation } from "react-router";
 import "./Cart.css";
 
 // const KEY = process.env.REACT_APP_STRIPE;
@@ -24,6 +25,12 @@ const Cart = ({ currentUserId, sales }) => {
   const [subtotal, setSubtotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   //Set number of items in cart
   useEffect(() => {
@@ -94,7 +101,7 @@ const Cart = ({ currentUserId, sales }) => {
         </Link>
         <div>
           <h5>
-            <i class="fas fa-shopping-cart"></i>({cartCount})
+            <i className="fas fa-shopping-cart"></i>({cartCount})
           </h5>
         </div>
       </div>

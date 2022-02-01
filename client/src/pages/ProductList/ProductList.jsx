@@ -14,7 +14,7 @@ const ProductList = ({ sales }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [location]);
 
   const handleFilters = (e) => {
     const value = e.target.value;

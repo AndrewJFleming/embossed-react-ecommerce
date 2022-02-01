@@ -1,12 +1,5 @@
 .pageContainer {
-  /* width: 100vw; */
   height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/1167355/pexels-photo-1167355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-      center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -16,6 +9,7 @@
 .pageWrapper {
   width: 25%;
   padding: 20px;
+  border-radius: 5px;
   background-color: white;
 }
 
@@ -25,14 +19,12 @@
 }
 
 .pageWrapper input {
-  flex: 1;
   min-width: 40%;
-  margin: 10px 0;
   padding: 10px;
 }
 
 @media screen and (max-width: 767px) {
   .pageWrapper {
-    width: "75%";
+    width: 75%;
   }
 }

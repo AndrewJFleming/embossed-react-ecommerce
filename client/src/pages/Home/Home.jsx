@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import Products from "../../components/Products/Products";
 import Slider from "../../components/Slider/Slider";
 import Categories from "../../components/Categories/Categories";
+import { useLocation } from "react-router";
 
 const Home = ({ sales }) => {
+  const location = useLocation();
+
   useEffect(() => {
-    console.log("render");
     window.scrollTo(0, 0);
-  }, []);
+  }, [location]);
 
   return (
     <div>

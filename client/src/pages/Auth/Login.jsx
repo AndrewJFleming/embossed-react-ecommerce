@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { signin } from "../../redux/actions/auth";
@@ -9,12 +8,10 @@ import "./Auth.css";
 import { Button, Form } from "react-bootstrap";
 import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
 import { CLEAR_AUTH_ERROR } from "../../redux/constants/actionTypes";
-// import { bgImage } from "../../images/bgImage.jpg";
+import bgImage from "../../images/auth-bg-img.jpeg";
 // import { login } from "../../redux/apiCalls";
 
 const Login = ({ errorStatus }) => {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -22,7 +19,6 @@ const Login = ({ errorStatus }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [error, setError] = useState(false);
-  // const { isFetching, error } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch({ type: CLEAR_AUTH_ERROR });
@@ -47,7 +43,12 @@ const Login = ({ errorStatus }) => {
     });
 
   return (
-    <div className="pageContainer">
+    <div
+      className="pageContainer"
+      style={{
+        background: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(${bgImage})`,
+      }}
+    >
       <div className="pageWrapper">
         <h2 className="page-title">SIGN IN</h2>
         <Form onSubmit={handleLogin}>
@@ -74,8 +75,6 @@ const Login = ({ errorStatus }) => {
             />
           </Form.Group>
           <Button type="submit">LOGIN</Button>
-          {/* {error && <h6>Error</h6>} */}
-          {/* <Link to="#">Forgot you password?</Link> */}
           <Link to="/register">Register</Link>
         </Form>
         {error && (

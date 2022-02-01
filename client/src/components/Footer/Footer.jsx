@@ -51,12 +51,12 @@ const Footer = ({ currentUser }) => {
               <Link to="/">
                 <li>Home</li>
               </Link>
-              <Link to="cart">
+              <Link to="/cart">
                 <li>Cart</li>
               </Link>
               {currentUser ? (
                 <React.Fragment>
-                  <Link to={`account/${currentUser._id}`}>
+                  <Link to={`/account/${currentUser._id}`}>
                     <li>My Account</li>
                   </Link>
                   <Link as={Link} to="/" onClick={handleLogout}>

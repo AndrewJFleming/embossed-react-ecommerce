@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { CLEAR_ADD_NOTICE } from "../../redux/constants/actionTypes";
 import "./SingleProduct.css";
-import ScrollToTop from "../../shared/components/ScrollToTop/ScrollToTop";
 
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
@@ -21,7 +20,9 @@ const SingleProduct = ({ sales }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  <ScrollToTop />;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     dispatch({ type: CLEAR_ADD_NOTICE });
@@ -79,12 +80,12 @@ const SingleProduct = ({ sales }) => {
       {product && (
         <Container>
           <Row>
-            <Col xs={12} sm={6} md={6} lg={6}>
+            <Col xs={12} sm={6} md={6} lg={4}>
               <div>
                 <img className="w-100" src={product.img} />
               </div>
             </Col>
-            <Col xs={12} sm={6} md={6} lg={6}>
+            <Col xs={12} sm={6} md={6} lg={8}>
               <div>
                 <h4 className="single-product-title">{product.title}</h4>
                 <span className="pId">PRODUCT ID: {product._id}</span>

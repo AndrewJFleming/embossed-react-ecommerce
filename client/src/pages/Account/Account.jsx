@@ -5,6 +5,7 @@ import { Card, Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/actions/auth";
 import ErrorPrompt from "../../shared/components/ErrorPrompt/ErrorPrompt";
+import { useLocation } from "react-router";
 
 const Account = ({ currentUser, errorStatus }) => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,12 @@ const Account = ({ currentUser, errorStatus }) => {
   });
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     dispatch({ type: CLEAR_AUTH_ERROR });
