@@ -8,6 +8,7 @@ import Categories from "../../components/Categories/Categories";
 
 const Home = ({ sales }) => {
   useEffect(() => {
+    console.log("render");
     window.scrollTo(0, 0);
   }, []);
 

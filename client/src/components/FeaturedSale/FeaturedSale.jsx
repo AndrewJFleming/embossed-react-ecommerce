@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import Loading from "../../shared/components/Loading/Loading";
 import "./FeaturedSale.css";
 
 const FeaturedSale = ({ sales }) => {
@@ -13,7 +14,7 @@ const FeaturedSale = ({ sales }) => {
     setFeatSale(featSale ? featSales[0] : sales[0]);
   }, [sales]);
 
-  return (
+  return featSale ? (
     <div
       className="featured-sale-wrapper"
       style={{ backgroundImage: `url(${featSale?.img})` }}
@@ -26,6 +27,8 @@ const FeaturedSale = ({ sales }) => {
       </Link>
       <p>{featSale?.desc}</p>
     </div>
+  ) : (
+    <Loading />
   );
 };
 

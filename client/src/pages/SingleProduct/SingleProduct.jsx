@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { CLEAR_ADD_NOTICE } from "../../redux/constants/actionTypes";
 import "./SingleProduct.css";
-import ScrollAndReset from "../../shared/components/ScrollAndReset/ScrollAndReset";
+import ScrollToTop from "../../shared/components/ScrollToTop/ScrollToTop";
 
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
@@ -21,12 +21,11 @@ const SingleProduct = ({ sales }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  <ScrollAndReset />;
+  <ScrollToTop />;
 
-  // useEffect(() => {
-  //   dispatch({ type: CLEAR_ADD_NOTICE });
-  //   window.scrollTo(0, 0);
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: CLEAR_ADD_NOTICE });
+  }, [dispatch]);
 
   useEffect(() => {
     let fetchedProduct;
