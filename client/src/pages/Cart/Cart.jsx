@@ -38,7 +38,6 @@ const Cart = ({ currentUserId, sales }) => {
 
     const findMatches = () => {
       cartItemsCopy.forEach((element) => {
-        // let result = test.find((t) => t.productId === element.productId);
         let result = sales.find((t) => t.productId === element.productId);
         if (result) {
           const newCartState = [...cartItemsCopy];
@@ -89,7 +88,7 @@ const Cart = ({ currentUserId, sales }) => {
   return (
     <Container className="my-5">
       <h2>MY CART</h2>
-      <div className="top mt-3 mb-5">
+      <div className="top my-3">
         <Link to="/">
           <Button variant="outline-danger">CONTINUE SHOPPING</Button>
         </Link>
@@ -100,8 +99,8 @@ const Cart = ({ currentUserId, sales }) => {
         </div>
       </div>
       <Row>
-        <Col className="bottom" xs={12} sm={8} lg={8}>
-          <div className="info">
+        <Col className="cartItems" xs={12} sm={12} md={8}>
+          <div>
             {cartState.map((product) => (
               <CartItem
                 key={`${product.cartItemId}`}
@@ -112,31 +111,29 @@ const Cart = ({ currentUserId, sales }) => {
             ))}
           </div>
         </Col>
-        <Col xs={12} sm={4} lg={4}>
-          <div className="summary mb-5">
-            <h4 className="summaryTitle">ORDER SUMMARY</h4>
-            <div className="summaryItem">
-              <h5>Subtotal</h5>
-              <p>$ {subtotal}</p>
-            </div>
-            <div className="summaryItem">
-              <h5>Estimated Shipping</h5>
-              <p>$ {shipping}</p>
-            </div>
-            <div className="summaryItem">
-              <h5>TOTAL</h5>
-              <p>$ {subtotal ? subtotal + shipping : 0}</p>
-            </div>
-            {/* <StripeCheckout>
+        <Col xs={12} sm={12} md={4} className="summary">
+          <h4 className="summary-title">ORDER SUMMARY</h4>
+          <div className="summary-item">
+            <h5>Subtotal:</h5>
+            <p>$ {subtotal}</p>
+          </div>
+          <div className="summary-item">
+            <h5>Estimated Shipping:</h5>
+            <p>$ {shipping}</p>
+          </div>
+          <div className="summary-item">
+            <h5>TOTAL:</h5>
+            <p>$ {subtotal ? subtotal + shipping : 0}</p>
+          </div>
+          {/* <StripeCheckout>
             <button>CHECKOUT NOW</button>
             </StripeCheckout> */}
-            <Button
-              variant="warning"
-              onClick={() => handleCreateCart(currentUserId, cartState)}
-            >
-              CHECKOUT NOW
-            </Button>
-          </div>
+          <Button
+            variant="warning"
+            onClick={() => handleCreateCart(currentUserId, cartState)}
+          >
+            CHECKOUT NOW
+          </Button>
         </Col>
       </Row>
       <Button variant="danger" onClick={handleResetCart}>

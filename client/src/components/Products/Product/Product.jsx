@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Product.css";
 import { Card } from "react-bootstrap";
+import "./Product.css";
 
 const Product = ({ product }) => {
-  const [hovered, setHovered] = useState(false);
-
-  const style = hovered ? { opacity: "1" } : {};
-
   return (
     <Card>
-      <Link to={`/product/${product._id}`} className="product-link">
-        <Card.Img className="cardImg" variant="top" src={product.img} />
+      <Link to={`/product/${product._id}`} className="productList-card-link">
+        <Card.Img
+          className="productList-card-image"
+          variant="top"
+          src={product.img}
+        />
       </Link>
       <Card.Body>
         <div className="card-inner">
           <div>
-            <Link to={`/product/${product._id}`} className="product-link">
-              <h5 className="product-title">{product.title}</h5>
+            <Link
+              to={`/product/${product._id}`}
+              className="productList-card-link"
+            >
+              <h5 className="productList-card-title">{product.title}</h5>
             </Link>
             {product.discount ? (
               <p className="sale-name">
@@ -27,7 +30,10 @@ const Product = ({ product }) => {
             ) : (
               product?.categories.slice(0, 3).map((c) => (
                 <span key={c}>
-                  <Link to={`/product-list/${c}`} className="product-list-cat">
+                  <Link
+                    to={`/product-list/${c}`}
+                    className="productList-card-cat"
+                  >
                     {c}
                   </Link>
                   &nbsp;

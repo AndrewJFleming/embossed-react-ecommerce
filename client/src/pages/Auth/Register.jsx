@@ -42,7 +42,7 @@ const Register = ({ errorStatus }) => {
   return (
     <div className="pageContainer">
       <div className="pageWrapper">
-        <h2 className="pageTitle">CREATE AN ACCOUNT</h2>
+        <h2 className="page-title">CREATE AN ACCOUNT</h2>
         <Form onSubmit={handleRegister}>
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>

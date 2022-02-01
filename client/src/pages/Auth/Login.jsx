@@ -49,7 +49,7 @@ const Login = ({ errorStatus }) => {
   return (
     <div className="pageContainer">
       <div className="pageWrapper">
-        <h2 className="pageTitle">SIGN IN</h2>
+        <h2 className="page-title">SIGN IN</h2>
         <Form onSubmit={handleLogin}>
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>

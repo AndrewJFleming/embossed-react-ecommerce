@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import "./ProductList.css";
 import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import Products from "../../components/Products/Products";
 import { Container } from "react-bootstrap";
+import "./ProductList.css";
 
 const ProductList = ({ sales }) => {
   const location = useLocation();
@@ -28,8 +28,8 @@ const ProductList = ({ sales }) => {
   return (
     <div className="mt-5">
       <Container>
-        <h2 className="pageTitle">{cat}</h2>
-        <div className="mt-4 filterContainer d-flex justify-content-between">
+        <h2 className="page-title">{cat}</h2>
+        <div className="mt-4 d-flex justify-content-between">
           {cat && (
             <div className="filter">
               <h5>Filter by Variant:</h5>

@@ -15,17 +15,45 @@ code {
     monospace;
 }
 
-.pageTitle {
-  font-size: 24px;
-  font-weight: 300;
-}
-
 a {
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
   color: goldenrod;
+}
+
+.page-title {
+  font-weight: lighter;
+}
+
+/*
+Used by product quantity changer feature
+*/
+.amount-container {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+.product-amount {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+}
+
+.discount-notice p {
+  font-size: small;
+  font-style: italic;
+}
+
+.discount-notice > * {
+  margin-bottom: 0;
+  color: #d13c36;
 }
 
 .errorPrompt {

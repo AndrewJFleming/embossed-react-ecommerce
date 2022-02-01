@@ -7,12 +7,12 @@ import { Button } from "react-bootstrap";
 const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
   return (
     <div className="mb-4 cartitem d-flex ">
-      <div className="cartitem__image">
-        <img className="productImage" src={product.img} alt="" />
+      <div>
+        <img className="cartItem-image" src={product.img} alt="" />
       </div>
-      <div className="cartitem-inner px-3 d-flex mh-100 flex-column justify-content-between">
-        <div className="cartitem-info">
-          <Link to={`/product/${product.productId}`} className="cartItem__name">
+      <div className="px-3 d-flex mh-100 flex-column justify-content-between">
+        <div>
+          <Link to={`/product/${product.productId}`} className="cartItem-name">
             <h4>
               <b>Product:</b> {product.title}
             </h4>
@@ -26,9 +26,9 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
           <p>
             <b>Variant:</b> {product.variant}
           </p>
-          <p className="product-price">$ {product.price * product.quantity}</p>
+          <p className="cartItem-price">$ {product.price * product.quantity}</p>
         </div>
-        <div className="controls-wrapper d-flex justify-content-between">
+        <div className="d-flex justify-content-between">
           <div className="amount-container">
             <Button variant="secondary">
               <i
@@ -49,7 +49,7 @@ const CartItem = ({ product, qtyChangeHandler, removeHandler }) => {
             </Button>
           </div>
           <button
-            className="cartItem__deleteBtn"
+            className="cartItem-deleteBtn"
             onClick={() => removeHandler(product.cartItemId, product.variant)}
           >
             <i className="fas fa-trash"></i>

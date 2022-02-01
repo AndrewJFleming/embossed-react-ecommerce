@@ -3,7 +3,6 @@ import axios from "axios";
 
 import { Row, Col } from "react-bootstrap";
 import Product from "./Product/Product";
-// import { popularProducts } from "../../data";
 
 const Products = ({ cat, filters, sort, sales }) => {
   const [products, setProducts] = useState([]);

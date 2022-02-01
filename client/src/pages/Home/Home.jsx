@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
@@ -7,6 +7,10 @@ import Slider from "../../components/Slider/Slider";
 import Categories from "../../components/Categories/Categories";
 
 const Home = ({ sales }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Slider />
