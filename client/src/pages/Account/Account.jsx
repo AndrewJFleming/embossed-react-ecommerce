@@ -13,7 +13,6 @@ const Account = ({ currentUser, errorStatus }) => {
     email: "",
     currentPassword: "",
   });
-  const [error, setError] = useState(false);
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -32,8 +31,10 @@ const Account = ({ currentUser, errorStatus }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    setError(errorStatus);
-  }, [errorStatus]);
+    setTimeout(function () {
+      dispatch({ type: CLEAR_AUTH_ERROR });
+    }, 2000);
+  }, [errorStatus, dispatch]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -57,59 +58,49 @@ const Account = ({ currentUser, errorStatus }) => {
         </Card.Body>
       </Card>
 
-      <div>
-        <Form onSubmit={handleUpdate}>
-          <Form.Group className="mb-3">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              required
-              value={formData.username}
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              required
-              value={formData.email}
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Current Password</Form.Label>
-            <Form.Text className="text-muted">
-              Input your currently registered password.
-            </Form.Text>
-            <Form.Control
-              required
-              type="text"
-              name="currentPassword"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>New Password</Form.Label>
-            <Form.Text className="text-muted">
-              Input your new password.
-            </Form.Text>
-            <Form.Control type="text" name="password" onChange={handleChange} />
-          </Form.Group>
-          <Button type="submit">Update</Button>
-
-          {error && (
-            <ErrorPrompt
-              h5="Error updating user..."
-              h6="Is your current password correct?"
-            />
-          )}
-        </Form>
-      </div>
+      <Form className="mb-3" onSubmit={handleUpdate}>
+        <Form.Group className="mb-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            required
+            value={formData.username}
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            required
+            value={formData.email}
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Current Password</Form.Label>
+          <Form.Text className="text-muted">
+            Input your currently registered password.
+          </Form.Text>
+          <Form.Control
+            required
+            type="text"
+            name="currentPassword"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>New Password</Form.Label>
+          <Form.Text className="text-muted">Input your new password.</Form.Text>
+          <Form.Control type="text" name="password" onChange={handleChange} />
+        </Form.Group>
+        <Button type="submit">Update</Button>
+      </Form>
+      {errorStatus && <ErrorPrompt h5="Login Error:" h6={errorStatus} />}
     </Container>
   );
 };

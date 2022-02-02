@@ -51,6 +51,7 @@ Used by product quantity changer feature
   font-style: italic;
 }
 
+.discount-notice,
 .discount-notice > * {
   margin-bottom: 0;
   color: #d13c36;

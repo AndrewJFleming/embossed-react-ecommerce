@@ -9,7 +9,8 @@ const authReducer = (state = { authData: {}, error: false }, action) => {
       localStorage.clear();
       return { ...state, authData: {}, error: false };
     case actionTypes.AUTH_ERROR:
-      return { ...state, error: true };
+      // return { ...state, error: true };
+      return { ...state, error: action.authError };
     case actionTypes.CLEAR_AUTH_ERROR:
       return { ...state, error: false };
     default:

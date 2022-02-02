@@ -7,8 +7,8 @@ export const signin = (formData, history) => async (dispatch) => {
     dispatch({ type: AUTH, data });
     history.push("/");
   } catch (error) {
-    console.log(error);
-    dispatch({ type: AUTH_ERROR });
+    const authError = error.response.data.message;
+    dispatch({ type: AUTH_ERROR, authError });
   }
 };
 export const signup = (formData, history) => async (dispatch) => {
@@ -17,8 +17,8 @@ export const signup = (formData, history) => async (dispatch) => {
     dispatch({ type: AUTH, data });
     history.push("/");
   } catch (error) {
-    console.log(error);
-    dispatch({ type: AUTH_ERROR });
+    const authError = error.response.data.message;
+    dispatch({ type: AUTH_ERROR, authError });
   }
 };
 export const updateUser = (id, formData) => async (dispatch) => {
@@ -28,7 +28,7 @@ export const updateUser = (id, formData) => async (dispatch) => {
     dispatch({ type: LOGOUT });
     dispatch({ type: RESET_CART });
   } catch (error) {
-    console.log(error);
-    dispatch({ type: AUTH_ERROR });
+    const authError = error.response.data.message;
+    dispatch({ type: AUTH_ERROR, authError });
   }
 };

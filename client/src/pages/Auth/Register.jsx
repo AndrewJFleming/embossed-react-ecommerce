@@ -18,13 +18,15 @@ const Register = ({ errorStatus }) => {
   });
   const dispatch = useDispatch();
   const history = useHistory();
-  const [error, setError] = useState(false);
+
   useEffect(() => {
     dispatch({ type: CLEAR_AUTH_ERROR });
   }, []);
 
   useEffect(() => {
-    setError(errorStatus);
+    setTimeout(function () {
+      dispatch({ type: CLEAR_AUTH_ERROR });
+    }, 2000);
   }, [errorStatus]);
 
   const handleRegister = (e) => {
@@ -93,12 +95,7 @@ const Register = ({ errorStatus }) => {
             Login
           </Link>
         </Form>
-        {error && (
-          <ErrorPrompt
-            h5="Error signing up..."
-            h6="Username or email may already be taken."
-          />
-        )}
+        {errorStatus && <ErrorPrompt h5="Login Error:" h6={errorStatus} />}
       </div>
     </div>
   );

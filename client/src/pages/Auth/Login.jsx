@@ -18,14 +18,12 @@ const Login = ({ errorStatus }) => {
   });
   const dispatch = useDispatch();
   const history = useHistory();
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     dispatch({ type: CLEAR_AUTH_ERROR });
   }, []);
 
   useEffect(() => {
-    setError(errorStatus);
     setTimeout(function () {
       dispatch({ type: CLEAR_AUTH_ERROR });
     }, 2000);
@@ -77,12 +75,7 @@ const Login = ({ errorStatus }) => {
           <Button type="submit">LOGIN</Button>
           <Link to="/register">Register</Link>
         </Form>
-        {error && (
-          <ErrorPrompt
-            h5="Error logging in..."
-            h6="Are your login creds correct?"
-          />
-        )}
+        {errorStatus && <ErrorPrompt h5="Login Error:" h6={errorStatus} />}
       </div>
     </div>
   );

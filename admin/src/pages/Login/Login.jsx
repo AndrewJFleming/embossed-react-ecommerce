@@ -14,7 +14,6 @@ const Login = ({ errorStatus }) => {
     username: "",
     password: "",
   });
-  const [error, setError] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,7 +31,6 @@ const Login = ({ errorStatus }) => {
   }, []);
 
   useEffect(() => {
-    setError(errorStatus);
     setTimeout(function () {
       dispatch({ type: CLEAR_AUTH_ERROR });
     }, 3000);
@@ -66,7 +64,7 @@ const Login = ({ errorStatus }) => {
         </Form.Group>
       </Form>
       <Button onClick={handleLogin}>Login</Button>
-      {error && <ErrorPrompt h5="Login Error:" h6={errorStatus} />}
+      {errorStatus && <ErrorPrompt h5="Login Error:" h6={errorStatus} />}
     </Container>
   );
 };

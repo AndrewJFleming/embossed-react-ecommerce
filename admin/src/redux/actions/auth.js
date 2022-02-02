@@ -16,7 +16,6 @@ export const signin = (formData, history) => async (dispatch) => {
 export const createUser = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.createUser(formData);
-    // history.push("/user/" + data.result._id);
   } catch (error) {
     // console.log(error.response);
     console.log(JSON.stringify(error.response.data.message));
