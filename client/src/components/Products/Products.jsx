@@ -13,7 +13,10 @@ const Products = ({ cat, filters, sort, sales }) => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          cat ? `/products?category=${cat}` : "/products/"
+          // cat ? `/products?category=${cat}` : "/products/"
+          cat
+            ? `https://embossed-react-ecommerce.herokuapp.com/products?category=${cat}`
+            : "https://embossed-react-ecommerce.herokuapp.com/products/"
         );
         setProducts(res.data);
       } catch (err) {

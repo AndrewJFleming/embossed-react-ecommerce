@@ -26,7 +26,10 @@ const App = () => {
   useEffect(() => {
     const getSales = async () => {
       try {
-        const res = await axios.get("/sales/");
+        // const res = await axios.get("/sales/");
+        const res = await axios.get(
+          "https://embossed-react-ecommerce.herokuapp.com/sales/"
+        );
         setSales(res.data);
       } catch (err) {
         console.log(err);

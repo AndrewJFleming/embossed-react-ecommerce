@@ -47,19 +47,5 @@ export const createCart = (id, cartData) => async (dispatch, getState) => {
   console.log(newCartData);
   const { data } = await api.createCart(newCartData);
 
-  // dispatch({
-  //   type: actionTypes.ADD_TO_CART,
-  //   payload: {
-  //     productId: data._id,
-  //     cartItemId: uuid.v4(),
-  //     title: data.title,
-  //     img: data.img,
-  //     price: data.price,
-  //     inStock: data.inStock,
-  //     quantity,
-  //     variant,
-  //   },
-  // });
   console.log(data);
-  // localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
 };

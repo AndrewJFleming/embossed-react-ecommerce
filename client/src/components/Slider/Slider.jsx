@@ -4,23 +4,14 @@ import { Link } from "react-router-dom";
 
 import { Carousel } from "react-bootstrap";
 import "./Slider.css";
+import Loading from "../../shared/components/Loading/Loading";
 
-function ControlledCarousel() {
+function ControlledCarousel({ slides }) {
   const [index, setIndex] = useState(0);
-  const [slides, setSlides] = useState([]);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-
-  useEffect(() => {
-    const getSliderCats = async () => {
-      const res = await axios.get("/categories");
-      const isSliderCat = res.data.filter((x) => !!x.isSlide);
-      setSlides(isSliderCat);
-    };
-    getSliderCats();
-  }, []);
 
   return (
     <Carousel fade activeIndex={index} onSelect={handleSelect}>
@@ -45,6 +36,20 @@ function ControlledCarousel() {
   );
 }
 const Slider = () => {
-  return <ControlledCarousel />;
+  const [slides, setSlides] = useState([]);
+
+  useEffect(() => {
+    const getSliderCats = async () => {
+      // const res = await axios.get("/categories");
+      const res = await axios.get(
+        "https://embossed-react-ecommerce.herokuapp.com/categories"
+      );
+      const isSliderCat = res.data.filter((x) => !!x.isSlide);
+      setSlides(isSliderCat);
+    };
+    getSliderCats();
+  }, []);
+
+  return slides.length ? <ControlledCarousel slides={slides} /> : <Loading />;
 };
 export default Slider;

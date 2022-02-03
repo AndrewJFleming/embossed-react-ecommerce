@@ -9,7 +9,9 @@ const Categories = () => {
 
   useEffect(() => {
     const getFeaturedCats = async () => {
-      const res = await axios.get("/categories");
+      const res = await axios.get(
+        "https://embossed-react-ecommerce.herokuapp.com/categories"
+      );
       const isFeaturedCategory = res.data.filter((x) => !!x.isFeatured);
       setFeaturedCats(isFeaturedCategory);
     };

@@ -32,7 +32,9 @@ const SingleProduct = ({ sales }) => {
     let fetchedProduct;
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products/find/" + id);
+        const res = await publicRequest.get(
+          "https://embossed-react-ecommerce.herokuapp.com/products/find/" + id
+        );
         fetchedProduct = res.data;
         if (res.data.variants[0]) {
           setVariant(res.data.variants[0]);
