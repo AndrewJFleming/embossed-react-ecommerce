@@ -37,12 +37,18 @@ const Footer = ({ currentUser }) => {
               penatibus et magnis dis parturient montes, nascetur
             </p>
             <div className="social-container">
-              <Link to="#" className="social-link">
+              <a
+                href="https://github.com/AndrewJFleming"
+                className="social-link"
+              >
                 <i className="fab fa-github-square"></i>
-              </Link>
-              <Link to="#" className="social-link">
+              </a>
+              <a
+                href="https://www.linkedin.com/in/andrew-j-fleming-web-dev"
+                className="social-link"
+              >
                 <i className="fab fa-linkedin-in"></i>
-              </Link>
+              </a>
             </div>
           </Col>
           <Col className="text-center footer-center  p-2">

@@ -15,7 +15,7 @@ const Home = ({ sales }) => {
   }, [location]);
 
   return (
-    <div>
+    <div className="minimum-height">
       <Slider />
       <Container>
         <Row className="mt-5">

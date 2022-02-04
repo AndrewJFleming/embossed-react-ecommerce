@@ -28,7 +28,7 @@ const App = () => {
       try {
         // const res = await axios.get("/sales/");
         const res = await axios.get(
-          "https://embossed-react-ecommerce.herokuapp.com/sales/"
+          process.env.REACT_APP_SERVER_URL + "/sales/"
         );
         setSales(res.data);
       } catch (err) {

@@ -1,2 +1,4 @@
 
 server/
+client/src/.env
+client/.env

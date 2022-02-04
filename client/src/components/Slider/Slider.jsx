@@ -42,7 +42,7 @@ const Slider = () => {
     const getSliderCats = async () => {
       // const res = await axios.get("/categories");
       const res = await axios.get(
-        "https://embossed-react-ecommerce.herokuapp.com/categories"
+        process.env.REACT_APP_SERVER_URL + "/categories"
       );
       const isSliderCat = res.data.filter((x) => !!x.isSlide);
       setSlides(isSliderCat);

@@ -15,8 +15,8 @@ const Products = ({ cat, filters, sort, sales }) => {
         const res = await axios.get(
           // cat ? `/products?category=${cat}` : "/products/"
           cat
-            ? `https://embossed-react-ecommerce.herokuapp.com/products?category=${cat}`
-            : "https://embossed-react-ecommerce.herokuapp.com/products/"
+            ? `${process.env.REACT_APP_SERVER_URL}/products?category=${cat}`
+            : `${process.env.REACT_APP_SERVER_URL}/products/`
         );
         setProducts(res.data);
       } catch (err) {

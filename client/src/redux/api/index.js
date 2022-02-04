@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const API = axios.create({ baseURL: "http://localhost:5000/api/" });
 const API = axios.create({
-  baseURL: "https://embossed-react-ecommerce.herokuapp.com/",
+  baseURL: process.env.REACT_APP_SERVER_URL,
 });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {

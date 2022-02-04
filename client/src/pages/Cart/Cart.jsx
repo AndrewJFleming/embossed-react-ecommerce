@@ -93,7 +93,7 @@ const Cart = ({ currentUserId, sales }) => {
   };
 
   return (
-    <Container className="my-5">
+    <Container className="my-5 minimum-height">
       <h2>MY CART</h2>
       <div className="top my-3">
         <Link to="/">

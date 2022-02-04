@@ -28,6 +28,13 @@ a {
 }
 
 /*
+Prevent whitespace exposure below footer while content is loading. 
+*/
+.minimum-height {
+  min-height: 60vh;
+}
+
+/*
 Used by product quantity changer feature
 */
 .amount-container {

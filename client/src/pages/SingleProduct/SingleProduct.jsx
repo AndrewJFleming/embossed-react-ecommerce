@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { CLEAR_ADD_NOTICE } from "../../redux/constants/actionTypes";
 import "./SingleProduct.css";
+import Loading from "../../shared/components/Loading/Loading";
 
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
@@ -33,7 +34,7 @@ const SingleProduct = ({ sales }) => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(
-          "https://embossed-react-ecommerce.herokuapp.com/products/find/" + id
+          process.env.REACT_APP_SERVER_URL + "/products/find/" + id
         );
         fetchedProduct = res.data;
         if (res.data.variants[0]) {
@@ -78,8 +79,8 @@ const SingleProduct = ({ sales }) => {
   };
 
   return (
-    <div className="mt-5 singleProduct">
-      {product && (
+    <div className="mt-5 minimum-height">
+      {product ? (
         <Container>
           <Row>
             <Col xs={12} sm={6} md={6} lg={4}>
@@ -162,6 +163,8 @@ const SingleProduct = ({ sales }) => {
             </Col>
           </Row>
         </Container>
+      ) : (
+        <Loading />
       )}
       <FeaturedSale sales={sales} />
     </div>
