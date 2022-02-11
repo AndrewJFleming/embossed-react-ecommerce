@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][project-screenshot]](https://example.com)
 
 The Embossed React Ecommerce app is an online shop app built with the MERN stack. There are three directories in the project's root directory: client, admin and server.
 
@@ -163,4 +163,4 @@ Andrew Fleming - [My LinkedIn](https://www.linkedin.com/in/andrew-j-fleming-web-
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/andrew-j-fleming-web-dev
-[product-screenshot]: images/screenshot.png
+[project-screenshot]: client/src/images/screenshot.png
