@@ -40,12 +40,14 @@ export const changeQuantity =
   };
 
 export const createCart = (id, cartData) => async (dispatch, getState) => {
-  const newCartData = {
-    userId: id,
-    products: cartData,
-  };
-  console.log(newCartData);
-  const { data } = await api.createCart(newCartData);
-
-  console.log(data);
+  if (id) {
+    const newCartData = {
+      userId: id,
+      products: cartData,
+    };
+    const { data } = await api.createCart(newCartData);
+    console.log(data);
+  } else {
+    console.log("Must be logged in to create cart DB document.");
+  }
 };

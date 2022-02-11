@@ -22,7 +22,6 @@ const ProductList = ({ sales }) => {
       ...filters,
       [e.target.name]: value,
     });
-    console.log(filters);
   };
 
   return (

@@ -100,22 +100,24 @@ const SingleCart = () => {
     }
   }, [allProducts, addCartProduct]);
 
-  //Combined both updateHandlers into one.
-  const handleUpdate = async (cartItemId) => {
+  //Combined both cart products update handlers into one
+  //(Remove product from cart or add new product to cart).
+  const handleUpdate = async (e, cartItemId) => {
+    console.log(e.target.type);
     let updatedCart;
-    if (typeof cartItemId === "string") {
+    if (e.target.type === "button") {
+      //Add to Cart button e.target.type === button and will satisfy this condition.
+      updatedCart = {
+        userId: cartProducts.userId,
+        products: [...cartProducts.products, formFields],
+      };
+    } else {
+      //delete icon e.target.type === undefined so clicking it will satisfy this condition.
       updatedCart = {
         userId: cartProducts.userId,
         products: cartProducts.products.filter(
           (p) => p.cartItemId !== cartItemId
         ),
-      };
-    } else {
-      //handler for adding products has no prop
-      //so cartItemId equals event object instead of string
-      updatedCart = {
-        userId: cartProducts.userId,
-        products: [...cartProducts.products, formFields],
       };
     }
     try {
@@ -174,7 +176,7 @@ const SingleCart = () => {
                     <h6>{p.title}</h6>
                     <i
                       className="fas fa-trash-alt deleteIcon"
-                      onClick={() => handleUpdate(p.cartItemId)}
+                      onClick={(e) => handleUpdate(e, p.cartItemId)}
                     ></i>
                   </div>
                   <div className="product-card-Id-wrapper">

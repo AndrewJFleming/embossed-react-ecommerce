@@ -125,10 +125,10 @@ const Cart = ({ currentUserId, sales }) => {
             <p>$ {subtotal}</p>
           </div>
           <div className="summary-item">
-            <h5>Estimated Shipping:</h5>
+            <h5>Est. Shipping:</h5>
             <p>$ {shipping}</p>
           </div>
-          <div className="summary-item">
+          <div className="summary-item checkout-total">
             <h5>TOTAL:</h5>
             <p>$ {subtotal ? subtotal + shipping : 0}</p>
           </div>
