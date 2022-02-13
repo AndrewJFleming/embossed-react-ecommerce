@@ -3,3 +3,6 @@ server/
 client/src/.env
 client/.env
 client/src/images/product-images
+client/src/images/logo-development
+
+client/src/images/purgation-logo.png

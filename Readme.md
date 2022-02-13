@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/AndrewJFleming/embossed-react-ecommerce">
-    <img src="client/src/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="client/src/images/logo.png" alt="Logo" height="80">
   </a>
 
   <h3 align="center">Embossed React Ecommerce</h3>
@@ -148,8 +148,9 @@ Both the client and admin app use the same server to interact with this project'
 
 
 
-<!-- Related PROJECTS -->
+<!-- RELATED PROJECT -->
 ## Related Project
+
 The Embossed admin dashboard hosted on Netlify is a version of the app that uses dummy data rather than MongoDB data. You can check out that project's GitHub repo <a href="https://github.com/AndrewJFleming/embossed-dummy-data-admin">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>

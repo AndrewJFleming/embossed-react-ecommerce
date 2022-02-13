@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter , Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./pages/Home/Home";
@@ -39,7 +39,7 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       {sales && <Announcement sales={sales} />}
       <TopNav currentUser={user} />
       <Switch>
@@ -79,7 +79,7 @@ const App = () => {
         </Route>
       </Switch>
       <Footer currentUser={user} />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
