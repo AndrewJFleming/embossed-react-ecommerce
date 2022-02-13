@@ -2,3 +2,4 @@
 server/
 client/src/.env
 client/.env
+client/src/images/product-images

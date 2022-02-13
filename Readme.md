@@ -1,7 +1,4 @@
 <div id="top"></div>
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -51,7 +48,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][project-screenshot]](https://example.com)
+[![Project Screen Shot][project-screenshot]](https://github.com/AndrewJFleming/embossed-react-ecommerce)
 
 The Embossed React Ecommerce app is an online shop app built with the MERN stack. There are three directories in the project's root directory: client, admin and server.
 
@@ -138,13 +135,21 @@ Both the client and admin app use the same server to interact with this project'
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- ROADMAP -->
 ## Roadmap
 
 - [x] Implement planned CRUD functionality.
+- [ ] Add navbar search functionality.
 - [ ] Introduce option to apply sales to more than one product or to all products within a category.
 - [ ] Execute get requests using Redux for products and sales.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- Related PROJECTS -->
+## Related Project
+The Embossed admin dashboard hosted on Netlify is a version of the app that uses dummy data rather than MongoDB data. You can check out that project's GitHub repo <a href="https://github.com/AndrewJFleming/embossed-dummy-data-admin">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -159,8 +164,4 @@ Andrew Fleming - [My LinkedIn](https://www.linkedin.com/in/andrew-j-fleming-web-
 
 
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/andrew-j-fleming-web-dev
 [project-screenshot]: client/src/images/screenshot.png
