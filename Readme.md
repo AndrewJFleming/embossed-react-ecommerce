@@ -91,8 +91,6 @@ Below you'll find some instructions on what you'll need to run the project local
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 Before you run the admin or client Embossed apps locally, you'll need to install their required dependencies. 
 
 
@@ -114,6 +112,8 @@ Before you run the admin or client Embossed apps locally, you'll need to install
    ```sh
    npm install
    ```
+
+4. Rename the .env.example file in the client directory to .env
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -143,6 +143,7 @@ Both the client and admin app use the same server to interact with this project'
 - [ ] Add navbar search functionality.
 - [ ] Introduce option to apply sales to more than one product or to all products within a category.
 - [ ] Execute get requests using Redux for products and sales.
+- [ ] Include server directory to repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

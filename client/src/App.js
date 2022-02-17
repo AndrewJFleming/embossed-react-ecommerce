@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter , Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./pages/Home/Home";
