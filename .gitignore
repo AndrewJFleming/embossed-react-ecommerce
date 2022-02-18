@@ -1,8 +1,11 @@
-
-server/
-client/src/.env
+client/node_modules
 client/.env
 client/src/images/product-images
 client/src/images/logo-development
-
 client/src/images/purgation-logo.png
+
+server/.env
+server/node_modules
+
+*.bak
+*.zip
