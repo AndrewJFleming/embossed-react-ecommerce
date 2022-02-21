@@ -13,7 +13,9 @@
     An ecommerce project built with the MERN stack.
     <br />
     <br />
-    <a href="https://github.com/AndrewJFleming/embossed-dummy-data-admin">Demo Admin Repo</a>
+    <a href="https://embossed-react-ecommerce.netlify.app/#/">Client Demo Hosted on Netlify</a>
+    ·
+    <a href="https://github.com/AndrewJFleming/embossed-dummy-data-admin">Dummy Data Admin Repo</a>
     ·
     <a href="https://www.linkedin.com/in/andrew-j-fleming-web-dev">My LinkedIn</a>
 </div>
@@ -51,15 +53,17 @@
 
 [![Project Screen Shot][project-screenshot]](https://github.com/AndrewJFleming/embossed-react-ecommerce)
 
-The Embossed React Ecommerce app is an online shop app built with the MERN stack. There are three directories in the project's root directory: client, admin and server.
+The Embossed React Ecommerce app is an online shopping app built with the MERN stack. There are three directories in the project's root directory: client, admin and server.
 
 The client app will be the one users will be using to browse for and add products to carts. 
 
-The admin app is only accessible to users with admin creds and serves as the dashboard where shop data can be created, updated and deleted.
+The admin app is only accessible to users with admin creds and serves as the dashboard where shop user, product, category, cart and sale data can be created, updated and deleted.
 
-Both apps use the same server for interacting with the project's MongoDB database.
+The client and admin apps use the same server for interacting with the project's MongoDB database.
 
 _Check out the <a href="https://github.com/AndrewJFleming/embossed-dummy-data-admin">Embossed admin demo dashboard repo</a> that uses dummy data instead of MongoDB data._
+
+_Check out the <a href="https://embossed-react-ecommerce.netlify.app/#/">client demo hosted on Netlify</a> to explore the shop._
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -107,13 +111,17 @@ Before you run the admin or client Embossed apps locally, you'll need to install
    ```sh
    cd admin
    ```
+   or
+    ```sh
+   cd admin
+   ```
 
-3. Install NPM packages
+3. Install NPM packages for each directory.
    ```sh
    npm install
    ```
 
-4. Rename the .env.example file in the client directory to .env
+4. Rename the .env.example file in the client and server directories to .env
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -140,10 +148,10 @@ Both the client and admin app use the same server to interact with this project'
 ## Roadmap
 
 - [x] Implement planned CRUD functionality.
+- [x] Include server directory to repo.
 - [ ] Add navbar search functionality.
 - [ ] Introduce option to apply sales to more than one product or to all products within a category.
 - [ ] Execute get requests using Redux for products and sales.
-- [ ] Include server directory to repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
