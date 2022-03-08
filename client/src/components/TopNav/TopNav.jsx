@@ -19,7 +19,7 @@ import { RESET_CART } from "../../redux/constants/actionTypes";
 import { useSelector } from "react-redux";
 
 const TopNav = ({ currentUser }) => {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
@@ -56,12 +56,12 @@ const TopNav = ({ currentUser }) => {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (search) {
-      window.location.replace("/?search=" + search);
-    }
-  };
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   if (search) {
+  //     window.location.replace("/?search=" + search);
+  //   }
+  // };
 
   const handleCollapse = () => {
     setExpanded(false);
@@ -134,7 +134,7 @@ const TopNav = ({ currentUser }) => {
                 &nbsp;({cartCount})
               </span>
             </Nav.Link>
-            <Form className="d-flex navSearch" onSubmit={handleSearch}>
+            {/* <Form className="d-flex navSearch" onSubmit={handleSearch}>
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -145,7 +145,7 @@ const TopNav = ({ currentUser }) => {
               <Button variant="outline-light" type="submit" className="ml-2">
                 Search
               </Button>
-            </Form>
+            </Form> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
