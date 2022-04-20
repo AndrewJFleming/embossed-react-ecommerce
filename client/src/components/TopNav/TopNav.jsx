@@ -14,8 +14,7 @@ import {
 import NavLogo from "../../images/logo.png";
 import "./TopNav.css";
 import { useDispatch } from "react-redux";
-import { LOGOUT } from "../../redux/constants/actionTypes";
-import { RESET_CART } from "../../redux/constants/actionTypes";
+import { RESET_CART, LOGOUT } from "../../redux/constants/actionTypes";
 import { useSelector } from "react-redux";
 
 const TopNav = ({ currentUser }) => {
@@ -30,7 +29,9 @@ const TopNav = ({ currentUser }) => {
 
   useEffect(() => {
     const getTopNavCats = async () => {
-      const res = await axios.get("/categories");
+      const res = await axios.get(
+        process.env.REACT_APP_SERVER_URL + "/categories"
+      );
       setTopNavCats(res.data);
     };
     getTopNavCats();
