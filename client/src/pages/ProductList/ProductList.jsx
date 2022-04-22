@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
 import Products from "../../components/Products/Products";
@@ -8,7 +8,7 @@ import "./ProductList.css";
 
 const ProductList = ({ sales }) => {
   const location = useLocation();
-  const cat = location.pathname.split("/")[2];
+  const { category } = useParams();
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
 
@@ -27,9 +27,9 @@ const ProductList = ({ sales }) => {
   return (
     <div className="mt-5">
       <Container>
-        <h2 className="page-title">{cat}</h2>
+        <h2 className="page-title">{category}</h2>
         <div className="mt-4 d-flex justify-content-between">
-          {cat && (
+          {category && (
             <div className="filter">
               <h5>Filter by Variant:</h5>
               <select id="variants" name="variants" onChange={handleFilters}>
@@ -51,7 +51,7 @@ const ProductList = ({ sales }) => {
         </div>
       </Container>
       <Container className="mt-3">
-        <Products cat={cat} filters={filters} sort={sort} sales={sales} />
+        <Products cat={category} filters={filters} sort={sort} sales={sales} />
       </Container>
       <FeaturedSale sales={sales} />
     </div>

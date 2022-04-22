@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 
 import { Container, Col, Row, Button } from "react-bootstrap";
 import FeaturedSale from "../../components/FeaturedSale/FeaturedSale";
@@ -13,7 +13,7 @@ import Loading from "../../shared/components/Loading/Loading";
 
 const SingleProduct = ({ sales }) => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState("");
@@ -26,6 +26,10 @@ const SingleProduct = ({ sales }) => {
   }, [location]);
 
   useEffect(() => {
+    console.log(productId);
+  }, [productId]);
+
+  useEffect(() => {
     dispatch({ type: CLEAR_ADD_NOTICE });
   }, [dispatch]);
 
@@ -34,7 +38,7 @@ const SingleProduct = ({ sales }) => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(
-          process.env.REACT_APP_SERVER_URL + "/products/find/" + id
+          process.env.REACT_APP_SERVER_URL + "/products/find/" + productId
         );
         fetchedProduct = res.data;
         if (res.data.variants[0]) {
@@ -61,7 +65,7 @@ const SingleProduct = ({ sales }) => {
       setProduct(fetchedProduct);
     };
     getProduct();
-  }, [id, sales]);
+  }, [productId, sales]);
 
   const handleQuanity = (type) => {
     if (type === "dec") {
