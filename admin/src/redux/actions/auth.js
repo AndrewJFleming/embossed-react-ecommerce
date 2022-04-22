@@ -1,11 +1,11 @@
 import { AUTH, LOGOUT, AUTH_ERROR } from "../constants/actionTypes";
 import * as api from "../api";
 
-export const signin = (formData, history) => async (dispatch) => {
+export const signin = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
     dispatch({ type: AUTH, data });
-    history.push("/");
+    navigate("/");
   } catch (error) {
     // console.log(error);
     const authError = error.response.data.message;
@@ -13,7 +13,7 @@ export const signin = (formData, history) => async (dispatch) => {
   }
 };
 
-export const createUser = (formData, history) => async (dispatch) => {
+export const createUser = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.createUser(formData);
   } catch (error) {

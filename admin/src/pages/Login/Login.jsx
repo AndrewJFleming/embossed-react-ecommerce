@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Container, Form, Button } from "react-bootstrap";
 import { signin } from "../../redux/actions/auth";
@@ -9,7 +9,7 @@ import { CLEAR_AUTH_ERROR } from "../../redux/constants/actionTypes";
 
 const Login = ({ errorStatus }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -17,7 +17,7 @@ const Login = ({ errorStatus }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(signin(formData, history));
+    dispatch(signin(formData, navigate));
   };
 
   const handleChange = (e) =>

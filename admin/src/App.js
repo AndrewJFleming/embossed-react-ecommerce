@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -26,61 +26,78 @@ const App = () => {
   const error = useSelector((state) => state.auth.error);
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/login">
-          {!admin ? <Login errorStatus={error} /> : <Redirect to="/" />}
-        </Route>
-        <React.Fragment>
-          <TopNav />
-          <Route exact path="/">
-            {admin ? <Home /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/users">
-            {admin ? <UserList /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/user/:userId">
-            {admin ? <SingleUser /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/new-user">
-            {admin ? <NewUser errorStatus={error} /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/products">
-            {admin ? <ProductList /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/product/:productId">
-            {admin ? <SingleProduct /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/new-product">
-            {admin ? <NewProduct /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/categories">
-            {admin ? <CategoryList /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/category/:catId">
-            {admin ? <SingleCategory /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/new-category">
-            {admin ? <NewCategory /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/carts">
-            {admin ? <CartList /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/cart/:cartId">
-            {admin ? <SingleCart /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/sales">
-            {admin ? <SaleList /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/sale/:saleId">
-            {admin ? <SingleSale /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/new-sale">
-            {admin ? <NewSale /> : <Redirect to="/login" />}
-          </Route>
-        </React.Fragment>
-      </Switch>
-    </BrowserRouter>
+    <Routes>
+      <Route
+        path="/login"
+        element={!admin ? <Login errorStatus={error} /> : <Navigate to="/" />}
+      ></Route>
+      <React.Fragment>
+        <TopNav />
+        <Route
+          exact
+          path="/"
+          element={admin ? <Home /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/users"
+          element={admin ? <UserList /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/user/:userId"
+          element={admin ? <SingleUser /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/new-user"
+          element={
+            admin ? <NewUser errorStatus={error} /> : <Navigate to="/login" />
+          }
+        ></Route>
+        <Route
+          path="/products"
+          element={admin ? <ProductList /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/product/:productId"
+          element={admin ? <SingleProduct /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/new-product"
+          element={admin ? <NewProduct /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/categories"
+          element={admin ? <CategoryList /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/category/:catId"
+          element={admin ? <SingleCategory /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/new-category"
+          element={admin ? <NewCategory /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/carts"
+          element={admin ? <CartList /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/cart/:cartId"
+          element={admin ? <SingleCart /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/sales"
+          element={admin ? <SaleList /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/sale/:saleId"
+          element={admin ? <SingleSale /> : <Navigate to="/login" />}
+        ></Route>
+        <Route
+          path="/new-sale"
+          element={admin ? <NewSale /> : <Navigate to="/login" />}
+        ></Route>
+      </React.Fragment>
+    </Routes>
   );
 };
 

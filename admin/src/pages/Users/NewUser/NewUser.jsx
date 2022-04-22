@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { CLEAR_AUTH_ERROR } from "../../../redux/constants/actionTypes";
 import { createUser } from "../../../redux/actions/auth";
@@ -16,7 +16,7 @@ const NewUser = ({ errorStatus }) => {
     isAdmin: false,
   });
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const NewUser = ({ errorStatus }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createUser(formData, history));
+    dispatch(createUser(formData, navigate));
   };
 
   // const handleSubmit = async (e) => {
