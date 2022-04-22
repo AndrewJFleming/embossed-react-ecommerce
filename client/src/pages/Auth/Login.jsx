@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { signin } from "../../redux/actions/auth";
 import "./Auth.css";
@@ -17,7 +17,7 @@ const Login = ({ errorStatus }) => {
     password: "",
   });
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch({ type: CLEAR_AUTH_ERROR });
@@ -31,7 +31,7 @@ const Login = ({ errorStatus }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(signin(formData, history));
+    dispatch(signin(formData, navigate));
   };
 
   const handleChange = (e) =>

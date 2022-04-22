@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./Auth.css";
 import { Form, Button } from "react-bootstrap";
@@ -17,7 +17,7 @@ const Register = ({ errorStatus }) => {
     password: "",
   });
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch({ type: CLEAR_AUTH_ERROR });
@@ -32,7 +32,7 @@ const Register = ({ errorStatus }) => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    dispatch(signup(formData, history));
+    dispatch(signup(formData, navigate));
   };
 
   const handleChange = (e) =>

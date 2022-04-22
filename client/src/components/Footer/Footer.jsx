@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Footer.css";
 import { Container, Row, Col } from "react-bootstrap";
@@ -10,13 +10,13 @@ import NavLogo from "../../images/logo.png";
 
 const Footer = ({ currentUser }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     try {
       dispatch({ type: LOGOUT });
       dispatch({ type: RESET_CART });
-      history.push("/");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

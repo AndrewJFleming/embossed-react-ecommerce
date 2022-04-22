@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -22,7 +22,7 @@ const TopNav = ({ currentUser }) => {
   const [expanded, setExpanded] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const [topNavCats, setTopNavCats] = useState([]);
@@ -51,7 +51,7 @@ const TopNav = ({ currentUser }) => {
     try {
       dispatch({ type: LOGOUT });
       dispatch({ type: RESET_CART });
-      history.push("/");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
