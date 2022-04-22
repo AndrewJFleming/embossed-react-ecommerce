@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import NavLogo from "../../images/logo.png";
 import "./TopNav.css";
 import { useDispatch } from "react-redux";
@@ -60,7 +52,7 @@ const TopNav = ({ currentUser }) => {
   // const handleSearch = (e) => {
   //   e.preventDefault();
   //   if (search) {
-  //     window.location.replace("/?search=" + search);
+  //     navigate("/?search=" + search);
   //   }
   // };
 
