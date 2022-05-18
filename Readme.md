@@ -113,7 +113,7 @@ Before you run the admin or client Embossed apps locally, you'll need to install
    ```
    or
     ```sh
-   cd admin
+   cd server
    ```
 
 3. Install NPM packages for each directory.
